@@ -1,6 +1,8 @@
 import { AxiosRequestConfig } from 'axios'
 import ICard from '../../interfaces/Card'
 
+const API_ENPOINT = process.env.REACT_APP_CLUB_API_SERVER
+
 // functions are to avoid cloning
 function POST_CONFIG(): AxiosRequestConfig {
     return {
@@ -8,7 +10,8 @@ function POST_CONFIG(): AxiosRequestConfig {
         headers: {
             'Content-Type': 'application/json',
             'Cache-Control': 'no-cache',
-        }
+        },
+        withCredentials: true
     }
 }
 function GET_CONFIG(): AxiosRequestConfig {
@@ -17,55 +20,61 @@ function GET_CONFIG(): AxiosRequestConfig {
         headers: {
             'Content-Type': 'application/json',
             'Cache-Control': 'no-cache'
-        }
+        },
+        withCredentials: true
+    }
+}
+function EVENT_SOURCE_INIT(): EventSourceInit {
+    return {
+        withCredentials: true
     }
 }
 const WIZ_API_MAP = {
     NEW_GAME: {
         url: (roomId: string) => {
-            return `/api/game/wizard/${roomId}`
+            return `${API_ENPOINT}/api/game/wizard/${roomId}`
         },
         config: POST_CONFIG
     },
     GET_GAME_INSTRUCTIONS: {
         url: (gameId: string) => {
-            return `/api/game/wizard/${gameId}`
+            return `${API_ENPOINT}/api/game/wizard/${gameId}`
         },
         config: GET_CONFIG
     },
     GET_GAME_PLAYERS: {
         url: (gameId: string) => {
-            return `/api/game/wizard/${gameId}/players`
+            return `${API_ENPOINT}/api/game/wizard/${gameId}/players`
         },
         config: GET_CONFIG
     },
     GET_NEXT_PLAYER: {
         url: (gameId: string) => {
-            return `/api/game/wizard/${gameId}/nextplayer`
+            return `${API_ENPOINT}/api/game/wizard/${gameId}/nextplayer`
         },
         config: GET_CONFIG
     },
     GET_PLAYER_HAND: {
         url: (gameId: string) => {
-            return `/api/game/wizard/${gameId}/hand`
+            return `${API_ENPOINT}/api/game/wizard/${gameId}/hand`
         },
         config: GET_CONFIG
     },
     GET_TABLE_STACK: {
         url: (gameId: string) => {
-            return `/api/game/wizard/${gameId}/stack`
+            return `${API_ENPOINT}/api/game/wizard/${gameId}/stack`
         },
         config: GET_CONFIG
     },
     GET_STRONG_SUIT: {
         url: (gameId: string) => {
-            return `/api/game/wizard/${gameId}/kozer`
+            return `${API_ENPOINT}/api/game/wizard/${gameId}/kozer`
         },
         config: GET_CONFIG
     },
     SEND_CARD: {
         url: (gameId: string) => {
-            return `/api/game/wizard/${gameId}/play`
+            return `${API_ENPOINT}/api/game/wizard/${gameId}/play`
         },
         config: (card: ICard) => {
             return {...POST_CONFIG(), data: JSON.stringify(card)}
@@ -73,9 +82,15 @@ const WIZ_API_MAP = {
     },
     SEND_BET: {
         url: (gameId: string, bet: number) => {
-            return `/api/game/wizard/${gameId}/bet/${bet}`
+            return `${API_ENPOINT}/api/game/wizard/${gameId}/bet/${bet}`
         },
         config: POST_CONFIG
+    },
+    UPDATES: {
+        url: (gameId: string) => {
+            return `${API_ENPOINT}/api/game/wizard/${gameId}/updates`
+        },
+        config: EVENT_SOURCE_INIT
     }
 }
 

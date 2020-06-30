@@ -81,6 +81,12 @@ const LOBBY_API_MAP = {
             url: () => {
                 return `${API_ENPOINT}/api/player`
             },
+        },
+        GET_PLAYER: {
+            config: GET_CONFIG,
+            url: () => {
+                return `${API_ENPOINT}/api/player`
+            }
         }
     }
 }

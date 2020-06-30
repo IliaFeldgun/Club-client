@@ -1,5 +1,5 @@
 import Cookies from 'universal-cookie';
-
+// Module probably not needed anymore
 const PLAYER_NAME_KEY = "player_name"
 const PLAYER_ID_KEY = "player_id"
 

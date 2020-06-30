@@ -3,7 +3,7 @@ import IWizAnnouncement from "../interfaces/WizAnnouncement";
 import ANNOUNCEMENT_MAP from "../text_map/AnnouncementMap";
 import { WizAnnouncementType } from "../interfaces/WizAnnouncementType";
 import IWizPlayer from "../interfaces/WizPlayer";
-import { getPlayerId } from "../../utils/Cookie";
+import ClubSession from "../../utils/ClubSession";
 
 interface IAnnouncementProps {
     announcement: IWizAnnouncement
@@ -24,7 +24,7 @@ export default class Announcement extends React.PureComponent
     }
     componentDidUpdate() {
         if (
-            this.props.announcement.player !== getPlayerId() &&
+            this.props.announcement.player !== ClubSession.getPlayerId() &&
             this.props.announcement &&
             this.props.announcement.type !== WizAnnouncementType.NONE &&
             this.props.announcement.version > this.state.previousVersion

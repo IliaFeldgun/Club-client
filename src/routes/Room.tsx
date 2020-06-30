@@ -3,7 +3,7 @@ import { RouteComponentProps, match } from 'react-router-dom'
 import LobbyApi from '../api/LobbyApi'
 import PlayerList from '../components/PlayerList'
 import "./Room.css"
-import { getPlayerName, getPlayerId } from '../utils/Cookie'
+import ClubSession from '../utils/ClubSession'
 import JoinButton from '../components/Room/JoinButton'
 import ShareButton from '../components/Room/ShareButton'
 import LoginModal from '../components/Login/LoginModal'
@@ -33,7 +33,7 @@ export default class Room extends React.PureComponent<IRoomProps,IRoomState>{
             roomId: props.match.params.id,
             gameName: "",
             gameId: "",
-            isLoggedIn: getPlayerId() !== ""
+            isLoggedIn: ClubSession.getPlayerId() !== ""
         }
     }
     componentDidMount() {
@@ -44,7 +44,7 @@ export default class Room extends React.PureComponent<IRoomProps,IRoomState>{
     }
     render() {
         let joinButton = <React.Fragment/>
-        if (!this.state.players.some((player) => player === getPlayerName()))
+        if (!this.state.players.some((player) => player === ClubSession.getPlayerName()))
         {
             joinButton = <JoinButton roomId={this.props.match.params.id} />
         }

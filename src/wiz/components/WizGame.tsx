@@ -7,7 +7,7 @@ import { ICardProps } from "./Card";
 import ICard, { Suit } from "../../interfaces/Card";
 import WizPlayerList from "./PlayerList";
 import WizOtherPlayers from "./OtherPlayers";
-import { getPlayerId } from "../../utils/Cookie";
+import ClubSession from "../../utils/ClubSession";
 import { PossibleMoves } from "../interfaces/PossibleMoves";
 import SetBet from "./SetBet";
 import StrongSuit from "./StrongSuit";
@@ -94,11 +94,11 @@ export default class WizGame extends React.PureComponent<IWizGameProps,IWizGameS
         )
     }
     isYourTurn() {
-        return getPlayerId() === this.props.nextPlayer
+        return ClubSession.getPlayerId() === this.props.nextPlayer
     }
     getPlayer() {
         return this.props.players.find((player) => {
-            return player.id === getPlayerId()
+            return player.id === ClubSession.getPlayerId()
         })
     }
     shouldPlayCard() {

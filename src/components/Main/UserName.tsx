@@ -1,9 +1,12 @@
 import React from "react";
-import { getPlayerName } from "../../utils/Cookie";
+import ClubSession from "../../utils/ClubSession";
 
 export default class UserName extends React.PureComponent {
+    componentDidMount() {
+        ClubSession.populateSession()
+    }
     render() {
-        let playerName = getPlayerName()
+        let playerName = ClubSession.getPlayerName()
         let nameToRender = playerName ? 
             <a href="/profile">{playerName}</a> : 
             <a href="/login">Login</a>

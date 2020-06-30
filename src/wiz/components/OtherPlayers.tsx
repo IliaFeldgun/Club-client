@@ -1,6 +1,6 @@
 import React from 'react'
 import WizOtherPlayer from './OtherPlayer'
-import { getPlayerId } from '../../utils/Cookie'
+import ClubSession from '../../utils/ClubSession'
 import IWizPlayer from '../interfaces/WizPlayer'
 
 interface IWizOtherPlayersProps {
@@ -11,7 +11,7 @@ export default class WizOtherPlayers extends React.PureComponent<IWizOtherPlayer
         let cards: JSX.Element[] = [<React.Fragment />]
         if (this.props.players) {
             const otherPlayers = this.props.players.filter((player) => {
-                return player.id !== getPlayerId()
+                return player.id !== ClubSession.getPlayerId()
             })
         
             const otherPlayerHands = otherPlayers.map((player) => 

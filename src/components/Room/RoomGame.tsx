@@ -3,7 +3,7 @@ import GameDisplay from './RoomGame/GameDisplay'
 import PlayButton from './RoomGame/PlayButton'
 import GameDropDown from './RoomGame/GameDropDown'
 import CreateGame from './RoomGame/CreateGame'
-import { getPlayerId } from '../../utils/Cookie'
+import ClubSession from '../../utils/ClubSession'
 
 interface IRoomGameProps {
     roomId: string
@@ -51,7 +51,7 @@ export default class RoomGame extends React.PureComponent<IRoomGameProps, IRoomG
         }
         else if (this.props.gameNames && 
                  this.props.gameNames.length &&
-                 this.props.roomLeaderId === getPlayerId()) {
+                 this.props.roomLeaderId === ClubSession.getPlayerId()) {
             toRender = 
                 <React.Fragment>
                     <GameDropDown 

@@ -1,7 +1,7 @@
 import React from 'react'
 import LobbyApi from '../api/LobbyApi'
 import LoginModal from '../components/Login/LoginModal'
-import { getPlayerId } from '../utils/Cookie'
+import ClubSession from '../utils/ClubSession'
 interface IRoomCreateProps {
 
 }
@@ -15,7 +15,7 @@ export default class Rooms extends React.PureComponent<IRoomCreateProps,IRoomCre
 
         this.state = {
             roomId: "",
-            isLoggedIn: getPlayerId() !== ""
+            isLoggedIn: ClubSession.getPlayerId() !== ""
         }
         this.handleRoomCreation = this.handleRoomCreation.bind(this)
     }

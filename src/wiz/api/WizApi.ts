@@ -124,6 +124,8 @@ export class WizApi {
         }
     }
     static listenToUpdateEvent(gameId: string) {
-        return new EventSource(`/api/game/wizard/${gameId}/updates`)
+        const url = WIZ_API_MAP.UPDATES.url(gameId)
+        const init = WIZ_API_MAP.UPDATES.config()
+        return new EventSource(url, init)
     }
 }

@@ -3,7 +3,8 @@ import ClubSession from "../../utils/ClubSession";
 
 export default class UserName extends React.PureComponent {
     componentDidMount() {
-        ClubSession.populateSession()
+        if (!ClubSession.getPlayerName())
+            ClubSession.populateSession()
     }
     render() {
         let playerName = ClubSession.getPlayerName()

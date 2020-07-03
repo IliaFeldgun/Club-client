@@ -16,9 +16,8 @@ export default class CardFan extends React.PureComponent<ICardFanProps,ICardFanS
     constructor(props:ICardFanProps) {
         super(props)
 
-        this.handleCardClick = this.handleCardClick.bind(this)
     }
-    handleCardClick(event: React.MouseEvent, suit: ICardProps["suit"], rank: ICardProps["rank"]) {
+    handleCardClick = (event: React.MouseEvent, suit: ICardProps["suit"], rank: ICardProps["rank"]) => {
         if (this.props.yourTurn) {
             let cssClasses = ["play-card"]
             Math.round(Math.random()) ? cssClasses.push("right") : cssClasses.push("left")

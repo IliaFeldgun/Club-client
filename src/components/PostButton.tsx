@@ -9,9 +9,8 @@ interface IPostButtonProps {
 export default class PostButton extends React.PureComponent<IPostButtonProps> {
     constructor(props: IPostButtonProps){
         super(props)
-        this.post = this.post.bind(this)
     }
-    post(e: React.MouseEvent) {
+    post = (e: React.MouseEvent) => {
         const options: RequestInit = {
             method: 'POST',
             cache: 'no-cache',

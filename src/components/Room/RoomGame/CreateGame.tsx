@@ -5,13 +5,8 @@ interface ICreateGameProps {
     roomId: string
     gameName: string
 }
-export default class CreateGame extends React.PureComponent<ICreateGameProps,{}>{
-    constructor(props: ICreateGameProps) {
-        super(props)
-
-        this.handleGameCreation = this.handleGameCreation.bind(this)
-    }
-    handleGameCreation(event: React.MouseEvent<HTMLButtonElement>) {
+export default class CreateGame extends React.PureComponent<ICreateGameProps>{
+    handleGameCreation = (event: React.MouseEvent<HTMLButtonElement>) => {
         const gameName = this.props.gameName
         const gameCreator = createGame(gameName)
         if (gameCreator) {

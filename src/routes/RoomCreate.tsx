@@ -17,9 +17,8 @@ export default class Rooms extends React.PureComponent<IRoomCreateProps,IRoomCre
             roomId: "",
             isLoggedIn: ClubSession.getPlayerId() !== null
         }
-        this.handleRoomCreation = this.handleRoomCreation.bind(this)
     }
-    handleRoomCreation(event: React.MouseEvent<HTMLButtonElement>) {
+    handleRoomCreation = (event: React.MouseEvent<HTMLButtonElement>) => {
         LobbyApi.newRoom().then((roomId) => {
             window.location.assign("/room/" + roomId) 
         })

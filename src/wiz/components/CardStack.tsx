@@ -16,9 +16,8 @@ export default class CardStack extends React.PureComponent<ICardStackProps,ICard
     constructor(props: ICardStackProps) {
         super(props)
         
-        this.handleCardClick = this.handleCardClick.bind(this)
     }
-    handleCardClick(event: React.MouseEvent, suit: ICardProps["suit"], rank: ICardProps["rank"]) {
+    handleCardClick = (event: React.MouseEvent, suit: ICardProps["suit"], rank: ICardProps["rank"]) => {
         if (this.props.handleCardClick)
             this.props.handleCardClick(event, suit, rank)
     }

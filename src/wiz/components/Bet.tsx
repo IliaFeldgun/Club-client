@@ -1,5 +1,5 @@
 import React from "react"
-
+// TODO: Unused, possibly not needed
 interface IBetProps {
     bet: number
 }

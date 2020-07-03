@@ -11,4 +11,10 @@ export default class SessionStorage {
     static setPlayerName(name: string) {
         sessionStorage.setItem("playerName", name)
     }
+    static removePlayerId() {
+        sessionStorage.removeItem("playerId")
+    }
+    static removePlayerName() {
+        sessionStorage.removeItem("playerName")
+    }
 }

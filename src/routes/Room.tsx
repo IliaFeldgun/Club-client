@@ -33,7 +33,7 @@ export default class Room extends React.PureComponent<IRoomProps,IRoomState>{
             roomId: props.match.params.id,
             gameName: "",
             gameId: "",
-            isLoggedIn: ClubSession.getPlayerId() !== ""
+            isLoggedIn: ClubSession.getPlayerId() !== null
         }
     }
     componentDidMount() {

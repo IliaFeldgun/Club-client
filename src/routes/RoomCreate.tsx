@@ -15,7 +15,7 @@ export default class Rooms extends React.PureComponent<IRoomCreateProps,IRoomCre
 
         this.state = {
             roomId: "",
-            isLoggedIn: ClubSession.getPlayerId() !== ""
+            isLoggedIn: ClubSession.getPlayerId() !== null
         }
         this.handleRoomCreation = this.handleRoomCreation.bind(this)
     }

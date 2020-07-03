@@ -4,9 +4,6 @@ interface IPlayButtonProps{
     handlePlay: () => void
 }
 export default class PlayButton extends React.PureComponent<IPlayButtonProps,{}>{
-    constructor(props: IPlayButtonProps) {
-        super(props)
-    }
     handlePlay = (event: React.MouseEvent<HTMLButtonElement>) => {
         this.props.handlePlay()
     }

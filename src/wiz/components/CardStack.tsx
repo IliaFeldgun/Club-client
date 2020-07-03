@@ -13,10 +13,6 @@ interface ICardStackState {
 
 }
 export default class CardStack extends React.PureComponent<ICardStackProps,ICardStackState> {
-    constructor(props: ICardStackProps) {
-        super(props)
-        
-    }
     handleCardClick = (event: React.MouseEvent, suit: ICardProps["suit"], rank: ICardProps["rank"]) => {
         if (this.props.handleCardClick)
             this.props.handleCardClick(event, suit, rank)

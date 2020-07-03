@@ -5,9 +5,6 @@ interface IJoinButtonProps{
     roomId: string
 }
 export default class JoinButton extends React.PureComponent<IJoinButtonProps,{}>{
-    constructor(props: IJoinButtonProps) {
-        super(props)
-    }
     handleRoomJoin = (event: React.MouseEvent<HTMLButtonElement>) => {
         LobbyApi.joinRoom(this.props.roomId).then((roomId) => 
         {

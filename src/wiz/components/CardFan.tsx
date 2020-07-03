@@ -13,10 +13,6 @@ interface ICardFanState {
 
 }
 export default class CardFan extends React.PureComponent<ICardFanProps,ICardFanState>{
-    constructor(props:ICardFanProps) {
-        super(props)
-
-    }
     handleCardClick = (event: React.MouseEvent, suit: ICardProps["suit"], rank: ICardProps["rank"]) => {
         if (this.props.yourTurn) {
             let cssClasses = ["play-card"]

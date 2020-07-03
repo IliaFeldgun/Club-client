@@ -29,6 +29,19 @@ export default class LobbyApi {
             throw error
         }
     }
+    static async clearPlayer() {
+        const url = LOBBY_API_MAP.PLAYER.CLEAR_PLAYER.url()
+        const config = LOBBY_API_MAP.PLAYER.CLEAR_PLAYER.config()
+        try {
+            const response = await axios(url, config)
+            return response.data
+        }
+        catch (ex) {
+            const error: AxiosError = ex
+            // TODO: Handle
+            throw error
+        }
+    }
     static async newRoom(): Promise<string> {
         const url = LOBBY_API_MAP.ROOM.CREATE_ROOM.url()
         const config = LOBBY_API_MAP.ROOM.CREATE_ROOM.config()

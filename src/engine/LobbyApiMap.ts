@@ -22,6 +22,15 @@ function POST_CONFIG(): AxiosRequestConfig {
         withCredentials: true
     }
 }
+function DELETE_CONFIG(): AxiosRequestConfig {
+    return {
+        method: "DELETE",
+        headers: {
+            'Cache-Control': 'no-cache'
+        },
+        withCredentials: true
+    }
+}
 
 const LOBBY_API_MAP = {
     ROOM: {
@@ -84,6 +93,12 @@ const LOBBY_API_MAP = {
         },
         GET_PLAYER: {
             config: GET_CONFIG,
+            url: () => {
+                return `${API_ENPOINT}/api/player`
+            }
+        },
+        CLEAR_PLAYER: {
+            config: DELETE_CONFIG,
             url: () => {
                 return `${API_ENPOINT}/api/player`
             }

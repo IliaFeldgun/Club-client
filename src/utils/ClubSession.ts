@@ -7,6 +7,7 @@ export default class ClubSession {
             if (player) {
                 ClubSessionStorage.setPlayerId(player.playerId)
                 ClubSessionStorage.setPlayerName(player.playerName)
+                window.location.reload()
             }
         })
     }
@@ -15,5 +16,12 @@ export default class ClubSession {
     }
     static getPlayerName() {
         return ClubSessionStorage.getPlayerName()
+    }
+    static clearSession() {
+        LobbyApi.clearPlayer().then(() => {
+            ClubSessionStorage.removePlayerId()
+            ClubSessionStorage.removePlayerName()
+            window.location.reload()
+        })
     }
 }

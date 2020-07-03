@@ -10,25 +10,25 @@ interface ILoginFormState {
 export default class LoginForm extends React.PureComponent<ILoginFormProps,ILoginFormState> {
     constructor(props: ILoginFormProps) {
         super(props)
-        this.state = {playerName: ""}
-        this.handleClick = this.handleClick.bind(this)
-        this.handleChange = this.handleChange.bind(this)
-        this.handleKeyUp = this.handleKeyUp.bind(this)
+        this.state = { playerName: "" }
     }
-    handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    static defaultProps = {
+        className: ""
+    }
+    handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             playerName: event.target.value
         })
     }
-    handleClick(event: React.MouseEvent<HTMLButtonElement>) {
+    handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         this.sendLogin()
     }
-    handleKeyUp(event: React.KeyboardEvent<HTMLInputElement>) {
+    handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.keyCode === 13) { // "RETURN" key
             this.sendLogin()
         }
     }
-    sendLogin() {
+    sendLogin = () => {
         if(this.state.playerName) {
             LobbyApi.newPlayer(this.state.playerName).then((isCreated) => {
                 window.location.reload()

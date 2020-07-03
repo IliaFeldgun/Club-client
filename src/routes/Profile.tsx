@@ -1,6 +1,7 @@
 import React from 'react'
 import RoomList from '../components/RoomList'
 import LobbyApi from '../api/LobbyApi'
+import LogoutForm from '../components/Login/LogoutForm'
 interface IProfileProps {
 
 }
@@ -22,6 +23,8 @@ export default class Profile extends React.PureComponent<IProfileProps,IProfileS
     render() {
         return (
             <div className="centered-top">
+                <LogoutForm />
+                <br />
                 Your rooms:
                 <RoomList rooms={this.state.rooms}/>
             </div>

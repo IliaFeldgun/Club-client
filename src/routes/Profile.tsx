@@ -2,6 +2,9 @@ import React from 'react'
 import RoomList from '../components/RoomList'
 import LobbyApi from '../api/LobbyApi'
 import LogoutForm from '../components/Login/LogoutForm'
+import ClubSession from '../utils/ClubSession'
+import { Redirect } from "react-router-dom"
+
 interface IProfileProps {
 
 }
@@ -21,13 +24,17 @@ export default class Profile extends React.PureComponent<IProfileProps,IProfileS
         LobbyApi.getPlayerRooms().then((rooms) => this.setState(() => ({rooms})))
     }
     render() {
-        return (
+        let toRender = 
             <div className="centered-top">
                 <LogoutForm />
                 <br />
                 Your rooms:
                 <RoomList rooms={this.state.rooms}/>
             </div>
+        if (!ClubSession.getPlayerId())
+            toRender = <Redirect to="/"/>
+        return (
+            {toRender}
         )
     }
 

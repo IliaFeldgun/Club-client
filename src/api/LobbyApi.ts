@@ -140,6 +140,7 @@ export default class LobbyApi {
     }
     static listenToUpdateEvent() {
         const url = LOBBY_API_MAP.ROOM.UPDATES.url()
-        return new EventSource(url)
+        const init = LOBBY_API_MAP.ROOM.UPDATES.config()
+        return new EventSource(url, init)
     }
 }

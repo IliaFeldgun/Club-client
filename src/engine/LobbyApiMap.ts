@@ -32,6 +32,12 @@ function DELETE_CONFIG(): AxiosRequestConfig {
     }
 }
 
+function EVENT_SOURCE_INIT(): EventSourceInit {
+    return {
+        withCredentials: true
+    }
+}
+
 const LOBBY_API_MAP = {
     ROOM: {
         GET_ROOM: {
@@ -73,7 +79,8 @@ const LOBBY_API_MAP = {
         UPDATES: {
             url: () => {
                 return `${API_ENPOINT}/api/room/updates`
-            }
+            },
+            config: EVENT_SOURCE_INIT
         }
     },
     PLAYER: {

@@ -1,5 +1,6 @@
 import React from "react";
 import LobbyApi from "../../api/LobbyApi";
+import ClubSession from "../../utils/ClubSession";
 
 interface ILoginFormProps {
     className: string
@@ -31,7 +32,7 @@ export default class LoginForm extends React.PureComponent<ILoginFormProps,ILogi
     sendLogin = () => {
         if(this.state.playerName) {
             LobbyApi.newPlayer(this.state.playerName).then((isCreated) => {
-                window.location.reload()
+                ClubSession.assertSession()
             })
         }
     }

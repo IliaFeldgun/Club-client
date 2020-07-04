@@ -86,7 +86,6 @@ export default class Wiz extends React.PureComponent<IWizProps,IWizState> {
         )
     }
     fetchDataToState() {
-        const AllRequests: Promise<any>[] = []
         const gameId = this.state.gameId
 
         WizApi.getGameInstructions(gameId).then((instructions) => {

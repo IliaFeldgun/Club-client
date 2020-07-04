@@ -74,12 +74,12 @@ export default class Announcement extends React.PureComponent
                     )
                     break
                 case WizAnnouncementType.WON_TAKE:
-                    text = ANNOUNCEMENT_MAP[WizAnnouncementType.WON_GAME](
+                    text = ANNOUNCEMENT_MAP[WizAnnouncementType.WON_TAKE](
                         player.name
                     )
                     break
                 case WizAnnouncementType.WON_GAME:
-                    text = ANNOUNCEMENT_MAP[WizAnnouncementType.PLAYED_CARD](
+                    text = ANNOUNCEMENT_MAP[WizAnnouncementType.WON_GAME](
                         player.name
                     )
                     break

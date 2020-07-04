@@ -23,13 +23,11 @@ export default class RoomGame extends React.PureComponent<IRoomGameProps, IRoomG
             selectedGame: props.gameNames[0]
         }
 
-        this.handlePlay = this.handlePlay.bind(this)
-        this.handleGameSelect = this.handleGameSelect.bind(this)
     }
-    handlePlay() {
+    handlePlay= () => {
         window.location.assign(`/${this.props.gameName}/${this.props.gameId}`)
     }
-    handleGameSelect(gameName: string) {
+    handleGameSelect = (gameName: string) => {
         this.setState({
             selectedGame: gameName
         })

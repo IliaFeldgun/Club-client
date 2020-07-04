@@ -14,22 +14,22 @@ export default class LoginModal extends React.PureComponent<ILoginModalProps, IL
         super(props)
 
         this.state = {
-            showModal: props.show
+            showModal: false
         }
-        
-        this.handleOpenModal = this.handleOpenModal.bind(this)
-        this.handleCloseModal = this.handleCloseModal.bind(this)
-        this.handleClick = this.handleClick.bind(this)
     }
-    
-    handleClick(event: React.MouseEvent<HTMLButtonElement>) {
+    componentDidMount() {
+        this.setState({
+            showModal: this.props.show
+        })
+    }
+    handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         this.handleOpenModal()
     }
-    handleOpenModal () {
+    handleOpenModal = () => {
         this.setState({ showModal: true })
     }
     
-    handleCloseModal () {
+    handleCloseModal = () => {
         this.setState({ showModal: false })
     }
     render() {
@@ -39,7 +39,7 @@ export default class LoginModal extends React.PureComponent<ILoginModalProps, IL
                         shouldCloseOnOverlayClick={true}
                         isOpen={this.state.showModal}
                         onRequestClose={this.handleCloseModal}>
-                <LoginForm className="" />
+                <LoginForm/>
                 
                 <button className="form-button close-button" onClick={this.handleCloseModal}>
                     Close

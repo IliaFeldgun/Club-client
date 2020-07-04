@@ -15,10 +15,8 @@ export default class GameDropDown extends React.PureComponent
         this.state = {
             selectedGameName: props.gameNames[0]
         }
-
-        this.handleChange = this.handleChange.bind(this)
     }
-    handleChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedGameIndex = event.target.selectedIndex
         const selectedGameName = this.props.gameNames[selectedGameIndex]
 

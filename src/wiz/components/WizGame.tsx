@@ -29,18 +29,13 @@ interface IWizGameProps {
 interface IWizGameState {
 }
 export default class WizGame extends React.PureComponent<IWizGameProps,IWizGameState> {
-    constructor(props: IWizGameProps) {
-        super(props)
-        this.handleFanCardClick = this.handleFanCardClick.bind(this)
-        this.handleBet = this.handleBet.bind(this)
-    }
-    handleFanCardClick(event: React.MouseEvent, 
+    handleFanCardClick = (event: React.MouseEvent, 
                        suit: ICardProps["suit"], 
-                       rank: ICardProps["rank"]) {
+                       rank: ICardProps["rank"]) => {
         if(this.props.handleFanCardClick)
             this.props.handleFanCardClick({suit,rank})
     }
-    handleBet(event: React.MouseEvent, bet: number) {
+    handleBet = (event: React.MouseEvent, bet: number) => {
         if (this.props.handleBet) {
             this.props.handleBet(bet)
         }

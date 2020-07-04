@@ -5,11 +5,7 @@ interface IJoinButtonProps{
     roomId: string
 }
 export default class JoinButton extends React.PureComponent<IJoinButtonProps,{}>{
-    constructor(props: IJoinButtonProps) {
-        super(props)
-        this.handleRoomJoin = this.handleRoomJoin.bind(this)
-    }
-    handleRoomJoin(event: React.MouseEvent<HTMLButtonElement>) {
+    handleRoomJoin = (event: React.MouseEvent<HTMLButtonElement>) => {
         LobbyApi.joinRoom(this.props.roomId).then((roomId) => 
         {
             window.location.assign("/room/" + roomId)

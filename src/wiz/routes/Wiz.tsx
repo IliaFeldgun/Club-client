@@ -37,9 +37,6 @@ export default class Wiz extends React.PureComponent<IWizProps,IWizState> {
             tableStack: [],
             announcement: undefined
         }
-
-        this.handleCardSend = this.handleCardSend.bind(this)
-        this.handleBet = this.handleBet.bind(this)
     }
     componentDidMount() {
         const eventSource = WizApi.listenToUpdateEvent(this.state.gameId)
@@ -51,7 +48,7 @@ export default class Wiz extends React.PureComponent<IWizProps,IWizState> {
         }
         this.fetchDataToState()
     }
-    handleCardSend(card: ICard) {
+    handleCardSend = (card: ICard) => {
         // if (this.canPlayCard(card)) {
             WizApi.sendCard(this.state.gameId, card).then((isCardSent) => {
                 if (!isCardSent) {
@@ -62,7 +59,7 @@ export default class Wiz extends React.PureComponent<IWizProps,IWizState> {
             })
         // }
     }
-    handleBet(bet: number) {
+    handleBet = (bet: number) => {
         WizApi.sendBet(this.state.gameId, bet).then((isBetSent) => {
             if (isBetSent) {
                 // this.fetchDataToState()

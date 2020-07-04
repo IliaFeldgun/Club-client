@@ -34,7 +34,9 @@ export default class Profile extends React.PureComponent<IProfileProps,IProfileS
         if (!ClubSession.getPlayerId())
             toRender = <Redirect to="/"/>
         return (
-            {toRender}
+            <React.Fragment>
+                {toRender}
+            </React.Fragment>
         )
     }
 

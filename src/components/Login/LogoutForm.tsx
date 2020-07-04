@@ -3,7 +3,7 @@ import ClubSession from '../../utils/ClubSession'
 
 export default class LogoutForm extends React.PureComponent {
     handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        ClubSession.clearSession()
+        ClubSession.killSession()
     }
     render() {
         const buttonClass = "form-button"

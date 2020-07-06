@@ -1,4 +1,4 @@
-import IPlayer from "../../engine/interfaces/Player";
+import IPlayer from "../../engine/interfaces/Player"
 
 export default interface IWizPlayer {
     id: IPlayer["id"]

@@ -1,5 +1,5 @@
-import React from "react";
-import RoomList from "../components/RoomList";
+import React from "react"
+import RoomList from "../components/RoomList"
 
 interface ILobbyProps {
 

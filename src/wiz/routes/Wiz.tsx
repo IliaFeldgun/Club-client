@@ -1,12 +1,12 @@
-import React from "react";
-import './Wiz.css';
-import WizGame from "../components/WizGame";
-import { match, RouteComponentProps } from "react-router";
-import { WizApi } from "../api/WizApi";
-import ICard, { Suit, Rank } from "../../interfaces/Card";
-import { PossibleMoves } from "../interfaces/PossibleMoves";
-import IWizPlayer from "../interfaces/WizPlayer";
-import IWizAnnouncement from "../interfaces/WizAnnouncement";
+import React from "react"
+import './Wiz.css'
+import WizGame from "../components/WizGame"
+import { match, RouteComponentProps } from "react-router"
+import { WizApi } from "../api/WizApi"
+import ICard, { Suit, Rank } from "../../interfaces/Card"
+import { PossibleMoves } from "../interfaces/PossibleMoves"
+import IWizPlayer from "../interfaces/WizPlayer"
+import IWizAnnouncement from "../interfaces/WizAnnouncement"
 
 interface IRouteParams {
     id: string

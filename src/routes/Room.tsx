@@ -13,7 +13,7 @@ interface IRouteParams {
     id: string
 }
 interface IRoomProps extends RouteComponentProps<IRouteParams>{
-    match: match<IRouteParams>;
+    match: match<IRouteParams>
 }
 interface IRoomState {
     players: string[]

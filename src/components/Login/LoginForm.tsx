@@ -1,6 +1,6 @@
-import React from "react";
-import LobbyApi from "../../api/LobbyApi";
-import ClubSession from "../../utils/ClubSession";
+import React from "react"
+import LobbyApi from "../../api/LobbyApi"
+import ClubSession from "../../utils/ClubSession"
 
 interface ILoginFormProps {
     className: string

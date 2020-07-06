@@ -1,7 +1,7 @@
-import React from "react";
-import PlaceholderCard from "./PlaceholderCard";
-import Card, { ICardProps } from "./Card";
-import ICard from "../../interfaces/Card";
+import React from "react"
+import PlaceholderCard from "./PlaceholderCard"
+import Card, { ICardProps } from "./Card"
+import ICard from "../../interfaces/Card"
 
 interface ICardStackProps {
     cards: ICard[]

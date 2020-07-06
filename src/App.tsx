@@ -1,12 +1,12 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import React from "react";
-import Login from "./routes/Login";
-import Home from "./routes/Home";
-import Wiz from "./wiz/routes/Wiz";
-import Room from "./routes/Room";
-import Lobby from "./routes/Lobby";
-import Rooms from "./routes/RoomCreate";
-import Profile from "./routes/Profile";
+import { BrowserRouter, Route, Switch } from "react-router-dom"
+import React from "react"
+import Login from "./routes/Login"
+import Home from "./routes/Home"
+import Wiz from "./wiz/routes/Wiz"
+import Room from "./routes/Room"
+import Lobby from "./routes/Lobby"
+import Rooms from "./routes/RoomCreate"
+import Profile from "./routes/Profile"
 
 export default class App extends React.PureComponent {
     render() {

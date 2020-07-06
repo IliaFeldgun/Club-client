@@ -26,7 +26,7 @@ export default class ShareButton extends React.PureComponent<IShareButtonProps, 
     }
     handleInputClick(event: React.MouseEvent<HTMLInputElement>) {
         event.currentTarget.select()
-        document.execCommand("copy");
+        document.execCommand("copy")
     }
     render() {
             const buttonClass = "form-button"

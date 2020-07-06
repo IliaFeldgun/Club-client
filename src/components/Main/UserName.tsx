@@ -1,5 +1,5 @@
-import React from "react";
-import ClubSession from "../../utils/ClubSession";
+import React from "react"
+import ClubSession from "../../utils/ClubSession"
 
 export default class UserName extends React.PureComponent {
     componentDidMount() {

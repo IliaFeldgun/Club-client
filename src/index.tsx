@@ -1,10 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import Footer from './components/Main/Footer';
-import Header from './components/Main/Header';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+import Footer from './components/Main/Footer'
+import Header from './components/Main/Header'
 import './index.css'
-import UserName from './components/Main/UserName';
+import UserName from './components/Main/UserName'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,4 +15,4 @@ ReactDOM.render(
     <Footer />
   </React.StrictMode>,
   document.getElementById('root')
-);
+)

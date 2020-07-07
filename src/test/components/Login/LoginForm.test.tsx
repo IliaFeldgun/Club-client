@@ -1,14 +1,17 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import LoginForm from '../../../components/Login/LoginForm'
+import { mount, render, shallow } from 'enzyme'
 
 describe('Testing LoginForm', () => {
     test('component renders', () => {
-        const div = document.createElement('div')
-        ReactDOM.render(<LoginForm className=""/>, div)
+        const component = shallow(<LoginForm className="form test"/>)
+        expect(component).toMatchSnapshot()
     })
     test('Component renders without props', () => {
-        const div = document.createElement('div')
-        ReactDOM.render(<LoginForm />, div)
+        const component = shallow(<LoginForm  />)
+        expect(component).toMatchSnapshot()
+    })
+    test('Component sends login', () => {
+        const component = shallow(<LoginForm />)
     })
 })

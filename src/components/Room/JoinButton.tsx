@@ -1,5 +1,5 @@
 import React from 'react'
-import LobbyApi from '../../api/LobbyApi'
+import LobbyApi from '../../engine/api/LobbyApi'
 
 interface IJoinButtonProps{
     roomId: string

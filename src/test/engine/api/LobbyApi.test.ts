@@ -1,6 +1,6 @@
-import LobbyApi from '../../api/LobbyApi'
+import LobbyApi from '../../../engine/api/LobbyApi'
 import axios from 'axios'
-import EMPTY_UUID from '../../utils/EMPTY_UUID'
+import EMPTY_UUID from '../../../utils/EMPTY_UUID'
 jest.mock('axios')
 const mockedAxios = axios as jest.Mocked<typeof axios>
 

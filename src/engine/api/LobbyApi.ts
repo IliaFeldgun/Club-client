@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios"
-import IRoom from "../engine/interfaces/Room"
-import LOBBY_API_MAP from "../engine/LobbyApiMap"
+import IRoom from "../interfaces/Room"
+import LOBBY_API_MAP from "./LobbyApiMap"
 
 export default class LobbyApi {
     static async newPlayer(playerName: string): Promise<boolean> {

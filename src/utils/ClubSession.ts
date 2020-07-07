@@ -1,4 +1,4 @@
-import LobbyApi from '../api/LobbyApi'
+import LobbyApi from '../engine/api/LobbyApi'
 import ClubSessionStorage from './SessionStorage'
 
 export default class ClubSession {

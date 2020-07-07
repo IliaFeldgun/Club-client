@@ -1,6 +1,6 @@
 import React from 'react'
 import RoomList from '../components/RoomList'
-import LobbyApi from '../api/LobbyApi'
+import LobbyApi from '../engine/api/LobbyApi'
 import LogoutForm from '../components/Login/LogoutForm'
 import ClubSession from '../utils/ClubSession'
 import { Redirect } from "react-router-dom"

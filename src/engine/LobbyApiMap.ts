@@ -2,8 +2,9 @@ import { AxiosRequestConfig } from 'axios'
 
 const API_ENPOINT = process.env.REACT_APP_CLUB_API_SERVER
 
-function GET_CONFIG(): AxiosRequestConfig {
+function GET_CONFIG(url: string): AxiosRequestConfig {
     return {
+        url,
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -12,8 +13,9 @@ function GET_CONFIG(): AxiosRequestConfig {
         withCredentials: true
     }
 }
-function POST_CONFIG(): AxiosRequestConfig {
+function POST_CONFIG(url: string): AxiosRequestConfig {
     return {
+        url,
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
@@ -22,8 +24,9 @@ function POST_CONFIG(): AxiosRequestConfig {
         withCredentials: true
     }
 }
-function DELETE_CONFIG(): AxiosRequestConfig {
+function DELETE_CONFIG(url: string): AxiosRequestConfig {
     return {
+        url,
         method: "DELETE",
         headers: {
             'Cache-Control': 'no-cache'
@@ -40,75 +43,52 @@ function EVENT_SOURCE_INIT(): EventSourceInit {
 
 const LOBBY_API_MAP = {
     ROOM: {
-        GET_ROOM: {
-            config: GET_CONFIG,
-            url: (roomId: string) => {
-                return `${API_ENPOINT}/api/room/${roomId}`
-            }
+        GET_ROOM: (roomId: string) => {
+            const url = `${API_ENPOINT}/api/room/${roomId}`
+            return GET_CONFIG(url)
         },
-        CREATE_ROOM: {
-            config: POST_CONFIG,
-            url: () => {
-                return `${API_ENPOINT}/api/room`
-            }
+        CREATE_ROOM: () => {
+            const url = `${API_ENPOINT}/api/room`
+            return POST_CONFIG(url)
         },
-        JOIN_ROOM: {
-            config: POST_CONFIG,
-            url: (roomId: string) => {
-                return `${API_ENPOINT}/api/room/${roomId}/join`
-            }
+        JOIN_ROOM: (roomId: string) => {
+            const url = `${API_ENPOINT}/api/room/${roomId}/join`
+            return POST_CONFIG(url)
         },
-        GET_LEADER: {
-            config: GET_CONFIG,
-            url: (roomId: string) => {
-                return `${API_ENPOINT}/api/room/${roomId}/leader`
-            }
+        GET_LEADER: (roomId: string) => {
+            const url = `${API_ENPOINT}/api/room/${roomId}/leader`
+            return GET_CONFIG(url)
         },
-        GET_PLAYER_NAMES: {
-            config: GET_CONFIG,
-            url: (roomId: string) => {
-                return `${API_ENPOINT}/api/room/${roomId}/playernames`
-            }
+        GET_PLAYER_NAMES: (roomId: string) => {
+            const url = `${API_ENPOINT}/api/room/${roomId}/playernames`
+            return GET_CONFIG(url)
         },
-        GET_GAME: {
-            config: GET_CONFIG,
-            url: (roomId: string) => {
-                return `${API_ENPOINT}/api/room/${roomId}/game`
-            }
+        GET_GAME: (roomId: string) => {
+            const url = `${API_ENPOINT}/api/room/${roomId}/game`
+            return GET_CONFIG(url)
         },
-        UPDATES: {
-            url: () => {
-                return `${API_ENPOINT}/api/room/updates`
-            },
-            config: EVENT_SOURCE_INIT
+        UPDATES: (): [string, EventSourceInit] => {
+            const url = `${API_ENPOINT}/api/room/updates`
+            const config = EVENT_SOURCE_INIT()
+            return [url, config]
         }
     },
     PLAYER: {
-        GET_ROOMS: {
-            config: GET_CONFIG,
-            url: () => {
-                return `${API_ENPOINT}/api/player/rooms`
-            }
+        GET_ROOMS: () => {
+            const url = `${API_ENPOINT}/api/player/rooms`
+            return GET_CONFIG(url)
         },
-        CREATE_PLAYER: {
-            config: (playerName: string) => {
-                return {...POST_CONFIG(), data: {playerName}}
-            },
-            url: () => {
-                return `${API_ENPOINT}/api/player`
-            },
+        CREATE_PLAYER: (playerName: string) => {
+            const url = `${API_ENPOINT}/api/player`
+            return {...POST_CONFIG(url), data: {playerName}}
         },
-        GET_PLAYER: {
-            config: GET_CONFIG,
-            url: () => {
-                return `${API_ENPOINT}/api/player`
-            }
+        GET_PLAYER: () => {
+            const url = `${API_ENPOINT}/api/player`
+            return GET_CONFIG(url)
         },
-        CLEAR_PLAYER: {
-            config: DELETE_CONFIG,
-            url: () => {
-                return `${API_ENPOINT}/api/player`
-            }
+        CLEAR_PLAYER: () => {
+            const url = `${API_ENPOINT}/api/player`
+            return DELETE_CONFIG(url)
         }
     }
 }

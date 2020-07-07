@@ -1,4 +1,4 @@
-# Club-client
+# ♣ Club-client
 [![License](https://img.shields.io/github/license/IliaFeldgun/Club-client?style=flat-square)](https://github.com/IliaFeldgun/Club-client/master/LICENSE.md)
 [![Build](https://img.shields.io/github/workflow/status/IliaFeldgun/Club-client/Node.js%20CI?style=flat-square)](https://github.com/IliaFeldgun/Club-client/actions?query=workflow%3A%22Node.js+CI%22)
 

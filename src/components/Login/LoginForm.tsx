@@ -1,6 +1,7 @@
 import React from "react"
 import LobbyApi from "../../engine/api/LobbyApi"
 import ClubSession from "../../utils/ClubSession"
+import ClientError from "../../engine/api/ClientError"
 
 interface ILoginFormProps {
     className: string
@@ -33,6 +34,9 @@ export default class LoginForm extends React.PureComponent<ILoginFormProps,ILogi
         if(this.state.playerName) {
             LobbyApi.newPlayer(this.state.playerName).then((isCreated) => {
                 ClubSession.assertSession()
+            }).catch((error: ClientError) => {
+                // TODO: Handle better
+                console.error(`${error.httpStatusCode}: ${error.message}`)
             })
         }
     }

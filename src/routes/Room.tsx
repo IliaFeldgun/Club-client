@@ -8,6 +8,7 @@ import JoinButton from '../components/Room/JoinButton'
 import ShareButton from '../components/Room/ShareButton'
 import LoginModal from '../components/Login/LoginModal'
 import RoomGame from '../components/Room/RoomGame'
+import ClientError from '../engine/api/ClientError'
 
 interface IRouteParams {
     id: string
@@ -78,9 +79,15 @@ export default class Room extends React.PureComponent<IRoomProps,IRoomState>{
                     gameName: room.gameName,
                     gameId: room.gameId
                 }))
+        }).catch((error: ClientError) => {
+            // TODO: Handle better
+            console.error(`${error.httpStatusCode}: ${error.message}`)
         })
         LobbyApi.getRoomPlayerNames(this.state.roomId).then((playerNames) => {
             this.setState(() => ({players: playerNames}))
+        }).catch((error: ClientError) => {
+            // TODO: Handle better
+            console.error(`${error.httpStatusCode}: ${error.message}`)
         })
 
     }

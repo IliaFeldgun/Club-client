@@ -13,7 +13,7 @@ export default class LobbyApi {
         catch (ex) {
             const error: AxiosError = ex
             throw new ClientError(
-                error.response?.status, 
+                error.response?.status,
                 error.response?.data
             )
         }
@@ -32,11 +32,11 @@ export default class LobbyApi {
             )
         }
     }
-    static async clearPlayer() {
+    static async clearPlayer(): Promise<boolean> {
         const config = LOBBY_API_MAP.PLAYER.CLEAR_PLAYER()
         try {
             const response = await axios.request(config)
-            return response.data
+            return response.data.playerId !== undefined
         }
         catch (ex) {
             const error: AxiosError = ex

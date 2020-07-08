@@ -1,4 +1,4 @@
-import { WizAnnouncementType } from "../interfaces/WizAnnouncementType";
+import { WizAnnouncementType } from "../interfaces/WizAnnouncementType"
 
 const ANNOUNCEMENT_MAP = {
     [WizAnnouncementType.PLACED_BET]: (playerName: string, bet: number) => {

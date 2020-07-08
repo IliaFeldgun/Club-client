@@ -1,6 +1,6 @@
 import React from 'react'
 import { RouteComponentProps, match } from 'react-router-dom'
-import LobbyApi from '../api/LobbyApi'
+import LobbyApi from '../engine/api/LobbyApi'
 import PlayerList from '../components/PlayerList'
 import "./Room.css"
 import ClubSession from '../utils/ClubSession'
@@ -8,12 +8,13 @@ import JoinButton from '../components/Room/JoinButton'
 import ShareButton from '../components/Room/ShareButton'
 import LoginModal from '../components/Login/LoginModal'
 import RoomGame from '../components/Room/RoomGame'
+import ClientError from '../engine/api/ClientError'
 
 interface IRouteParams {
     id: string
 }
 interface IRoomProps extends RouteComponentProps<IRouteParams>{
-    match: match<IRouteParams>;
+    match: match<IRouteParams>
 }
 interface IRoomState {
     players: string[]
@@ -78,9 +79,15 @@ export default class Room extends React.PureComponent<IRoomProps,IRoomState>{
                     gameName: room.gameName,
                     gameId: room.gameId
                 }))
+        }).catch((error: ClientError) => {
+            // TODO: Handle better
+            console.error(`${error.httpStatusCode}: ${error.message}`)
         })
         LobbyApi.getRoomPlayerNames(this.state.roomId).then((playerNames) => {
             this.setState(() => ({players: playerNames}))
+        }).catch((error: ClientError) => {
+            // TODO: Handle better
+            console.error(`${error.httpStatusCode}: ${error.message}`)
         })
 
     }

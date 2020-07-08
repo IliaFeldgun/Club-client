@@ -1,7 +1,8 @@
 import React from 'react'
-import LobbyApi from '../api/LobbyApi'
+import LobbyApi from '../engine/api/LobbyApi'
 import LoginModal from '../components/Login/LoginModal'
 import ClubSession from '../utils/ClubSession'
+import ClientError from '../engine/api/ClientError'
 interface IRoomCreateProps {
 
 }
@@ -21,6 +22,9 @@ export default class Rooms extends React.PureComponent<IRoomCreateProps,IRoomCre
     handleRoomCreation = (event: React.MouseEvent<HTMLButtonElement>) => {
         LobbyApi.newRoom().then((roomId) => {
             window.location.assign("/room/" + roomId) 
+        }).catch((error: ClientError) => {
+            // TODO: Handle better, 401
+            console.error(`${error.httpStatusCode}: ${error.message}`)
         })
     }
     render() {

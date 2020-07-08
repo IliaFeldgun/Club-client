@@ -1,6 +1,6 @@
-import React from "react";
-import Card, { ICardProps } from "./Card";
-import ICard from "../../interfaces/Card";
+import React from "react"
+import Card, { ICardProps } from "./Card"
+import ICard from "../../interfaces/Card"
 
 interface ICardFanProps {
     yourTurn: boolean

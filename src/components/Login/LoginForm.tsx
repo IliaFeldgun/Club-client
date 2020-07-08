@@ -1,17 +1,20 @@
-import React from "react";
-import LobbyApi from "../../api/LobbyApi";
-import ClubSession from "../../utils/ClubSession";
+import React from "react"
+import LobbyApi from "../../engine/api/LobbyApi"
+import ClubSession from "../../utils/ClubSession"
+import ClientError from "../../engine/api/ClientError"
+import ClientErrorBox from "../ClientErrorBox"
 
 interface ILoginFormProps {
     className: string
 }
 interface ILoginFormState {
-    playerName: string
+    playerName: string,
+    error?: ClientError
 }
 export default class LoginForm extends React.PureComponent<ILoginFormProps,ILoginFormState> {
     constructor(props: ILoginFormProps) {
         super(props)
-        this.state = { playerName: "" }
+        this.state = { playerName: "", error: undefined }
     }
     static defaultProps = {
         className: ""
@@ -33,13 +36,24 @@ export default class LoginForm extends React.PureComponent<ILoginFormProps,ILogi
         if(this.state.playerName) {
             LobbyApi.newPlayer(this.state.playerName).then((isCreated) => {
                 ClubSession.assertSession()
+            }).catch((error: ClientError) => {
+                this.setState({
+                    error
+                })
             })
         }
+    }
+    handleErrorClose = () => {
+        this.setState({
+            error: undefined
+        })
     }
     render() {
         const fieldClass = "form-field"
         const allClass = this.props.className + " login-form"
         const buttonClass = "form-button"
+        const errorDisplay = !this.state.error ? <React.Fragment /> : 
+            <ClientErrorBox error={this.state.error} onModalClose={this.handleErrorClose} />
         return (
             <React.Fragment>
                 <div className={allClass}>
@@ -58,6 +72,7 @@ export default class LoginForm extends React.PureComponent<ILoginFormProps,ILogi
                         </span>
                     </button>
                 </div>
+                {errorDisplay}
             </React.Fragment>
         )
     }

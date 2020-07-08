@@ -1,12 +1,12 @@
-import React from "react";
-import './Wiz.css';
-import WizGame from "../components/WizGame";
-import { match, RouteComponentProps } from "react-router";
-import { WizApi } from "../api/WizApi";
-import ICard, { Suit, Rank } from "../../interfaces/Card";
-import { PossibleMoves } from "../interfaces/PossibleMoves";
-import IWizPlayer from "../interfaces/WizPlayer";
-import IWizAnnouncement from "../interfaces/WizAnnouncement";
+import React from "react"
+import './Wiz.css'
+import WizGame from "../components/WizGame"
+import { match, RouteComponentProps } from "react-router"
+import { WizApi } from "../api/WizApi"
+import ICard, { Suit, Rank } from "../../interfaces/Card"
+import { PossibleMoves } from "../interfaces/PossibleMoves"
+import IWizPlayer from "../interfaces/WizPlayer"
+import IWizAnnouncement from "../interfaces/WizAnnouncement"
 
 interface IRouteParams {
     id: string
@@ -86,31 +86,25 @@ export default class Wiz extends React.PureComponent<IWizProps,IWizState> {
         )
     }
     fetchDataToState() {
-        const AllRequests: Promise<any>[] = []
         const gameId = this.state.gameId
-        // TODO: Maybe unite API
-        AllRequests.push(WizApi.getGameInstructions(gameId))
-        AllRequests.push(WizApi.getGamePlayers(gameId))
-        AllRequests.push(WizApi.getNextPlayer(gameId))
-        AllRequests.push(WizApi.getPlayerHand(gameId))
-        AllRequests.push(WizApi.getTableStack(gameId))
-        AllRequests.push(WizApi.getStrongSuit(gameId))
 
-        Promise.all(AllRequests).then(([
-            instructions, 
-            players, 
-            nextPlayer,
-            playerHand, 
-            tableStack,
-            strongSuit
-        ]) => {
-            this.setState(() => ({
-                instructions, 
-                players, 
-                nextPlayer,
-                playerHand, 
-                tableStack,
-                strongSuit}))
+        WizApi.getGameInstructions(gameId).then((instructions) => {
+            this.setState(() => ({instructions}))
+        })
+        WizApi.getGamePlayers(gameId).then((players) => {
+            this.setState(() => ({players}))
+        })
+        WizApi.getNextPlayer(gameId).then((nextPlayer) => {
+            this.setState(() => ({nextPlayer}))
+        })
+        WizApi.getPlayerHand(gameId).then((playerHand) => {
+            this.setState(() => ({playerHand}))
+        })
+        WizApi.getTableStack(gameId).then((tableStack) => {
+            this.setState(() => ({tableStack}))
+        })
+        WizApi.getStrongSuit(gameId).then((strongSuit) => {
+            this.setState(() => ({strongSuit}))
         })
     }
     canPlayCard(card: ICard) {

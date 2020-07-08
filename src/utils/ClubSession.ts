@@ -1,5 +1,6 @@
-import LobbyApi from '../api/LobbyApi'
+import LobbyApi from '../engine/api/LobbyApi'
 import ClubSessionStorage from './SessionStorage'
+import ClientError from '../engine/api/ClientError'
 
 export default class ClubSession {
     static assertSession() {
@@ -34,6 +35,9 @@ export default class ClubSession {
     static killSession() {
         LobbyApi.clearPlayer().then(() => {
             ClubSession.clearSession()
+        }).catch((error: ClientError) => {
+            // TODO: Handle better
+            console.error(`${error.httpStatusCode}: ${error.message}`)
         })
     }
     static clearSession() {

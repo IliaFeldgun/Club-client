@@ -1,7 +1,11 @@
 import React from 'react'
 import RoomList from '../components/RoomList'
-import LobbyApi from '../api/LobbyApi'
+import LobbyApi from '../engine/api/LobbyApi'
 import LogoutForm from '../components/Login/LogoutForm'
+import ClubSession from '../utils/ClubSession'
+import { Redirect } from "react-router-dom"
+import ClientError from '../engine/api/ClientError'
+
 interface IProfileProps {
 
 }
@@ -18,16 +22,27 @@ export default class Profile extends React.PureComponent<IProfileProps,IProfileS
     }
 
     componentDidMount() {
-        LobbyApi.getPlayerRooms().then((rooms) => this.setState(() => ({rooms})))
+        LobbyApi.getPlayerRooms().then(
+            (rooms) => this.setState(() => ({rooms}))
+        ).catch((error: ClientError) => {
+            // TODO: Handle better
+            console.error(`${error.httpStatusCode}: ${error.message}`)
+        })
     }
     render() {
-        return (
+        let toRender = 
             <div className="centered-top">
                 <LogoutForm />
                 <br />
                 Your rooms:
                 <RoomList rooms={this.state.rooms}/>
             </div>
+        if (!ClubSession.getPlayerId())
+            toRender = <Redirect to="/"/>
+        return (
+            <React.Fragment>
+                {toRender}
+            </React.Fragment>
         )
     }
 

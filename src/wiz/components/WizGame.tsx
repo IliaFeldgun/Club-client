@@ -1,19 +1,19 @@
-import React from "react";
-import CardBoard from "./CardBoard";
-import CardFan from "./CardFan";
-import ScoreBoard from "./ScoreBoard";
-import CardStack from "./CardStack";
-import { ICardProps } from "./Card";
-import ICard, { Suit } from "../../interfaces/Card";
-import WizPlayerList from "./PlayerList";
-import WizOtherPlayers from "./OtherPlayers";
-import ClubSession from "../../utils/ClubSession";
-import { PossibleMoves } from "../interfaces/PossibleMoves";
-import SetBet from "./SetBet";
-import StrongSuit from "./StrongSuit";
-import IWizPlayer from "../interfaces/WizPlayer";
-import IWizAnnouncement from "../interfaces/WizAnnouncement";
-import Announcement from "./Announcement";
+import React from "react"
+import CardBoard from "./CardBoard"
+import CardFan from "./CardFan"
+import ScoreBoard from "./ScoreBoard"
+import CardStack from "./CardStack"
+import { ICardProps } from "./Card"
+import ICard, { Suit } from "../../interfaces/Card"
+import WizPlayerList from "./PlayerList"
+import WizOtherPlayers from "./OtherPlayers"
+import ClubSession from "../../utils/ClubSession"
+import { PossibleMoves } from "../interfaces/PossibleMoves"
+import SetBet from "./SetBet"
+import StrongSuit from "./StrongSuit"
+import IWizPlayer from "../interfaces/WizPlayer"
+import IWizAnnouncement from "../interfaces/WizAnnouncement"
+import Announcement from "./Announcement"
 
 interface IWizGameProps {
     instructions: PossibleMoves

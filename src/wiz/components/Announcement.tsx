@@ -1,9 +1,9 @@
-import React from "react";
-import IWizAnnouncement from "../interfaces/WizAnnouncement";
-import ANNOUNCEMENT_MAP from "../text_map/AnnouncementMap";
-import { WizAnnouncementType } from "../interfaces/WizAnnouncementType";
-import IWizPlayer from "../interfaces/WizPlayer";
-import ClubSession from "../../utils/ClubSession";
+import React from "react"
+import IWizAnnouncement from "../interfaces/WizAnnouncement"
+import ANNOUNCEMENT_MAP from "../text_map/AnnouncementMap"
+import { WizAnnouncementType } from "../interfaces/WizAnnouncementType"
+import IWizPlayer from "../interfaces/WizPlayer"
+import ClubSession from "../../utils/ClubSession"
 
 interface IAnnouncementProps {
     announcement: IWizAnnouncement
@@ -52,7 +52,7 @@ export default class Announcement extends React.PureComponent
                 show: false,
                 previousVersion: this.props.announcement.version
             })
-         }, time);
+         }, time)
     }
     getText() {
         let text: string = ""

@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios"
 import IRoom from "../interfaces/Room"
 import LOBBY_API_MAP from "./LobbyApiMap"
+import ClientError from "./ClientError"
 
 export default class LobbyApi {
     static async newPlayer(playerName: string): Promise<boolean> {
@@ -11,8 +12,10 @@ export default class LobbyApi {
         }
         catch (ex) {
             const error: AxiosError = ex
-            // TODO: Handle            
-            throw error
+            throw new ClientError(
+                error.response?.status, 
+                error.response?.data
+            )
         }
     }
     static async getPlayer(): Promise<{playerId: string, playerName: string}> {
@@ -23,8 +26,10 @@ export default class LobbyApi {
         }
         catch (ex) {
             const error: AxiosError = ex
-            // TODO: Handle
-            throw error
+            throw new ClientError(
+                error.response?.status, 
+                error.response?.data
+            )
         }
     }
     static async clearPlayer() {
@@ -35,8 +40,10 @@ export default class LobbyApi {
         }
         catch (ex) {
             const error: AxiosError = ex
-            // TODO: Handle
-            throw error
+            throw new ClientError(
+                error.response?.status, 
+                error.response?.data
+            )
         }
     }
     static async newRoom(): Promise<string> {
@@ -47,8 +54,10 @@ export default class LobbyApi {
         }
         catch (ex) {
             const error: AxiosError = ex
-            // TODO: Handle            
-            throw error
+            throw new ClientError(
+                error.response?.status, 
+                error.response?.data
+            )
         }
     }
 
@@ -60,8 +69,10 @@ export default class LobbyApi {
         }
         catch (ex) {
             const error: AxiosError = ex
-            // TODO: Handle            
-            throw error
+            throw new ClientError(
+                error.response?.status, 
+                error.response?.data
+            )
         }
     }
 
@@ -73,8 +84,10 @@ export default class LobbyApi {
         }
         catch (ex) {
             const error: AxiosError = ex
-            // TODO: Handle            
-            throw error
+            throw new ClientError(
+                error.response?.status, 
+                error.response?.data
+            )
         }
     }
     
@@ -86,8 +99,10 @@ export default class LobbyApi {
         }
         catch (ex) {
             const error: AxiosError = ex
-            // TODO: Handle            
-            throw error
+            throw new ClientError(
+                error.response?.status, 
+                error.response?.data
+            )
         }
     }
     static async getRoomLeader(roomId: string): Promise<string> {
@@ -98,8 +113,10 @@ export default class LobbyApi {
         }
         catch (ex) {
             const error: AxiosError = ex
-            // TODO: Handle            
-            throw error
+            throw new ClientError(
+                error.response?.status, 
+                error.response?.data
+            )
         }
     }
     static async getRoomGame(roomId: string): Promise<{id: string, name: string}>
@@ -111,8 +128,10 @@ export default class LobbyApi {
         }
         catch (ex) {
             const error: AxiosError = ex
-            // TODO: Handle            
-            throw error
+            throw new ClientError(
+                error.response?.status, 
+                error.response?.data
+            )
         }
     }
     static async getRoom(roomId: string): Promise<IRoom> {
@@ -124,8 +143,10 @@ export default class LobbyApi {
         }
         catch (ex) {
             const error: AxiosError = ex
-            // TODO: Handle            
-            throw error
+            throw new ClientError(
+                error.response?.status, 
+                error.response?.data
+            )
         }
     }
     static listenToUpdateEvent() {

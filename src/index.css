@@ -11,6 +11,14 @@ header {
 footer {
     z-index: 500;
 }
+.error-modal {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+}
+.error-modal .form-button {
+    float: right
+}
 .main-title {
     margin-left: 0.5vmax;
     line-height: 6vh;

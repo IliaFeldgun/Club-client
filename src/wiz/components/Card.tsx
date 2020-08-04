@@ -7,73 +7,79 @@ export interface ICardProps {
     rank: ICard["rank"]
     handleClick?: (event: React.MouseEvent, suit: ICard["suit"], rank: ICard["rank"]) => void
 }
-interface ICardState {
+const Card: React.FC<ICardProps> = (props) => {
+    const handleClick = (event: React.MouseEvent<HTMLSpanElement>) => {
+        if (props.handleClick) {
+            props.handleClick(event, props.suit, props.rank)
+        }
+    }
+    const suit: string = translateSuit(props.suit)
+    const rank: string = translateRank(props.rank)
+    const classRed: string = isRed(props.suit) ? "red-card" : ""
 
-}
-export default class Card extends React.PureComponent<ICardProps,ICardState>{
-    handleClick = (event: React.MouseEvent<HTMLSpanElement>) => {
-        if (this.props.handleClick) {
-            this.props.handleClick(event, this.props.suit, this.props.rank)
-        }
-    }
-    render() {
-        let suit: string = this.translateSuit()
-        let rank: string = this.translateRank()
-        
-        const isRed = this.isRed()
-        const red = isRed ? "red-card" : ""
-        const isJoker = this.props.rank === Rank.JOKER
-        const joker = isJoker ? "vertical-text" : ""
-        let rotate: CSSProperties = {}
-        const degrees = this.props.rotateDegree
-        const spread = degrees
-        if (this.props.rotateDegree) {
-            rotate = {transform: `rotate(${degrees}deg) translate(${spread}%,0)`}
-        }
-        
-        const classes = `white player-card ${red} ${joker}`
-    const cardContent = <React.Fragment>{suit}{!isJoker && <br/>}{rank}</React.Fragment>
-        return (
-            <p className={classes} style={rotate} onClick={this.handleClick}>
-                {cardContent}
-            </p>
-        )
-    }
-    isRed() : boolean {
-        return this.props.suit === Suit.HEART || this.props.suit === Suit.DIAMOND
-    }
-    translateSuit() : string {
-        let suit: string
-        switch(this.props.suit) {
-            case Suit.SPADE:
-                suit = "♠"
-                break
-            case Suit.HEART:
-                suit = "♥"
-                break
-            case Suit.CLUB:
-                suit = "♣"
-                break
-            case Suit.DIAMOND:
-                suit = "♦"
-                break
-        }
+    const isJoker = props.rank === Rank.JOKER
+    const classJoker = isJoker ? "vertical-text" : ""
 
-        return suit
+    let rotate: CSSProperties = {}
+    const degrees = props.rotateDegree
+    const spread = degrees
+    if (props.rotateDegree) {
+        rotate = {transform: `rotate(${degrees}deg) translate(${spread}%,0)`}
     }
-    translateRank() : string {
-        let rank: string
-        
-        if (this.props.rank <= 10 && this.props.rank >= 2) {
-            rank = this.props.rank.toString()
-        }
-        else if (this.props.rank === Rank.JOKER) {
-            rank = "JOKER"
-        }
-        else {
-            rank = Rank[this.props.rank].charAt(0)
-        }
-        
-        return rank
-    }
+
+    const classes = `white player-card ${classRed} ${classJoker}`
+    const cardContent = <React.Fragment>
+        {suit}
+        {!isJoker && <br/>}
+        {rank}
+    </React.Fragment>
+    
+    return (
+        <p className={classes} style={rotate} onClick={handleClick}>
+            {cardContent}
+        </p>
+    )
 }
+
+// TODO: move helper function to another class
+
+const translateRank = (rank: Rank) : string  =>{
+    let textRank: string
+    
+    if (rank <= 10 && rank >= 2) {
+        textRank = rank.toString()
+    }
+    else if (rank === Rank.JOKER) {
+        textRank = "JOKER"
+    }
+    else {
+        textRank = Rank[rank].charAt(0)
+    }
+    
+    return textRank
+}
+const translateSuit = (suit: Suit) : string  => {
+    let textSuit: string
+    switch(suit) {
+        case Suit.SPADE:
+            textSuit = "♠"
+            break
+        case Suit.HEART:
+            textSuit = "♥"
+            break
+        case Suit.CLUB:
+            textSuit = "♣"
+            break
+        case Suit.DIAMOND:
+            textSuit = "♦"
+            break
+    }
+
+    return textSuit
+}
+
+const isRed = (suit: Suit) : boolean => {
+    return suit === Suit.HEART || suit === Suit.DIAMOND
+}
+
+export default Card

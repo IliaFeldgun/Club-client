@@ -1,18 +1,12 @@
 import React from "react"
 
-interface ICardBoardProps {
+const CardBoard: React.FC = (props) => {
+    const classes = "split cardboard left tall three-quarters"
+    return (
+        <span className={classes}>
+            {props.children}
+        </span>
+    )
+}
 
-}
-interface ICardBoardState {
-    
-}
-export default class CardBoard extends React.PureComponent<ICardBoardProps,ICardBoardState> {
-    render() {
-        const classes = "split cardboard left tall three-quarters"
-        return (
-            <span className={classes}>
-                {this.props.children}
-            </span>
-        )
-    }
-}
+export default CardBoard

@@ -1,20 +1,28 @@
 import React from "react"
 import ClubSession from "../../utils/ClubSession"
 
-export default class UserName extends React.PureComponent {
-    componentDidMount() {
-            ClubSession.assertSession()
-    }
-    render() {
-        let playerName = ClubSession.getPlayerName()
-        let nameToRender = playerName ? 
-            <a href="/profile">{playerName}</a> : 
-            <a href="/login">Login</a>
+const UserName: React.FunctionComponent = () => {
+    const [playerName, setPlayerName] = React.useState("")
+    React.useEffect(() => {
+        ClubSession.assertSession()
+    }, [])
 
-        return (
-            <span className="main-user">
-                {nameToRender}
-            </span>
-        )
-    }
+    React.useEffect(() => {
+        const newPlayerName = ClubSession.getPlayerName()
+
+        if (newPlayerName && newPlayerName !== "")
+            setPlayerName(newPlayerName)
+    }, [])
+
+    const toRender = playerName !== "" ? 
+        <a href="/profile">{playerName}</a> : 
+        <a href="/login">Login</a>
+
+    return (
+        <span className="main-user">
+            {toRender}
+        </span>
+    )
 }
+
+export default UserName

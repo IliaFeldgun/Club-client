@@ -3,77 +3,65 @@ import LobbyApi from "../../engine/api/LobbyApi"
 import ClubSession from "../../utils/ClubSession"
 import ClientError from "../../engine/api/ClientError"
 import ClientErrorBox from "../ClientErrorBox"
-
+// TODO: make className optional
 interface ILoginFormProps {
     className: string
 }
-interface ILoginFormState {
-    playerName: string,
-    error?: ClientError
-}
-export default class LoginForm extends React.PureComponent<ILoginFormProps,ILoginFormState> {
-    constructor(props: ILoginFormProps) {
-        super(props)
-        this.state = { playerName: "", error: undefined }
+const LoginForm: React.FC<ILoginFormProps> = (props) => {
+    const [playerName, setPlayerName] = React.useState("")
+    const [error, setError] = React.useState<ClientError>()
+    
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setPlayerName(event.target.value)
     }
-    static defaultProps = {
-        className: ""
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        sendLogin()
     }
-    handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({
-            playerName: event.target.value
-        })
-    }
-    handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        this.sendLogin()
-    }
-    handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.keyCode === 13) { // "RETURN" key
-            this.sendLogin()
+            sendLogin()
         }
     }
-    sendLogin = () => {
-        if(this.state.playerName) {
-            LobbyApi.newPlayer(this.state.playerName).then((isCreated) => {
+    const sendLogin = () => {
+        if(playerName) {
+            LobbyApi.newPlayer(playerName).then((isCreated) => {
                 ClubSession.assertSession()
             }).catch((error: ClientError) => {
-                this.setState({
-                    error
-                })
+                setError(error)
             })
         }
     }
-    handleErrorClose = () => {
-        this.setState({
-            error: undefined
-        })
+    const handleErrorClose = () => {
+        setError(undefined)
     }
-    render() {
-        const fieldClass = "form-field"
-        const allClass = this.props.className + " login-form"
-        const buttonClass = "form-button"
-        const errorDisplay = !this.state.error ? <React.Fragment /> : 
-            <ClientErrorBox error={this.state.error} onModalClose={this.handleErrorClose} />
-        return (
-            <React.Fragment>
-                <div className={allClass}>
-                    <h3>Login with a name of your choice</h3>
-                    <input 
-                        className={fieldClass} 
-                        id="playerName" 
-                        type="text" 
-                        name="playerName" 
-                        onChange={this.handleChange} 
-                        onKeyUp={this.handleKeyUp} 
-                    />
-                    <button className={buttonClass} id="loginsend" onClick={this.handleClick}>
-                        <span>
-                            Login
-                        </span>
-                    </button>
-                </div>
-                {errorDisplay}
-            </React.Fragment>
-        )
-    }
+    const fieldClass = "form-field"
+    const allClass = props.className + " login-form"
+    const buttonClass = "form-button"
+    const errorDisplay = !error ? <React.Fragment /> : 
+        <ClientErrorBox error={error} onModalClose={handleErrorClose} />
+    
+    return (
+        <React.Fragment>
+            <div className={allClass}>
+                <h3>Login with a name of your choice</h3>
+                <input 
+                    className={fieldClass} 
+                    id="playerName" 
+                    type="text" 
+                    name="playerName" 
+                    onChange={handleChange} 
+                    onKeyUp={handleKeyUp} 
+                />
+                <button className={buttonClass} id="loginsend" onClick={handleClick}>
+                    <span>
+                        Login
+                    </span>
+                </button>
+            </div>
+            {errorDisplay}
+        </React.Fragment>
+    )
 }
+
+export default LoginForm

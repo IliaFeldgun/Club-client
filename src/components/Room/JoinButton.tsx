@@ -5,9 +5,9 @@ import ClientError from '../../engine/api/ClientError'
 interface IJoinButtonProps{
     roomId: string
 }
-export default class JoinButton extends React.PureComponent<IJoinButtonProps,{}>{
-    handleRoomJoin = (event: React.MouseEvent<HTMLButtonElement>) => {
-        LobbyApi.joinRoom(this.props.roomId).then((roomId) => 
+const JoinButton: React.FC<IJoinButtonProps> = (props) => {
+    const handleRoomJoin = (event: React.MouseEvent<HTMLButtonElement>) => {
+        LobbyApi.joinRoom(props.roomId).then((roomId) => 
         {
             window.location.assign("/room/" + roomId)
         }).catch((error: ClientError) => {
@@ -15,12 +15,13 @@ export default class JoinButton extends React.PureComponent<IJoinButtonProps,{}>
             console.error(`${error.httpStatusCode}: ${error.message}`)
         })
     }
-    render() {
-        const buttonClass = "form-button"
-        return (
-            <button className={buttonClass} type="button" onClick={this.handleRoomJoin}>
-                <span>Join this room</span>
-            </button>
-        )
-    }
+    
+    const buttonClass = "form-button"
+    return (
+        <button className={buttonClass} type="button" onClick={handleRoomJoin}>
+            <span>Join this room</span>
+        </button>
+    )
 }
+
+export default JoinButton

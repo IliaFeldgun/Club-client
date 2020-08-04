@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing LoginForm component renders 1`] = `
+<Fragment>
+  <div
+    className="form test login-form"
+  >
+    <h3>
+      Login with a name of your choice
+    </h3>
+    <input
+      className="form-field"
+      id="playerName"
+      name="playerName"
+      onChange={[Function]}
+      onKeyUp={[Function]}
+      type="text"
+    />
+    <button
+      className="form-button"
+      id="loginsend"
+      onClick={[Function]}
+    >
+      <span>
+        Login
+      </span>
+    </button>
+  </div>
+</Fragment>
+`;

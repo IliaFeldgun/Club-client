@@ -1,18 +1,18 @@
 import React from 'react'
 import ClubSession from '../../utils/ClubSession'
 
-export default class LogoutForm extends React.PureComponent {
-    handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+const LogoutForm: React.FunctionComponent = () => {
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         ClubSession.killSession()
     }
-    render() {
-        const buttonClass = "form-button"
-        return (
-            <button className={buttonClass} onClick={this.handleClick}>
+    const buttonClass = "form-button"
+    return (
+        <button className={buttonClass} onClick={handleClick}>
             <span>
                 Logout
             </span>
         </button>
-        )
-    }
+    )
 }
+
+export default LogoutForm

@@ -1,21 +1,14 @@
 import React from "react"
 import RoomList from "../components/RoomList"
 
-interface ILobbyProps {
+const Lobby: React.FC = () => {
+    const [rooms, setRooms] = React.useState<string[]>([])
+    React.useEffect(() => {
+        setRooms([])
+    }, [])
+    return (
+        <RoomList rooms={rooms}/>
+    )
+}
 
-}
-interface ILobbyState {
-    rooms: string[]
-}
-export default class Lobby extends React.PureComponent<ILobbyProps,ILobbyState>{
-    constructor(props: ILobbyProps) {
-        super(props)
-
-        this.state = {rooms: []}
-    }
-    render() {
-        return (
-            <RoomList rooms={this.state.rooms}/>
-        )
-    }
-}
+export default Lobby

@@ -4,44 +4,31 @@ interface IGameDropDownProps {
     gameNames: string[]
     handleSelection: (gameName: string) => void
 }
-interface IGameDropDownState {
-    selectedGameName: string
-}
-export default class GameDropDown extends React.PureComponent
-    <IGameDropDownProps, IGameDropDownState> {
-    constructor(props: IGameDropDownProps) {
-        super(props)
+const GameDropDown: React.FC<IGameDropDownProps> = (props) => {
+    const [games, setGames] = React.useState<JSX.Element[]>([])
 
-        this.state = {
-            selectedGameName: props.gameNames[0]
-        }
-    }
-    handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const selectedGameIndex = event.target.selectedIndex
-        const selectedGameName = this.props.gameNames[selectedGameIndex]
-
-        this.setState({
-            selectedGameName
-        })
-
-        this.props.handleSelection(selectedGameName)
-    }
-    render() {
-        const games = this.props.gameNames.map((game) => {
+    React.useEffect(() => {
+        setGames(props.gameNames.map((game) => {
             return <option key={game} value={game}>{game}</option>
-        })
+        }))
+    }, [props.gameNames])
 
-        return (
-            <React.Fragment>
-                <div>Select the game you wish to start: </div>
-                <select 
-                    className="room-game-select"
-                    name="games"
-                    onChange={this.handleChange}
-                >
-                    {games}
-                </select>
-            </React.Fragment>
-        )
+    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const name = event.target.value
+        props.handleSelection(name)
     }
+    return (
+        <React.Fragment>
+            <div>Select the game you wish to start: </div>
+            <select 
+                className="room-game-select"
+                name="games"
+                onChange={handleChange}
+            >
+                {games}
+            </select>
+        </React.Fragment>
+    )
 }
+
+export default GameDropDown

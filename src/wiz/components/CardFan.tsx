@@ -9,47 +9,55 @@ interface ICardFanProps {
                        suit: ICardProps["suit"], 
                        rank: ICardProps["rank"]) => void
 }
-interface ICardFanState {
+const CardFan: React.FC<ICardFanProps> = (props) => {
+    const [cards, setCards] = React.useState<JSX.Element[]>([])
+    
 
-}
-export default class CardFan extends React.PureComponent<ICardFanProps,ICardFanState>{
-    handleCardClick = (event: React.MouseEvent, suit: ICardProps["suit"], rank: ICardProps["rank"]) => {
-        if (this.props.yourTurn) {
-            let cssClasses = ["play-card"]
-            Math.round(Math.random()) ? cssClasses.push("right") : cssClasses.push("left")
-            event.currentTarget.classList.add(cssClasses[0], cssClasses[1])
-            if (this.props.handleCardClick)
-                this.props.handleCardClick(event, suit, rank)
+    React.useEffect(() => {
+        // TODO: Move this out
+        const handleCardClick = (event: React.MouseEvent, suit: ICardProps["suit"], rank: ICardProps["rank"]) => {
+            if (props.yourTurn) {
+                let cssClasses = ["play-card"]
+                Math.round(Math.random()) ? cssClasses.push("right") : cssClasses.push("left")
+                event.currentTarget.classList.add(cssClasses[0], cssClasses[1])
+                if (props.handleCardClick)
+                    props.handleCardClick(event, suit, rank)
+            }
         }
-    }
-    render() {
-        const totalCards = this.props.cards.length
-        const increment = 10
-        const firstDegree = (-1) * increment * ((totalCards % 2) ? (totalCards-1)/2 : totalCards/2)
-        let currentDegree = firstDegree
-        
-        let cardsInFan: any = <React.Fragment />
-        if (this.props.cards.length && this.props.cards && this.props.cards[0]) {
-            cardsInFan = this.props.cards.map((card: ICard) => {
+        if (props.cards.length && props.cards && props.cards[0]) {
+            const totalCards = props.cards.length
+            const increment = 10
+            const firstDegree = (-1) * increment * ((totalCards % 2) ? (totalCards-1)/2 : totalCards/2)
+            let currentDegree = firstDegree
+
+            setCards(props.cards.map((card: ICard) => {
                 const currentRotate = currentDegree
                 currentDegree+= increment
                 return <Card key={`${card.suit},${card.rank}`} 
                             suit={card.suit} rank={card.rank} 
                             rotateDegree={currentRotate} 
-                            handleClick={this.handleCardClick}/>
-            })
+                            handleClick={handleCardClick}/>
+            }))
         }
-        let wrongTurnTooltip = <React.Fragment />
-        if (!this.props.yourTurn) {
-            wrongTurnTooltip =  <span className="tooltip-text">
-                                    Wait for your turn
-                                </span>
+        else {
+            setCards([<React.Fragment />])
         }
-        return (
-            <div className="player-fan">
-                {wrongTurnTooltip}
-                {cardsInFan}
-            </div>
-        )
+    }, [props])
+
+    let wrongTurnTooltip = <React.Fragment />
+    if (!props.yourTurn) {
+        wrongTurnTooltip =  
+            <span className="tooltip-text">
+                Wait for your turn
+            </span>
     }
+
+    return (
+        <div className="player-fan">
+            {wrongTurnTooltip}
+            {cards}
+        </div>
+    )
 }
+
+export default CardFan

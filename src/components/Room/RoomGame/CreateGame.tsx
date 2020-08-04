@@ -5,28 +5,29 @@ interface ICreateGameProps {
     roomId: string
     gameName: string
 }
-export default class CreateGame extends React.PureComponent<ICreateGameProps>{
-    handleGameCreation = (event: React.MouseEvent<HTMLButtonElement>) => {
-        const gameName = this.props.gameName
+const CreateGame: React.FC<ICreateGameProps> = (props) => {
+    const handleGameCreation = (event: React.MouseEvent<HTMLButtonElement>) => {
+        const gameName = props.gameName
         const gameCreator = createGame(gameName)
         if (gameCreator) {
-            gameCreator(this.props.roomId).then((gameId: string) => {
+            gameCreator(props.roomId).then((gameId: string) => {
                 window.location.assign(`/${gameName}/` + gameId) 
             })
         }
     }
-    render() {
-        const buttonClass = "form-button"
-        return (
-            <React.Fragment>
-                <button 
-                    className={buttonClass} 
-                    type="button" 
-                    onClick={this.handleGameCreation}
-                >
-                    <span>Create Game</span>
-                </button>
-            </React.Fragment>
-        )
-    }
+
+    const buttonClass = "form-button"
+    return (
+        <React.Fragment>
+            <button
+                className={buttonClass}
+                type="button"
+                onClick={handleGameCreation}
+            >
+                <span>Create Game</span>
+            </button>
+        </React.Fragment>
+    )
 }
+
+export default CreateGame

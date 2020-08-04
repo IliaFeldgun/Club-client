@@ -24,71 +24,72 @@ interface IRoomState {
     gameId: string
     isLoggedIn: boolean
 }
-export default class Room extends React.PureComponent<IRoomProps,IRoomState>{
-    constructor(props: IRoomProps) {
-        super(props)
+const Room: React.FC<IRoomProps> = (props) => {
+    const roomId = props.match.params.id
+    const [players, setPlayers] = React.useState<string[]>([])
+    const [leader, setLeader] = React.useState("")
+    const [gameName, setGameName] = React.useState("")
+    const [gameId, setGameId] = React.useState("")
+    const [isLoggedIn, setIsLoggedIn] = React.useState(false)
 
-        this.state = {
-            players: [],
-            leader: "",
-            roomId: props.match.params.id,
-            gameName: "",
-            gameId: "",
-            isLoggedIn: ClubSession.getPlayerId() !== null
+    React.useEffect(() => {
+        setIsLoggedIn(ClubSession.getPlayerId() !== null)
+    }, [])
+
+    React.useEffect(() => {
+        // TODO: move this out of here
+        const fetchDataToState = () => {
+            LobbyApi.getRoom(roomId).then((room) => {
+                if (room) {
+                    setLeader(room.leader)
+                    setGameName(room.gameName)
+                    setGameId(room.gameId)
+                }
+            }).catch((error: ClientError) => {
+                // TODO: Handle better
+                console.error(`${error.httpStatusCode}: ${error.message}`)
+            })
+            
+            LobbyApi.getRoomPlayerNames(roomId).then((playerNames) => {
+                setPlayers(playerNames)
+            }).catch((error: ClientError) => {
+                // TODO: Handle better
+                console.error(`${error.httpStatusCode}: ${error.message}`)
+            })
         }
-    }
-    componentDidMount() {
+
         LobbyApi.listenToUpdateEvent().onmessage = (event) => {
-            this.fetchDataToState()
+            fetchDataToState()
         }
-        this.fetchDataToState()
+
+        fetchDataToState()
+    }, [roomId])
+    
+    let joinButton = <React.Fragment/>
+    if (!players.some((player) => player === ClubSession.getPlayerName()))
+    {
+        joinButton = <JoinButton roomId={roomId} />
     }
-    render() {
-        let joinButton = <React.Fragment/>
-        if (!this.state.players.some((player) => player === ClubSession.getPlayerName()))
-        {
-            joinButton = <JoinButton roomId={this.props.match.params.id} />
-        }
-        return (
-            <div className="centered-relative room">
-                <span className="bold">Room ID: </span>
-                <span>{this.props.match.params.id}</span>
-                <div className="align-right">
-                    <ShareButton targetUrl={document.URL} />
-                </div>
-                <p className="block bold">Players in this room:</p>
-                <PlayerList players={this.state.players} />
-                {joinButton}
-                <RoomGame 
-                    roomLeaderId={this.state.leader}
-                    gameId={this.state.gameId} 
-                    gameName={this.state.gameName}
-                    roomId={this.state.roomId}
-                    gameNames={["wizard"]}
-                />
-                <LoginModal show={!this.state.isLoggedIn} />
+    return (
+        <div className="centered-relative room">
+            <span className="bold">Room ID: </span>
+            <span>{roomId}</span>
+            <div className="align-right">
+                <ShareButton targetUrl={document.URL} />
             </div>
-        )
-    }
-
-    fetchDataToState() {
-        LobbyApi.getRoom(this.state.roomId).then((room) => {
-            if (room)
-                this.setState(() => ({
-                    leader: room.leader,
-                    gameName: room.gameName,
-                    gameId: room.gameId
-                }))
-        }).catch((error: ClientError) => {
-            // TODO: Handle better
-            console.error(`${error.httpStatusCode}: ${error.message}`)
-        })
-        LobbyApi.getRoomPlayerNames(this.state.roomId).then((playerNames) => {
-            this.setState(() => ({players: playerNames}))
-        }).catch((error: ClientError) => {
-            // TODO: Handle better
-            console.error(`${error.httpStatusCode}: ${error.message}`)
-        })
-
-    }
+            <p className="block bold">Players in this room:</p>
+            <PlayerList players={players} />
+            {joinButton}
+            <RoomGame 
+                roomLeaderId={leader}
+                gameId={gameId} 
+                gameName={gameName}
+                roomId={roomId}
+                gameNames={["wizard"]}
+            />
+            <LoginModal show={!isLoggedIn} />
+        </div>
+    )
 }
+
+export default Room

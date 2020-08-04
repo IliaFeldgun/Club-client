@@ -1,7 +1,7 @@
 import React from "react"
 import ReactModal from 'react-modal'
 
-ReactModal.setAppElement('#root')
+ReactModal.setAppElement('*')
 interface ISetBetProps {
     maxBet: number
     handleBet: (event: React.MouseEvent, bet: number) => void

@@ -12,7 +12,7 @@ const UserName: React.FunctionComponent = () => {
 
         if (newPlayerName && newPlayerName !== "")
             setPlayerName(newPlayerName)
-    })
+    }, [])
 
     const toRender = playerName !== "" ? 
         <a href="/profile">{playerName}</a> : 

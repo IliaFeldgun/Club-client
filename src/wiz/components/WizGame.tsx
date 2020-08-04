@@ -26,101 +26,88 @@ interface IWizGameProps {
     handleFanCardClick?: (card: ICard) => void
     handleBet?: (bet: number) => void
 }
-interface IWizGameState {
-}
-export default class WizGame extends React.PureComponent<IWizGameProps,IWizGameState> {
-    handleFanCardClick = (event: React.MouseEvent, 
-                       suit: ICardProps["suit"], 
-                       rank: ICardProps["rank"]) => {
-        if(this.props.handleFanCardClick)
-            this.props.handleFanCardClick({suit,rank})
+const WizGame: React.FC<IWizGameProps> = (props) => {
+    const [shouldBet, setShouldBet] = React.useState(false)
+    
+    React.useEffect(() => {
+        const isYourTurn = isCurrentPlayersTurn(props.nextPlayer) 
+        const playerHasHand = props.playerHand !== undefined
+        const isInstructionBet = props.instructions === PossibleMoves.PLACE_BET
+        const player = getCurrentPlayer(props.players)
+        const didPlayerNotBet = player !== undefined && player.bet === undefined
+        setShouldBet(isYourTurn && playerHasHand && isInstructionBet && didPlayerNotBet)
+    }, [props.nextPlayer, props.playerHand, props.instructions, props.players])
+    
+    const handleFanCardClick = (
+        event: React.MouseEvent, 
+        suit: ICardProps["suit"], 
+        rank: ICardProps["rank"]
+    ) => {
+        if(props.handleFanCardClick)
+            props.handleFanCardClick({suit,rank})
     }
-    handleBet = (event: React.MouseEvent, bet: number) => {
-        if (this.props.handleBet) {
-            this.props.handleBet(bet)
+    const handleBet = (event: React.MouseEvent, bet: number) => {
+        if (props.handleBet) {
+            props.handleBet(bet)
         }
     }
-    componentDidMount() {
-        // this.setState({handCards: [
-        //     {suit: Suit.SPADE, rank: Rank.QUEEN},
-        //     {suit: Suit.HEART, rank: Rank.SEVEN},
-        //     {suit: Suit.CLUB, rank: Rank.JACK},
-        //     {suit: Suit.DIAMOND, rank: Rank.ACE},
-        //     {suit: Suit.DIAMOND, rank: Rank.TWO}
-        // ]})
+    
+    let setBet = <React.Fragment />
+    if (shouldBet) {
+        setBet = <SetBet maxBet={props.playerHand.length} handleBet={handleBet}/>
     }
-    render() {
-        //const otherPlayerHands = this.mockOtherPlayers()
-        
-        let setBet = <React.Fragment />
-        if (this.shouldBet()) {
-            setBet = <SetBet maxBet={this.props.playerHand.length} handleBet={this.handleBet}/>
-        }
-        let strongSuit = <React.Fragment />
-        if (this.props.strongSuit) {
-            strongSuit = <StrongSuit strongSuit={this.props.strongSuit} />
-        }
-        let announcement = <React.Fragment />
-        if (this.props.announcement) {
-            announcement = 
-            <Announcement 
-                announcement={this.props.announcement} 
-                players={this.props.players}
-            />
-        }
-
-        return (
-            <React.Fragment>
-                {setBet}
-                {announcement}
-                <CardBoard>
-                    {strongSuit}
-                    <CardStack cards={this.props.tableStack} />
-                    <CardFan yourTurn={this.isYourTurn() && this.shouldPlayCard()} 
-                             cards={this.props.playerHand} 
-                             handleCardClick={this.handleFanCardClick}/>
-                    <WizOtherPlayers players={this.props.players} />
-                </CardBoard>
-                <ScoreBoard>
-                    <WizPlayerList players={this.props.players}
-                                   nextPlayer={this.props.nextPlayer} />
-                </ScoreBoard>
-            </React.Fragment>
-        )
+    let strongSuit = <React.Fragment />
+    if (props.strongSuit) {
+        strongSuit = <StrongSuit strongSuit={props.strongSuit} />
     }
-    isYourTurn() {
-        return ClubSession.getPlayerId() === this.props.nextPlayer
-    }
-    getPlayer() {
-        return this.props.players.find((player) => {
-            return player.id === ClubSession.getPlayerId()
-        })
-    }
-    shouldPlayCard() {
-        return this.props.instructions === PossibleMoves.PLAY_CARD
-    }
-    shouldBet() {
-        const isYourTurn = this.isYourTurn() 
-        const playerHasHand = this.props.playerHand 
-        const isInstructionBet = this.props.instructions === PossibleMoves.PLACE_BET
-        const player = this.getPlayer()
-        const didPlayerNotBet = player && player.bet === undefined
-        return isYourTurn && playerHasHand && isInstructionBet && didPlayerNotBet
-    }
-    mockOtherPlayers() {
-        const players = [
-            {name: "gever", cards: 3},
-            {name: "logever", cards: 10},
-            {name: "empty", cards: 15},
-            {name: "haver", cards: 1},
-            {name: "sababa", cards: 10},
-            {name: "ah", cards: 17},
-            {name: "savir", cards: 6},
-            {name: "lo-savir", cards: 12},
-            {name: "gavir", cards: 6},
-            {name: "lo-gavir", cards: 12}
-        ]
-        return players
+    let announcement = <React.Fragment />
+    if (props.announcement) {
+        announcement = 
+        <Announcement 
+            announcement={props.announcement} 
+            players={props.players}
+        />
     }
 
+    return (
+        <React.Fragment>
+            {setBet}
+            {announcement}
+            <CardBoard>
+                {strongSuit}
+                <CardStack cards={props.tableStack} />
+                <CardFan yourTurn={shouldPlayCard(props.nextPlayer, props.instructions)} 
+                    cards={props.playerHand} 
+                    handleCardClick={handleFanCardClick}
+                />
+                <WizOtherPlayers players={props.players} />
+            </CardBoard>
+            <ScoreBoard>
+                <WizPlayerList 
+                    players={props.players} 
+                    nextPlayer={props.nextPlayer} 
+                />
+            </ScoreBoard>
+        </React.Fragment>
+    )
+
 }
+
+const getCurrentPlayer = (players: IWizPlayer[]) => {
+    return players.find((player) => {
+        return player.id === ClubSession.getPlayerId()
+    })
+}
+
+const isCurrentPlayersTurn = (nextPlayer: string): boolean => {
+    return ClubSession.getPlayerId() === nextPlayer
+}
+
+const shouldPlayCard = (nextPlayer: string, instructions: PossibleMoves) => {
+    return (
+        instructions === PossibleMoves.PLAY_CARD && 
+        isCurrentPlayersTurn(nextPlayer)
+    )
+}
+
+export default WizGame

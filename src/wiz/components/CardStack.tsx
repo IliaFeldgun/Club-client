@@ -9,33 +9,39 @@ interface ICardStackProps {
                        suit: ICardProps["suit"], 
                        rank: ICardProps["rank"]) => void
 }
-interface ICardStackState {
-
-}
-export default class CardStack extends React.PureComponent<ICardStackProps,ICardStackState> {
-    handleCardClick = (event: React.MouseEvent, suit: ICardProps["suit"], rank: ICardProps["rank"]) => {
-        if (this.props.handleCardClick)
-            this.props.handleCardClick(event, suit, rank)
-    }
-    render() {
-        let cardsInStack: JSX.Element[] = []
-        if (!this.props.cards || this.props.cards.length === 0) {
-            cardsInStack.push(<PlaceholderCard key="placeholder"/>)
+const CardStack: React.FC<ICardStackProps> = (props) => {
+    const [cards, setCards] = React.useState<JSX.Element[]>([])
+    
+    React.useEffect(() => {
+        if (!props.cards || props.cards.length === 0) {
+            setCards([<PlaceholderCard key="placeholder"/>])
         }
         else {
-            cardsInStack = this.props.cards.map((card) => { 
-            return <Card key={`${card.suit},${card.rank}`} 
-                         suit={card.suit} rank={card.rank} 
-                         rotateDegree={0} 
-                         handleClick={this.handleCardClick}/>})
+            setCards(props.cards.map((card) => { 
+                return <Card 
+                    key={`${card.suit},${card.rank}`} 
+                    suit={card.suit} rank={card.rank} 
+                    rotateDegree={0} 
+                    handleClick={handleCardClick}
+                />
+                })
+            )
         }
-        const classes = "stack"
-        return (
-        <React.Fragment>
-            <div className={classes}>
-                {cardsInStack}
-            </div>
-        </React.Fragment>
-        )
+    }, [props.cards])
+
+    const handleCardClick = (event: React.MouseEvent, suit: ICardProps["suit"], rank: ICardProps["rank"]) => {
+        if (props.handleCardClick)
+            props.handleCardClick(event, suit, rank)
     }
+
+    const classes = "stack"
+    return (
+    <React.Fragment>
+        <div className={classes}>
+            {cards}
+        </div>
+    </React.Fragment>
+    )
 }
+
+export default CardStack

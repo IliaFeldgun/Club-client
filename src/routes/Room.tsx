@@ -25,11 +25,11 @@ interface IRoomState {
     isLoggedIn: boolean
 }
 const Room: React.FC<IRoomProps> = (props) => {
+    const roomId = props.match.params.id
     const [players, setPlayers] = React.useState<string[]>([])
     const [leader, setLeader] = React.useState("")
     const [gameName, setGameName] = React.useState("")
     const [gameId, setGameId] = React.useState("")
-    const [roomId, setRoomId] = React.useState(props.match.params.id)
     const [isLoggedIn, setIsLoggedIn] = React.useState(false)
 
     React.useEffect(() => {

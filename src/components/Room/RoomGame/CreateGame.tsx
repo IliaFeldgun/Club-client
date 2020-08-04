@@ -30,5 +30,4 @@ const CreateGame: React.FC<ICreateGameProps> = (props) => {
     )
 }
 
-
 export default CreateGame

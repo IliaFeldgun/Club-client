@@ -44,8 +44,6 @@ const CardFan: React.FC<ICardFanProps> = (props) => {
 
     }, [props.cards])
 
-    
-    
     let wrongTurnTooltip = <React.Fragment />
     if (!props.yourTurn) {
         wrongTurnTooltip =  
@@ -53,6 +51,7 @@ const CardFan: React.FC<ICardFanProps> = (props) => {
                 Wait for your turn
             </span>
     }
+    
     return (
         <div className="player-fan">
             {wrongTurnTooltip}

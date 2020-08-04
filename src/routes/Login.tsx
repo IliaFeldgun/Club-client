@@ -4,14 +4,14 @@ import { Redirect } from "react-router-dom"
 import ClubSession from "../utils/ClubSession"
 import LoginForm from "../components/Login/LoginForm"
 
-export default class Login extends React.PureComponent {
-    render() {
-        let pageContents = ClubSession.getPlayerName() ? <Redirect to="/"/> : <LoginForm className="centered-top"/>
+const Login: React.FC = () => {
+    let pageContents = ClubSession.getPlayerName() ? <Redirect to="/"/> : <LoginForm className="centered-top"/>
 
-        return (
-            <React.Fragment>
-                {pageContents}
-            </React.Fragment>
-        )
-    }
+    return (
+        <React.Fragment>
+            {pageContents}
+        </React.Fragment>
+    )
 }
+
+export default Login

@@ -12,62 +12,58 @@ interface IRoomGameProps {
     gameId: string
     gameNames: string[]
 }
-interface IRoomGameState {
-    selectedGame: string
-}
-export default class RoomGame extends React.PureComponent<IRoomGameProps, IRoomGameState>{
-    constructor(props: IRoomGameProps) {
-        super(props)
+const RoomGame: React.FC<IRoomGameProps> = (props) => {
+    const [selectedGame, setSelectedGame] = React.useState("")
 
-        this.state = {
-            selectedGame: props.gameNames[0]
-        }
+    React.useEffect(() => {
+        setSelectedGame(props.gameNames[0])
+    }, [ props.gameNames ])
 
+    const handlePlay = () => {
+        window.location.assign(`/${props.gameName}/${props.gameId}`)
     }
-    handlePlay= () => {
-        window.location.assign(`/${this.props.gameName}/${this.props.gameId}`)
+
+    const handleGameSelect = (gameName: string) => {
+        setSelectedGame(gameName)
     }
-    handleGameSelect = (gameName: string) => {
-        this.setState({
-            selectedGame: gameName
-        })
-    }
-    render() {
-        let toRender = <React.Fragment />
-        if (this.props.gameName && this.props.gameId) {
-            toRender = 
-                <React.Fragment>
-                    <GameDisplay 
-                        gameName={this.props.gameName} 
+
+    let toRender = <React.Fragment />
+    if (props.gameName && props.gameId) {
+        toRender = 
+            <React.Fragment>
+                <GameDisplay 
+                    gameName={props.gameName} 
+                />
+                <div className="align-right">
+                    <PlayButton 
+                        handlePlay={handlePlay}
                     />
-                    <div className="align-right">
-                        <PlayButton 
-                            handlePlay={this.handlePlay}
-                        />
-                    </div>
-                </React.Fragment>
-        }
-        else if (this.props.gameNames && 
-                 this.props.gameNames.length &&
-                 this.props.roomLeaderId === ClubSession.getPlayerId()) {
-            toRender = 
-                <React.Fragment>
-                    <GameDropDown 
-                        handleSelection={this.handleGameSelect} 
-                        gameNames={this.props.gameNames} 
-                    />
-                    <div className="align-right">
-                        <CreateGame 
-                        roomId={this.props.roomId} 
-                        gameName={this.state.selectedGame} 
-                        />
-                    </div>
-                </React.Fragment>
-        }
-        return (
-            <div className="room-game">
-                {toRender}
-            </div>
-        )
+                </div>
+            </React.Fragment>
     }
+    else if (props.gameNames && 
+        props.gameNames.length &&
+        props.roomLeaderId === ClubSession.getPlayerId()
+    ) {
+        toRender = 
+            <React.Fragment>
+                <GameDropDown 
+                    handleSelection={handleGameSelect} 
+                    gameNames={props.gameNames} 
+                />
+                <div className="align-right">
+                    <CreateGame 
+                    roomId={props.roomId} 
+                    gameName={selectedGame} 
+                    />
+                </div>
+            </React.Fragment>
+    }
+    return (
+        <div className="room-game">
+            {toRender}
+        </div>
+    )
 }
+
+export default RoomGame

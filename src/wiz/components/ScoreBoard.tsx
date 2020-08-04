@@ -8,3 +8,5 @@ const ScoreBoard: React.FC = (props) => {
         </span>
     )
 }
+
+export default ScoreBoard

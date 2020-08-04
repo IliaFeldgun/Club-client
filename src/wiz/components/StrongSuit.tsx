@@ -16,6 +16,8 @@ const StrongSuit: React.FC<IStrongSuitProps> = (props) => {
     )
 }
 
+// TODO: move helper function to another class
+
 const translateSuit = (suit: Suit) : string  => {
     let textSuit: string
     switch(suit) {

@@ -41,6 +41,8 @@ const Card: React.FC<ICardProps> = (props) => {
     )
 }
 
+// TODO: move helper function to another class
+
 const translateRank = (rank: Rank) : string  =>{
     let textRank: string
     

@@ -7,11 +7,4 @@ describe('Testing LoginForm', () => {
         const component = shallow(<LoginForm className="form test"/>)
         expect(component).toMatchSnapshot()
     })
-    test('Component renders without props', () => {
-        const component = shallow(<LoginForm  />)
-        expect(component).toMatchSnapshot()
-    })
-    test('Component sends login', () => {
-        const component = shallow(<LoginForm />)
-    })
 })

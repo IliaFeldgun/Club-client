@@ -2,25 +2,30 @@ import React from 'react'
 import EmptyCard from './EmptyCard'
 
 interface IEmptyCardFanProps {
-    cards: number
+    amount: number
 }
-export default class EmptyCardFan extends React.PureComponent<IEmptyCardFanProps,{}> {
-    render() {
-        const totalCards = this.props.cards
+const EmptyCardFan: React.FC<IEmptyCardFanProps> = (props) => {
+    const [cards, setCards] = React.useState<JSX.Element[]>([])
+
+    React.useEffect(() => {
+        const totalCards = props.amount
         const increment = 10
         const firstDegree = (-1) * increment * ((totalCards % 2) ? (totalCards-1)/2 : totalCards/2)
+        const newCards: JSX.Element[] = []
 
-        const cardsInFan : any[] = []
-
-        for (let i = 0; i < this.props.cards; i++) {
-            cardsInFan.push(<EmptyCard key={Math.random()} rotateDegree={firstDegree + (increment * i)}/>)
+        for (let i = 0; i < props.amount; i++) {
+            newCards.push(<EmptyCard key={Math.random()} rotateDegree={firstDegree + (increment * i)}/>)
         }
-        return (
+        setCards(newCards)
+    }, [props.amount])
+
+    return (
+        <React.Fragment>
             <React.Fragment>
-                <React.Fragment>
-                    {cardsInFan}
-                </React.Fragment>
+                {cards}
             </React.Fragment>
-        )
-    }
+        </React.Fragment>
+    )
 }
+
+export default EmptyCardFan

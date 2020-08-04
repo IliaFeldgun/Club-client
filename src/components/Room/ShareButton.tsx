@@ -4,55 +4,50 @@ import ReactModal from 'react-modal'
 interface IShareButtonProps {
     targetUrl: string
 }
-interface IShareButtonState {
-    showModal: boolean
-}
-export default class ShareButton extends React.PureComponent<IShareButtonProps, IShareButtonState>{
-    constructor(props: IShareButtonProps) {
-        super(props)
-        this.state = {
-            showModal: false
-        }
+const ShareButton: React.FC<IShareButtonProps> = (props) => {
+    const [showModal, setShowModal] = React.useState(false)
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        handleOpenModal()
     }
-    handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        this.handleOpenModal()
+    const handleOpenModal = () => {
+        setShowModal(true)
     }
-    handleOpenModal = () => {
-        this.setState({ showModal: true })
+    const handleCloseModal = () => {
+        setShowModal(false)
     }
-    
-    handleCloseModal = () => {
-        this.setState({ showModal: false })
-    }
-    handleInputClick(event: React.MouseEvent<HTMLInputElement>) {
+    const handleInputClick = (event: React.MouseEvent<HTMLInputElement>) => {
         event.currentTarget.select()
         document.execCommand("copy")
     }
-    render() {
-            const buttonClass = "form-button"
-        return (
-            <React.Fragment>
-                <button className={buttonClass} type="button" onClick={this.handleClick}>
-                    <span>Share room link</span>
+
+    const buttonClass = "form-button"
+    return (
+        <React.Fragment>
+            <button className={buttonClass} type="button" onClick={handleClick}>
+                <span>Share room link</span>
+            </button>
+            
+            <ReactModal 
+                className="box-modal share-modal" 
+                shouldCloseOnEsc={true}
+                shouldCloseOnOverlayClick={true}
+                isOpen={showModal}
+                onRequestClose={handleCloseModal}
+            >
+                <h3>Share this link:</h3>
+                <input 
+                    className="url-textbox" 
+                    type="url" 
+                    value={props.targetUrl} 
+                    onClick={handleInputClick} 
+                    readOnly={true}
+                />
+                <button className="form-button" onClick={handleCloseModal}>
+                    Close
                 </button>
-                
-                <ReactModal className="box-modal share-modal" 
-                            shouldCloseOnEsc={true}
-                            shouldCloseOnOverlayClick={true}
-                            isOpen={this.state.showModal}
-                            onRequestClose={this.handleCloseModal}>
-                    <h3>Share this link:</h3>
-                    <input className="url-textbox" 
-                           type="url" value={this.props.targetUrl} 
-                           onClick={this.handleInputClick} 
-                           readOnly={true}>
-                    </input>
-                    <button className="form-button" onClick={this.handleCloseModal}>
-                        Close
-                    </button>
-                </ReactModal>
-            </React.Fragment>
-        )
-    }
-    
+            </ReactModal>
+        </React.Fragment>
+    )
 }
+
+export default ShareButton

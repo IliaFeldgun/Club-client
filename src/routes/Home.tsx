@@ -5,8 +5,6 @@ import Catalog from "../components/Home/Catalog"
 import wizGameImage from '../img/WizClub2Small.png'
 
 const Home: React.FC = () => {
-    const [roomId, setRoomId] = React.useState("")
-
     return (
         <React.Fragment>
             <Description/>

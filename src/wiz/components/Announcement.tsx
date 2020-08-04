@@ -9,13 +9,8 @@ interface IAnnouncementProps {
     announcement: IWizAnnouncement
     players: IWizPlayer[]
 }
-interface IAnnouncementState {
-    show: boolean
-    previousVersion: number
-}
 const Announcement: React.FC<IAnnouncementProps> = (props) => {
     const [show, setShow] = React.useState(false)
-    const [previousVersion, setPreviousVersion] = React.useState(0)
     
     const displayAnnouncement = (time: number) => {
         setShow(true)
@@ -28,8 +23,7 @@ const Announcement: React.FC<IAnnouncementProps> = (props) => {
         if (
             props.announcement.player !== ClubSession.getPlayerId() &&
             props.announcement &&
-            props.announcement.type !== WizAnnouncementType.NONE &&
-            props.announcement.version > previousVersion
+            props.announcement.type !== WizAnnouncementType.NONE
         ) { 
             displayAnnouncement(3000)
         }

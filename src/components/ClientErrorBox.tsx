@@ -7,16 +7,9 @@ interface IClientErrorBoxProps {
     error: ClientError
     onModalClose?: () => void
 }
-interface IClientErrorBoxState {
-    displayError: boolean
-}
 const ClientErrorBox: React.FC<IClientErrorBoxProps> = (props) => {
     const [displayError, setDisplayError] = React.useState(true)
-    
-    const handleOpenModal = () => {
-        setDisplayError(true)
-    }
-    
+
     const handleCloseModal = () => {
         setDisplayError(false)
         if (props.onModalClose) {

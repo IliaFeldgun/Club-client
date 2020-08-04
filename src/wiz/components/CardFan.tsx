@@ -12,17 +12,18 @@ interface ICardFanProps {
 const CardFan: React.FC<ICardFanProps> = (props) => {
     const [cards, setCards] = React.useState<JSX.Element[]>([])
     
-    const handleCardClick = (event: React.MouseEvent, suit: ICardProps["suit"], rank: ICardProps["rank"]) => {
-        if (props.yourTurn) {
-            let cssClasses = ["play-card"]
-            Math.round(Math.random()) ? cssClasses.push("right") : cssClasses.push("left")
-            event.currentTarget.classList.add(cssClasses[0], cssClasses[1])
-            if (props.handleCardClick)
-                props.handleCardClick(event, suit, rank)
-        }
-    }
 
     React.useEffect(() => {
+        // TODO: Move this out
+        const handleCardClick = (event: React.MouseEvent, suit: ICardProps["suit"], rank: ICardProps["rank"]) => {
+            if (props.yourTurn) {
+                let cssClasses = ["play-card"]
+                Math.round(Math.random()) ? cssClasses.push("right") : cssClasses.push("left")
+                event.currentTarget.classList.add(cssClasses[0], cssClasses[1])
+                if (props.handleCardClick)
+                    props.handleCardClick(event, suit, rank)
+            }
+        }
         if (props.cards.length && props.cards && props.cards[0]) {
             const totalCards = props.cards.length
             const increment = 10
@@ -41,8 +42,7 @@ const CardFan: React.FC<ICardFanProps> = (props) => {
         else {
             setCards([<React.Fragment />])
         }
-
-    }, [props.cards])
+    }, [props])
 
     let wrongTurnTooltip = <React.Fragment />
     if (!props.yourTurn) {
@@ -51,7 +51,7 @@ const CardFan: React.FC<ICardFanProps> = (props) => {
                 Wait for your turn
             </span>
     }
-    
+
     return (
         <div className="player-fan">
             {wrongTurnTooltip}

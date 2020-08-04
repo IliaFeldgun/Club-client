@@ -13,6 +13,16 @@ const CardStack: React.FC<ICardStackProps> = (props) => {
     const [cards, setCards] = React.useState<JSX.Element[]>([])
     
     React.useEffect(() => {
+        // TODO: Move this out
+        const handleCardClick = (
+            event: React.MouseEvent, 
+            suit: ICardProps["suit"], 
+            rank: ICardProps["rank"]
+        ) => {
+            if (props.handleCardClick)
+                props.handleCardClick(event, suit, rank)
+        }
+
         if (!props.cards || props.cards.length === 0) {
             setCards([<PlaceholderCard key="placeholder"/>])
         }
@@ -27,12 +37,7 @@ const CardStack: React.FC<ICardStackProps> = (props) => {
                 })
             )
         }
-    }, [props.cards])
-
-    const handleCardClick = (event: React.MouseEvent, suit: ICardProps["suit"], rank: ICardProps["rank"]) => {
-        if (props.handleCardClick)
-            props.handleCardClick(event, suit, rank)
-    }
+    }, [props])
 
     const classes = "stack"
     return (

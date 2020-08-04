@@ -36,31 +36,34 @@ const Room: React.FC<IRoomProps> = (props) => {
         setIsLoggedIn(ClubSession.getPlayerId() !== null)
     }, [])
 
-    const fetchDataToState = () => {
-        LobbyApi.getRoom(roomId).then((room) => {
-            if (room) {
-                setLeader(room.leader)
-                setGameName(room.gameName)
-                setGameId(room.gameId)
-            }
-        }).catch((error: ClientError) => {
-            // TODO: Handle better
-            console.error(`${error.httpStatusCode}: ${error.message}`)
-        })
-        
-        LobbyApi.getRoomPlayerNames(roomId).then((playerNames) => {
-            setPlayers(playerNames)
-        }).catch((error: ClientError) => {
-            // TODO: Handle better
-            console.error(`${error.httpStatusCode}: ${error.message}`)
-        })
-    }
     React.useEffect(() => {
+        // TODO: move this out of here
+        const fetchDataToState = () => {
+            LobbyApi.getRoom(roomId).then((room) => {
+                if (room) {
+                    setLeader(room.leader)
+                    setGameName(room.gameName)
+                    setGameId(room.gameId)
+                }
+            }).catch((error: ClientError) => {
+                // TODO: Handle better
+                console.error(`${error.httpStatusCode}: ${error.message}`)
+            })
+            
+            LobbyApi.getRoomPlayerNames(roomId).then((playerNames) => {
+                setPlayers(playerNames)
+            }).catch((error: ClientError) => {
+                // TODO: Handle better
+                console.error(`${error.httpStatusCode}: ${error.message}`)
+            })
+        }
+
         LobbyApi.listenToUpdateEvent().onmessage = (event) => {
             fetchDataToState()
         }
+
         fetchDataToState()
-    }, [])
+    }, [roomId])
     
     let joinButton = <React.Fragment/>
     if (!players.some((player) => player === ClubSession.getPlayerName()))

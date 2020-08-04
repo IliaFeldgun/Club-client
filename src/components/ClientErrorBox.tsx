@@ -2,7 +2,7 @@ import React from 'react'
 import ClientError from '../engine/api/ClientError'
 import ReactModal from 'react-modal'
 
-ReactModal.setAppElement('#root')
+ReactModal.setAppElement('*')
 interface IClientErrorBoxProps {
     error: ClientError
     onModalClose?: () => void

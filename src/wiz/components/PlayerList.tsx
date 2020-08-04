@@ -5,14 +5,14 @@ interface IWizPlayerListProps {
     players: IWizPlayer[]
     nextPlayer: string
 }
-export default class WizPlayerList extends React.PureComponent<IWizPlayerListProps,{}>{
-    render() {
-        let players: JSX.Element[] = [<React.Fragment/>]
-        
-        if (this.props.players) {
-            players = this.props.players.map((player) => {
+const WizPlayerList: React.FC<IWizPlayerListProps> = (props) => {
+    const [players, setPlayers] = React.useState<JSX.Element[]>([])
+
+    React.useEffect(() => {
+        if (props.players) {
+            setPlayers(props.players.map((player) => {
                 let classes = ""
-                if (player.id === this.props.nextPlayer) {
+                if (player.id === props.nextPlayer) {
                     classes = "highlight"
                 }
                 return <PlayerListItem 
@@ -22,14 +22,16 @@ export default class WizPlayerList extends React.PureComponent<IWizPlayerListPro
                     score={player.score}
                     bet={player.bet}
                     takes={player.takes} />
-            })
+            }))
         }
-        return (
-            <div className="player-list">
-                Players:
-                {players}
-            </div>
+    }, [props.players, props.nextPlayer])
 
-        )
-    }
+    return (
+        <div className="player-list">
+            Players:
+            {players}
+        </div>
+    )
 }
+
+export default WizPlayerList

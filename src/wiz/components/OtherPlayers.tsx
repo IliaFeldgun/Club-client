@@ -6,35 +6,37 @@ import IWizPlayer from '../interfaces/WizPlayer'
 interface IWizOtherPlayersProps {
     players: IWizPlayer[]
 }
-export default class WizOtherPlayers extends React.PureComponent<IWizOtherPlayersProps,{}> {
-    render() {
-        let cards: JSX.Element[] = [<React.Fragment />]
-        if (this.props.players) {
-            const otherPlayers = this.props.players.filter((player) => {
-                return player.id !== ClubSession.getPlayerId()
-            })
+const WizOtherPlayers: React.FC<IWizOtherPlayersProps> = (props) => {
+    const [players, setPlayers] = React.useState<JSX.Element[]>([])
+    
+    React.useEffect(() => {
+        const otherPlayers = props.players.filter((player) => {
+            return player.id !== ClubSession.getPlayerId()
+        })
         
-            const otherPlayerHands = otherPlayers.map((player) => 
-            {
-                return {
-                    name: player.name, 
-                    cards: player.handSize
-                }
-            })
-            
-            cards = otherPlayerHands.map((player, index) => {
-                return (
-                        <WizOtherPlayer key={player.name} 
-                                        name={player.name} 
-                                        cards={player.cards} 
-                                        className={`other-fan-${index + 1}`}/>
-                )
-            })
-        }
-        return (
-            <div className="other-players">
-                {cards}
-            </div>
-        )
-    }
+        const otherPlayerHands = otherPlayers.map((player) => 
+        {
+            return {
+                name: player.name, 
+                cards: player.handSize
+            }
+        })
+
+        setPlayers(otherPlayerHands.map((player, index) => {
+            return (
+                    <WizOtherPlayer key={player.name} 
+                                    name={player.name} 
+                                    cards={player.cards} 
+                                    className={`other-fan-${index + 1}`}/>
+            )
+        }))
+    }, [props.players])
+    
+    return (
+        <div className="other-players">
+            {players}
+        </div>
+    )
 }
+
+export default WizOtherPlayers

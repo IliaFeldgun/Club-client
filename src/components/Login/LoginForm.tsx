@@ -3,15 +3,11 @@ import LobbyApi from "../../engine/api/LobbyApi"
 import ClubSession from "../../utils/ClubSession"
 import ClientError from "../../engine/api/ClientError"
 import ClientErrorBox from "../ClientErrorBox"
-
+// TODO: make className optional
 interface ILoginFormProps {
-    className?: string
+    className: string
 }
-interface ILoginFormState {
-    playerName: string,
-    error?: ClientError
-}
-const LoginForm: React.FC<ILoginFormProps> = (props = {className: ""}) => {
+const LoginForm: React.FC<ILoginFormProps> = (props) => {
     const [playerName, setPlayerName] = React.useState("")
     const [error, setError] = React.useState<ClientError>()
     

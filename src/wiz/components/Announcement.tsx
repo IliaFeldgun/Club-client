@@ -3,7 +3,7 @@ import IWizAnnouncement from "../interfaces/WizAnnouncement"
 import ANNOUNCEMENT_MAP from "../text_map/AnnouncementMap"
 import { WizAnnouncementType } from "../interfaces/WizAnnouncementType"
 import IWizPlayer from "../interfaces/WizPlayer"
-import ClubSession from "../../utils/ClubSession"
+//import ClubSession from "../../utils/ClubSession"
 
 interface IAnnouncementProps {
     announcement: IWizAnnouncement

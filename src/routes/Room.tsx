@@ -19,17 +19,17 @@ interface IRoomProps extends RouteComponentProps<IRouteParams>{
 interface IRoomState {
     players: string[]
     leader: string
-    roomId: string
     gameName: string
     gameId: string
-    isLoggedIn: boolean
 }
 const Room: React.FC<IRoomProps> = (props) => {
     const roomId = props.match.params.id
-    const [players, setPlayers] = React.useState<string[]>([])
-    const [leader, setLeader] = React.useState("")
-    const [gameName, setGameName] = React.useState("")
-    const [gameId, setGameId] = React.useState("")
+    const [room, setRoom] = React.useState<IRoomState>({
+        players: [],
+        leader: "",
+        gameName: "",
+        gameId: ""
+    })
     const [isLoggedIn, setIsLoggedIn] = React.useState(false)
 
     React.useEffect(() => {
@@ -37,21 +37,12 @@ const Room: React.FC<IRoomProps> = (props) => {
     }, [])
 
     React.useEffect(() => {
-        // TODO: move this out of here
+        // TODO: Maybe move this out of here
         const fetchDataToState = () => {
             LobbyApi.getRoom(roomId).then((room) => {
                 if (room) {
-                    setLeader(room.leader)
-                    setGameName(room.gameName)
-                    setGameId(room.gameId)
+                    setRoom(room)
                 }
-            }).catch((error: ClientError) => {
-                // TODO: Handle better
-                console.error(`${error.httpStatusCode}: ${error.message}`)
-            })
-            
-            LobbyApi.getRoomPlayerNames(roomId).then((playerNames) => {
-                setPlayers(playerNames)
             }).catch((error: ClientError) => {
                 // TODO: Handle better
                 console.error(`${error.httpStatusCode}: ${error.message}`)
@@ -66,7 +57,7 @@ const Room: React.FC<IRoomProps> = (props) => {
     }, [roomId])
     
     let joinButton = <React.Fragment/>
-    if (!players.some((player) => player === ClubSession.getPlayerName()))
+    if (!room.players.some((player) => player === ClubSession.getPlayerName()))
     {
         joinButton = <JoinButton roomId={roomId} />
     }
@@ -78,12 +69,12 @@ const Room: React.FC<IRoomProps> = (props) => {
                 <ShareButton targetUrl={document.URL} />
             </div>
             <p className="block bold">Players in this room:</p>
-            <PlayerList players={players} />
+            <PlayerList players={room.players} />
             {joinButton}
             <RoomGame 
-                roomLeaderId={leader}
-                gameId={gameId} 
-                gameName={gameName}
+                roomLeaderId={room.leader}
+                gameId={room.gameId} 
+                gameName={room.gameName}
                 roomId={roomId}
                 gameNames={["wizard"]}
             />

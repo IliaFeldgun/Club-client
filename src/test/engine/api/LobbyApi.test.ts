@@ -102,27 +102,27 @@ describe("Testing lobby API access", () => {
             }
         })
     })
-    describe("Room player names retrieval", () => {
-        test("Room player names retrieval", async () => {
-            const playerNames = ["Woman", "Who-man", "Hooman"]
-            mockedAxios.request.mockResolvedValueOnce({
-                data: {
-                    playerNames
-                }
-            })
-            expect(await LobbyApi.getRoomPlayerNames(EMPTY_UUID)).toEqual(playerNames)
-        })
-        test("Room player names retrieval fails", async () => {
-            try {
-                await LobbyApi.getRoomPlayerNames(EMPTY_UUID)
-            }
-            catch (ex) {
-                const error: ClientError = ex
-                expect(error.httpStatusCode).toBe(errorStatus)
-                expect(error.message).toBe(errorMessage)
-            }
-        })
-    })
+    // describe("Room player names retrieval", () => {
+    //     test("Room player names retrieval", async () => {
+    //         const playerNames = ["Woman", "Who-man", "Hooman"]
+    //         mockedAxios.request.mockResolvedValueOnce({
+    //             data: {
+    //                 playerNames
+    //             }
+    //         })
+    //         expect(await LobbyApi.getRoomPlayerNames(EMPTY_UUID)).toEqual(playerNames)
+    //     })
+    //     test("Room player names retrieval fails", async () => {
+    //         try {
+    //             await LobbyApi.getRoomPlayerNames(EMPTY_UUID)
+    //         }
+    //         catch (ex) {
+    //             const error: ClientError = ex
+    //             expect(error.httpStatusCode).toBe(errorStatus)
+    //             expect(error.message).toBe(errorMessage)
+    //         }
+    //     })
+    // })
     describe("Room join", () => {
         test("Room join", async () => {
             const roomId = EMPTY_UUID
@@ -218,7 +218,7 @@ describe("Testing lobby API access", () => {
                 gameName: "Wizard",
                 id: EMPTY_UUID,
                 leader: EMPTY_UUID,
-                players: [EMPTY_UUID, EMPTY_UUID, EMPTY_UUID]
+                players: ["Pasha", "Sasson", "Mellie"]
             }
             mockedAxios.request.mockResolvedValueOnce({
                 data: {

@@ -35,26 +35,25 @@ const Room: React.FC<IRoomProps> = (props) => {
     React.useEffect(() => {
         setIsLoggedIn(ClubSession.getPlayerId() !== null)
     }, [])
+    
+    const fetchDataToState = React.useCallback(() => {
+        LobbyApi.getRoom(roomId).then((room) => {
+            if (room) {
+                setRoom(room)
+            }
+        }).catch((error: ClientError) => {
+            // TODO: Handle better
+            console.error(`${error.httpStatusCode}: ${error.message}`)
+        })
+    }, [roomId])
 
     React.useEffect(() => {
-        // TODO: Maybe move this out of here
-        const fetchDataToState = () => {
-            LobbyApi.getRoom(roomId).then((room) => {
-                if (room) {
-                    setRoom(room)
-                }
-            }).catch((error: ClientError) => {
-                // TODO: Handle better
-                console.error(`${error.httpStatusCode}: ${error.message}`)
-            })
-        }
-
         LobbyApi.listenToUpdateEvent().onmessage = (event) => {
             fetchDataToState()
         }
 
         fetchDataToState()
-    }, [roomId])
+    }, [fetchDataToState])
     
     let joinButton = <React.Fragment/>
     if (!room.players.some((player) => player === ClubSession.getPlayerName()))

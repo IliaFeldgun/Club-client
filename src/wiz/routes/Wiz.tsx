@@ -76,22 +76,11 @@ const Wiz: React.FC<IWizProps> = (props) => {
                             strongSuit={strongSuit}
                             instructions={instructions}
                             announcement={announcement}/>
-    // TODO: Render error element
-    // if (!state.game || !state.players)
-        // toRender = <React.Fragment/>
     return (
         <React.Fragment>
             {toRender}
         </React.Fragment>
     )
 }
-// canPlayCard(card: ICard) {
-//     const requiredSuit = state.tableStack[0].suit
-//     const isCorrectSuit = requiredSuit === card.suit
-//     const hasCorrectSuit = state.playerHand.some(card => card.suit === requiredSuit)
-//     const isJoker = card.rank === Rank.JOKER
-
-//     return isJoker || isCorrectSuit || !hasCorrectSuit
-// }
 
 export default Wiz

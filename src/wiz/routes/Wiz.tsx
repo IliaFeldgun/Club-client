@@ -3,7 +3,7 @@ import './Wiz.css'
 import WizGame from "../components/WizGame"
 import { match, RouteComponentProps } from "react-router"
 import { WizApi } from "../api/WizApi"
-import ICard, { Suit, Rank } from "../../interfaces/Card"
+import ICard, { Suit } from "../../interfaces/Card"
 import { PossibleMoves } from "../interfaces/PossibleMoves"
 import IWizPlayer from "../interfaces/WizPlayer"
 import IWizAnnouncement from "../interfaces/WizAnnouncement"
@@ -14,105 +14,73 @@ interface IRouteParams {
 interface IWizProps extends RouteComponentProps<IRouteParams>{
     match: match<IRouteParams>
 }
-interface IWizState {
-    gameId: string
-    instructions: PossibleMoves
-    players: IWizPlayer[]
-    nextPlayer: string
-    playerHand: ICard[]
-    tableStack: ICard[]
-    strongSuit?: Suit
-    announcement?: IWizAnnouncement
-}
-export default class Wiz extends React.PureComponent<IWizProps,IWizState> {
-    constructor(props: IWizProps) {
-        super(props)
+const Wiz: React.FC<IWizProps> = (props) => {
+    const gameId = props.match.params.id
+    const [announcement, setAnnouncement] = React.useState<IWizAnnouncement>()
+    const [instructions, setInstructions] = React.useState<PossibleMoves>(PossibleMoves.NONE)
+    const [players, setPlayers] = React.useState<IWizPlayer[]>([])
+    const [nextPlayer, setNextPlayer] = React.useState("")
+    const [playerHand, setPlayerHand] = React.useState<ICard[]>([])
+    const [tableStack, setTableStack] = React.useState<ICard[]>([])
+    const [strongSuit, setStrongSuit] = React.useState<Suit>()
 
-        this.state = {
-            gameId: props.match.params.id,
-            instructions: PossibleMoves.NONE,
-            players: [], 
-            nextPlayer: "",
-            playerHand: [], 
-            tableStack: [],
-            announcement: undefined
-        }
-    }
-    componentDidMount() {
-        const eventSource = WizApi.listenToUpdateEvent(this.state.gameId)
+    const fetchDataToState = React.useCallback(() => {
+        WizApi.getGameInstructions(gameId).then((instructions) => {
+            setInstructions(instructions)
+        })
+        WizApi.getGamePlayers(gameId).then((players) => {
+            setPlayers(players)
+        })
+        WizApi.getNextPlayer(gameId).then((nextPlayer) => {
+            setNextPlayer(nextPlayer)
+        })
+        WizApi.getPlayerHand(gameId).then((playerHand) => {
+            setPlayerHand(playerHand)
+        })
+        WizApi.getTableStack(gameId).then((tableStack) => {
+            setTableStack(tableStack)
+        })
+        WizApi.getStrongSuit(gameId).then((strongSuit) => {
+            setStrongSuit(strongSuit)
+        })
+    }, [gameId])
+    
+    React.useEffect(() => {
+        const eventSource = WizApi.listenToUpdateEvent(gameId)
         eventSource.onmessage = (event) => {
-            this.setState(() => ({
-                announcement: JSON.parse(event.data)
-            }))
-            this.fetchDataToState()
+            setAnnouncement(JSON.parse(event.data))
+            fetchDataToState()
         }
-        this.fetchDataToState()
-    }
-    handleCardSend = (card: ICard) => {
-        // if (this.canPlayCard(card)) {
-            WizApi.sendCard(this.state.gameId, card).then((isCardSent) => {
+        fetchDataToState()
+    }, [ fetchDataToState, gameId ])
+
+    const handleCardSend = (card: ICard) => {
+            WizApi.sendCard(gameId, card).then((isCardSent) => {
                 if (!isCardSent) {
                     alert("NOPE")
                     window.location.reload()
                 }
-                // this.fetchDataToState()
             })
-        // }
     }
-    handleBet = (bet: number) => {
-        WizApi.sendBet(this.state.gameId, bet).then((isBetSent) => {
-            if (isBetSent) {
-                // this.fetchDataToState()
-            }
+    const handleBet = (bet: number) => {
+        WizApi.sendBet(gameId, bet).then((isBetSent) => {
         })
     }
-    render() {
-        let toRender = <WizGame players={this.state.players} 
-                                nextPlayer={this.state.nextPlayer}
-                                playerHand={this.state.playerHand}
-                                tableStack={this.state.tableStack}
-                                handleFanCardClick={this.handleCardSend}
-                                handleBet={this.handleBet}
-                                strongSuit={this.state.strongSuit}
-                                instructions={this.state.instructions}
-                                announcement={this.state.announcement}/>
-        // TODO: Render error element
-        // if (!this.state.game || !this.state.players)
-            // toRender = <React.Fragment/>
-        return (
-            <React.Fragment>
-                {toRender}
-            </React.Fragment>
-        )
-    }
-    fetchDataToState() {
-        const gameId = this.state.gameId
 
-        WizApi.getGameInstructions(gameId).then((instructions) => {
-            this.setState(() => ({instructions}))
-        })
-        WizApi.getGamePlayers(gameId).then((players) => {
-            this.setState(() => ({players}))
-        })
-        WizApi.getNextPlayer(gameId).then((nextPlayer) => {
-            this.setState(() => ({nextPlayer}))
-        })
-        WizApi.getPlayerHand(gameId).then((playerHand) => {
-            this.setState(() => ({playerHand}))
-        })
-        WizApi.getTableStack(gameId).then((tableStack) => {
-            this.setState(() => ({tableStack}))
-        })
-        WizApi.getStrongSuit(gameId).then((strongSuit) => {
-            this.setState(() => ({strongSuit}))
-        })
-    }
-    canPlayCard(card: ICard) {
-        const requiredSuit = this.state.tableStack[0].suit
-        const isCorrectSuit = requiredSuit === card.suit
-        const hasCorrectSuit = this.state.playerHand.some(card => card.suit === requiredSuit)
-        const isJoker = card.rank === Rank.JOKER
-
-        return isJoker || isCorrectSuit || !hasCorrectSuit
-    }
+    let toRender = <WizGame players={players} 
+                            nextPlayer={nextPlayer}
+                            playerHand={playerHand}
+                            tableStack={tableStack}
+                            handleFanCardClick={handleCardSend}
+                            handleBet={handleBet}
+                            strongSuit={strongSuit}
+                            instructions={instructions}
+                            announcement={announcement}/>
+    return (
+        <React.Fragment>
+            {toRender}
+        </React.Fragment>
+    )
 }
+
+export default Wiz

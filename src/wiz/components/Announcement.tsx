@@ -3,7 +3,7 @@ import IWizAnnouncement from "../interfaces/WizAnnouncement"
 import ANNOUNCEMENT_MAP from "../text_map/AnnouncementMap"
 import { WizAnnouncementType } from "../interfaces/WizAnnouncementType"
 import IWizPlayer from "../interfaces/WizPlayer"
-import ClubSession from "../../utils/ClubSession"
+//import ClubSession from "../../utils/ClubSession"
 
 interface IAnnouncementProps {
     announcement: IWizAnnouncement
@@ -11,23 +11,26 @@ interface IAnnouncementProps {
 }
 const Announcement: React.FC<IAnnouncementProps> = (props) => {
     const [show, setShow] = React.useState(false)
+    const [lastVersion, setLastVersion] = React.useState(0)
     
-    const displayAnnouncement = (time: number) => {
+    const displayAnnouncement = React.useCallback((time: number) => {
         setShow(true)
+        setLastVersion(props.announcement.version)
         setTimeout(() => { 
             setShow(false)
          }, time)
-    }
+    },[props.announcement.version])
 
     React.useEffect(() => {
         if (
-            props.announcement.player !== ClubSession.getPlayerId() &&
+            // props.announcement.player !== ClubSession.getPlayerId() &&
             props.announcement &&
-            props.announcement.type !== WizAnnouncementType.NONE
+            props.announcement.type !== WizAnnouncementType.NONE &&
+            props.announcement.version > lastVersion
         ) { 
             displayAnnouncement(3000)
         }
-    }, [props.announcement])
+    })
     
     const text = getText(props.announcement, props.players)
     let classes = "grey-popup" 
@@ -43,7 +46,6 @@ const getText = (
     announcement: IWizAnnouncement, 
     players: IWizPlayer[]
 ) : string => {
-
     let text: string = ""
     const type = announcement.type
     const player = players.find((player) => {

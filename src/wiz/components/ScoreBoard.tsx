@@ -1,11 +1,15 @@
 import React from "react"
-const styles: React.CSSProperties = {
-    flexBasis: '25%'
-}
+import {createUseStyles} from 'react-jss'
+
+const useStyles = createUseStyles({
+    scoreBoard: {
+        flexBasis: '25%'
+    }
+})
 const ScoreBoard: React.FC = (props) => {
-    // const classes = "split right tall one-quarter"
+    const classes = useStyles()
     return (
-        <span style={styles}>
+        <span className={classes.scoreBoard}>
             {props.children}
         </span>
     )

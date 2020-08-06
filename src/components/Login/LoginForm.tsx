@@ -28,7 +28,7 @@ const useStyles = createUseStyles({
         paddingRight: '6px',
         marginTop: '5px',
         marginBottom: '5px',
-        '&hover': {
+        '&:hover': {
             backgroundColor: 'cornflowerblue'
         }
     }

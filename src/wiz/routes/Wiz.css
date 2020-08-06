@@ -90,7 +90,7 @@ body {
     font-size: 10vh;
     position: absolute;
     bottom: 0;
-    transform: translate(0, -50%);
+    /* transform: translate(0, -50%); */
     margin-left: 1vw;
     z-index: 101;
     user-select: none; 

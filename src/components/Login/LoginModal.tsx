@@ -7,8 +7,12 @@ import modalClasses from '../../style/modalClasses'
 import formClasses from '../../style/formClasses'
 
 const useStyles = createUseStyles({
-    boxModal: {...modalClasses.boxModal, textAlign: 'center'},
-    formButton: {...formClasses.formButton, marginTop: '2%'}
+    boxModal: {...modalClasses.boxModal, 
+        textAlign: 'center'
+    },
+    formButton: {...formClasses.formButton, 
+        marginTop: '2%'
+    }
 })
 
 ReactModal.setAppElement('*')

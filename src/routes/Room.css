@@ -23,17 +23,6 @@ li {
     bottom: 0;
     background-color: white;
 }
-.share-modal {
-    width: 80%
-}
-.share-modal input {
-    width: 99%
-}
-.share-modal button {
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, 0);
-}
 .login-modal {
     text-align: center;
 }

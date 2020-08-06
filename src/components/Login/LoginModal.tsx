@@ -21,7 +21,7 @@ const LoginModal: React.FC<ILoginModalProps> = (props) => {
                     shouldCloseOnOverlayClick={true}
                     isOpen={showModal}
                     onRequestClose={handleCloseModal}>
-            <LoginForm className=""/>
+            <LoginForm />
             
             <button className="form-button close-button" onClick={handleCloseModal}>
                 Close

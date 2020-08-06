@@ -34,12 +34,7 @@ const useStyles = createUseStyles({
     }
 })
 
-
-// TODO: make className optional
-interface ILoginFormProps {
-    className: string
-}
-const LoginForm: React.FC<ILoginFormProps> = (props) => {
+const LoginForm: React.FC = () => {
     const classes = useStyles()
     const [playerName, setPlayerName] = React.useState("")
     const [error, setError] = React.useState<ClientError>()
@@ -68,13 +63,12 @@ const LoginForm: React.FC<ILoginFormProps> = (props) => {
     const handleErrorClose = () => {
         setError(undefined)
     }
-    const allClass = props.className + " login-form"
     const errorDisplay = !error ? <React.Fragment /> : 
         <ClientErrorBox error={error} onModalClose={handleErrorClose} />
     
     return (
         <React.Fragment>
-            <div className={allClass}>
+            <div>
                 <h3>Login with a name of your choice</h3>
                 <input 
                     className={classes.formField} 

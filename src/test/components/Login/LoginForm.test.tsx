@@ -4,7 +4,7 @@ import { mount, render, shallow } from 'enzyme'
 
 describe('Testing LoginForm', () => {
     test('component renders', () => {
-        const component = shallow(<LoginForm className="form test"/>)
+        const component = shallow(<LoginForm />)
         expect(component).toMatchSnapshot()
     })
 })

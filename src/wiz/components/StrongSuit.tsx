@@ -1,17 +1,28 @@
 import React from 'react'
 import { Suit } from '../../interfaces/Card'
+import Tooltip from '../../components/Tooltip'
 
 interface IStrongSuitProps {
     strongSuit: Suit
 }
 const StrongSuit: React.FC<IStrongSuitProps> = (props) => {
+    const [displayTooltip, setDisplayTooltip] = React.useState(false)
     const suit = translateSuit(props.strongSuit)
     const redClass = isRed(props.strongSuit) ? "red-card" : ""
-
+    const handleMouseOver = () => {
+        setDisplayTooltip(true)
+    }
+    const handleMouseOut = () => {
+        setDisplayTooltip(false)
+    }
     return (
-        <span className={`strong-suit ${redClass}`}>
+        <span 
+            className={`strong-suit ${redClass}`} 
+            onMouseOver={handleMouseOver}
+            onMouseOut={handleMouseOut}
+        >
             {suit}
-            <span className="tooltip-text">Strong suit</span>
+            <Tooltip display={displayTooltip}>Strong suit</Tooltip>
         </span>
     )
 }

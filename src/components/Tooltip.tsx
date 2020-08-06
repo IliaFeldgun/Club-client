@@ -22,7 +22,7 @@ const useStyles = createUseStyles({
             content: '""',
             position: 'absolute',
             top: '100%',
-            left: '10%',
+            left: '50%',
             transform: 'translate(-50%, 0)',
             borderWidth: '5px',
             borderStyle: 'solid',
@@ -32,7 +32,6 @@ const useStyles = createUseStyles({
     displayTooltip: {
         visibility: 'visible',
         opacity: 1,
-        width: 'max-content'
     }
 })
 

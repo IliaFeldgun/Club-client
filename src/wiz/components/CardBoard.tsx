@@ -1,13 +1,19 @@
 import React from "react"
-const styles : React.CSSProperties = {
-    flexGrow: 1,
-    position: 'relative',
-    background: 'rgba(7,150,34)'
-}
+import {createUseStyles} from 'react-jss'
+
+const useStyles = createUseStyles({
+    cardBoard: {
+        flexGrow: 1,
+        position: 'relative',
+        background: 'rgba(7,150,34)'
+    }
+})
+
 const CardBoard: React.FC = (props) => {
-    // const classes = "split cardboard left tall three-quarters"
+    const classes = useStyles()
+    
     return (
-        <span style={styles}>
+        <span className={classes.cardBoard}>
             {props.children}
         </span>
     )

@@ -3,8 +3,36 @@ import LobbyApi from '../engine/api/LobbyApi'
 import LoginModal from '../components/Login/LoginModal'
 import ClubSession from '../utils/ClubSession'
 import ClientError from '../engine/api/ClientError'
+import {createUseStyles} from 'react-jss'
+
+const useStyles = createUseStyles({
+    centeredTop: {
+        position: 'absolute',
+        top: '30%',
+        left: '50%',
+        textAlign: 'center',
+        transform: 'translate(-50%, -50%)',
+        width: 'fit-content'
+    },
+    formButton: {
+        backgroundColor: 'rgb(0, 102, 153)',
+        border: 0,
+        color: 'white',
+        borderRadius: '3px',
+        paddingTop: '3px',
+        paddingBottom: '3px',
+        paddingLeft: '6px',
+        paddingRight: '6px',
+        marginTop: '5px',
+        marginBottom: '5px',
+        '&:hover': {
+            backgroundColor: 'cornflowerblue'
+        }
+    }
+})
 
 const Rooms: React.FC = () => {
+    const classes = useStyles()
     const [isLoggedIn, setIsLoggedIn] = React.useState(true)
     React.useEffect(() => {
         setIsLoggedIn(ClubSession.getPlayerId() !== null)
@@ -20,13 +48,12 @@ const Rooms: React.FC = () => {
         })
     }
     
-    const buttonClass = "form-button"
     return (
         <React.Fragment>
-            <div className="centered-top">
+            <div className={classes.centeredTop}>
                 <h3>Create a room</h3>
                 <button 
-                    className={buttonClass} 
+                    className={classes.formButton} 
                     type="button" 
                     onClick={handleRoomCreation}
                 >

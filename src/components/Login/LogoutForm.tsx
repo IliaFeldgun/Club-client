@@ -1,13 +1,21 @@
 import React from 'react'
 import ClubSession from '../../utils/ClubSession'
 
+import {createUseStyles} from 'react-jss'
+import formClasses from '../../style/formClasses'
+
+const useStyles = createUseStyles({
+    formButton: formClasses.formButton
+})
 const LogoutForm: React.FunctionComponent = () => {
+    const classes = useStyles()
+    
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         ClubSession.killSession()
     }
-    const buttonClass = "form-button"
+
     return (
-        <button className={buttonClass} onClick={handleClick}>
+        <button className={classes.formButton} onClick={handleClick}>
             <span>
                 Logout
             </span>

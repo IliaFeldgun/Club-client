@@ -1,3 +1,13 @@
+* {
+    font-family: sans-serif;
+}
+#root {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+}
 header {
     height: 6vh;
     background-color: white;
@@ -5,11 +15,14 @@ header {
     color: black;
     padding-right: 1vw;
     padding-left: 1vw;
-    position: relative;
+    /* position: relative; */
     z-index: 500;
 }
 footer {
     z-index: 500;
+    color:white;
+    background-color: gray;
+
 }
 .error-modal {
     padding-left: 5%;
@@ -18,23 +31,6 @@ footer {
 }
 .error-modal .form-button {
     float: right
-}
-.main-title {
-    margin-left: 0.5vmax;
-    line-height: 6vh;
-    font-size: 4vh;
-    font-weight: bold;
-}
-.main-user {
-    font-size: 3vh;
-    float: right;
-    line-height: 6vh;
-    margin-right: 2vmax;
-}
-footer {
-    color:white;
-    background-color: gray;
-
 }
 .wide {
     width: 100%;

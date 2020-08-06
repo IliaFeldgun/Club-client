@@ -5,8 +5,21 @@ import LogoutForm from '../components/Login/LogoutForm'
 import ClubSession from '../utils/ClubSession'
 import { Redirect } from "react-router-dom"
 import ClientError from '../engine/api/ClientError'
+import {createUseStyles} from 'react-jss'
+
+const useStyles = createUseStyles({
+    centeredTop: {
+        position: 'absolute',
+        top: '30%',
+        left: '50%',
+        textAlign: 'center',
+        transform: 'translate(-50%, -50%)',
+        width: 'fit-content'
+    }
+})
 
 const Profile: React.FC = () => {
+    const classes = useStyles()
     const [rooms, setRooms] = React.useState<string[]>([])
     React.useEffect(() => {
         LobbyApi.getPlayerRooms().then(
@@ -18,7 +31,7 @@ const Profile: React.FC = () => {
     }, [])
     
     let toRender = 
-        <div className="centered-top">
+        <div className={classes.centeredTop}>
             <LogoutForm />
             <br />
             Your rooms:

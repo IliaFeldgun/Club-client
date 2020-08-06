@@ -35,15 +35,6 @@ footer {
 .wide {
     width: 100%;
 }
-.centered-top {
-    position: absolute;
-    top:30%;
-    left:50%;
-    text-align: center;
-    transform: translate(-50%, -50%);
-    width: fit-content;
-
-}
 .centered {
     position: absolute;
     top: 50%;

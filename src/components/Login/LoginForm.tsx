@@ -59,12 +59,13 @@ const LoginForm: React.FC = () => {
             <div>
                 <h3>Login with a name of your choice</h3>
                 <input 
-                    className={classes.formField} 
-                    id="playerName" 
-                    type="text" 
-                    name="playerName" 
-                    onChange={handleChange} 
-                    onKeyUp={handleKeyUp} 
+                    className={classes.formField}
+                    id="playerName"
+                    type="text"
+                    name="playerName"
+                    autoFocus={true}
+                    onChange={handleChange}
+                    onKeyUp={handleKeyUp}
                 />
                 <button className={classes.formButton} id="loginsend" onClick={handleClick}>
                     <span>

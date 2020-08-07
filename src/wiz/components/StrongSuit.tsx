@@ -1,14 +1,30 @@
 import React from 'react'
 import { Suit } from '../../interfaces/Card'
 import Tooltip from '../../components/Tooltip'
+import {createUseStyles} from 'react-jss'
+const useStyles = createUseStyles({
+    red: {
+        color: 'red'
+    },
+    strongSuit: {
+        fontSize: '10vh',
+        position: 'absolute',
+        bottom: '0',
+        marginLeft: '1vw',
+        zIndex: '101',
+        userSelect: 'none', 
+        textShadow: '0.25vh 0.5vh darkgreen',
+    }
+})
 
 interface IStrongSuitProps {
     strongSuit: Suit
 }
 const StrongSuit: React.FC<IStrongSuitProps> = (props) => {
+    const classes = useStyles()
     const [displayTooltip, setDisplayTooltip] = React.useState(false)
     const suit = translateSuit(props.strongSuit)
-    const redClass = isRed(props.strongSuit) ? "red-card" : ""
+    const redClass = isRed(props.strongSuit) ? classes.red : ""
     const handleMouseOver = () => {
         setDisplayTooltip(true)
     }
@@ -17,7 +33,7 @@ const StrongSuit: React.FC<IStrongSuitProps> = (props) => {
     }
     return (
         <span 
-            className={`strong-suit ${redClass}`} 
+            className={`${classes.strongSuit} ${redClass}`} 
             onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}
         >

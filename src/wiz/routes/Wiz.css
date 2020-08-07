@@ -49,21 +49,6 @@ body {
     border-style: solid;
     border-color: #555 transparent transparent transparent;
 }
-.strong-suit {
-    font-size: 10vh;
-    position: absolute;
-    bottom: 0;
-    /* transform: translate(0, -50%); */
-    margin-left: 1vw;
-    z-index: 101;
-    user-select: none; 
-    text-shadow: 0.25vh 0.5vh darkgreen;
-}
-.strong-suit:hover .tooltip-text {
-    visibility: visible;
-    opacity: 1;
-    text-shadow: none;
-}
 .player-card {
     width: 12vmax;
     height: 18vmax;

@@ -22,24 +22,8 @@ body {
 .top {top: 0; }
 .bottom {bottom: 0; }
 
-.fixed {
-    position: fixed;
-}
-.tall {
-    height: 100%;
-}
 .wide {
     width: 100%;
-}
-.centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-  }
-.horizontal-centered {
-    text-align: center;
 }
 .cardboard {
     background-color: rgba(7,150,34);
@@ -262,32 +246,6 @@ body {
 }
 .player-card.right {
     animation-name: to-stack, rotate-right
-}
-
-.box-modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 1%;
-    border-style: solid;
-    border-width: thin;
-    border-radius: 5px;
-}
-.bet-modal input {
-    display: block;
-}
-.bet-modal button {
-    float: right
-}
-.bet-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: white;
 }
 .player-list {
     padding: 0.5vh;

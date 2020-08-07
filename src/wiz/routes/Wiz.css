@@ -2,35 +2,14 @@ body {
     margin: 0;
     overflow: hidden;
 }
-.three-quarters {
-    width: 75%;
-}
-.half {
-    width: 50%;
-}
-.one-quarter {
-    width: 25%;
-}
-.split {
-    position: absolute;
-    /*z-index: 1;*/
-    overflow-x: hidden;
-    padding-top: 0;
-}
 .left { left: 0; }
 .right { right: 0; }
 .top {top: 0; }
 .bottom {bottom: 0; }
 
-.wide {
-    width: 100%;
-}
 .cardboard {
     background-color: rgba(7,150,34);
     overflow: hidden;
-}
-.scoreboard {
-    background-color: white;
 }
 .white {
     background-color: white;

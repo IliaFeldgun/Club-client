@@ -32,9 +32,6 @@ footer {
 .error-modal .form-button {
     float: right
 }
-.wide {
-    width: 100%;
-}
 /*snackbar*/
 .grey-popup {
   visibility: hidden;

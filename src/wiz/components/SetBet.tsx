@@ -1,5 +1,18 @@
 import React from "react"
 import ReactModal from 'react-modal'
+import {createUseStyles} from 'react-jss'
+import modalClasses from '../../style/modalClasses'
+import formClasses from '../../style/formClasses'
+const useStyles = createUseStyles({
+    modal: {...modalClasses.boxModal},
+    input: {
+        display: 'block'
+    },
+    button: {...formClasses.formButton,
+        float: 'right'
+    }
+
+})
 
 ReactModal.setAppElement('*')
 interface ISetBetProps {
@@ -7,6 +20,7 @@ interface ISetBetProps {
     handleBet: (event: React.MouseEvent, bet: number) => void
 }
 const SetBet: React.FC<ISetBetProps> = (props) => {
+    const classes = useStyles()
     const [bet, setBet] = React.useState(0)
     const [showModal, setShowModal] = React.useState(false)
 
@@ -28,14 +42,20 @@ const SetBet: React.FC<ISetBetProps> = (props) => {
         handleOpenModal()
     }, [])
 
-    const buttonClass = "form-button"
     return (
-        <ReactModal className="bet-modal box-modal"
+        <ReactModal className={classes.modal}
                     isOpen={showModal}>
-            <input type="range" defaultValue="0" name="setBet" min="0" max={props.maxBet}
-                    onChange={handleBetChange}/>
+            <input 
+                className={classes.input}
+                type="range" 
+                defaultValue="0" 
+                name="setBet" 
+                min="0" 
+                max={props.maxBet}
+                onChange={handleBetChange}
+            />
             <label>{bet}</label>
-                <button className={buttonClass} type="button" onClick={handleClick}>
+                <button className={classes.button} type="button" onClick={handleClick}>
                     <span>
                         Bet!
                     </span>

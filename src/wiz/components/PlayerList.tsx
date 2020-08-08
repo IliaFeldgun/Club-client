@@ -1,22 +1,26 @@
 import React from 'react'
 import PlayerListItem from './PlayerListItem'
 import IWizPlayer from '../interfaces/WizPlayer'
+import {createUseStyles} from 'react-jss'
+const useStyles = createUseStyles({
+    list: {
+        padding: '0.5vh'
+    }
+})
+
 interface IWizPlayerListProps {
     players: IWizPlayer[]
     nextPlayer: string
 }
 const WizPlayerList: React.FC<IWizPlayerListProps> = (props) => {
+    const classes = useStyles()
     const [players, setPlayers] = React.useState<JSX.Element[]>([])
 
     React.useEffect(() => {
         if (props.players) {
             setPlayers(props.players.map((player) => {
-                let classes = ""
-                if (player.id === props.nextPlayer) {
-                    classes = "highlight"
-                }
                 return <PlayerListItem 
-                    className={classes}
+                    highlight={player.id === props.nextPlayer}
                     key={player.id} 
                     name={player.name} 
                     score={player.score}
@@ -27,7 +31,7 @@ const WizPlayerList: React.FC<IWizPlayerListProps> = (props) => {
     }, [props.players, props.nextPlayer])
 
     return (
-        <div className="player-list">
+        <div className={classes.list}>
             Players:
             {players}
         </div>

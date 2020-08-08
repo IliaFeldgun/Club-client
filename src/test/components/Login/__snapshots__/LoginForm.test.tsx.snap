@@ -7,6 +7,7 @@ exports[`Testing LoginForm component renders 1`] = `
       Login with a name of your choice
     </h3>
     <input
+      autoFocus={true}
       className="formField-0-2-2"
       id="playerName"
       name="playerName"

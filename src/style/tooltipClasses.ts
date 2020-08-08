@@ -1,6 +1,4 @@
-import React from 'react'
-import {createUseStyles} from 'react-jss'
-const useStyles = createUseStyles({
+const tooltipClasses = {
     tooltip: {
         fontSize: '2vh',
         lineHeight: '2vh',
@@ -29,27 +27,12 @@ const useStyles = createUseStyles({
             borderColor: '#555 transparent transparent transparent',
         }
     },
-    displayTooltip: {
-        visibility: 'visible',
-        opacity: 1,
+    tooltipTarget: {
+        '&:hover $tooltip': {
+            visibility: 'visible',
+            opacity: 1,
+        }
     }
-})
-
-interface ITooltipProps {
-    display: boolean
-}
-const Tooltip: React.FC<ITooltipProps> = (props) => {
-    const classes = useStyles()
-    let tooltipClasses = `${classes.tooltip}`
-    if (props.display) {
-        tooltipClasses += ` ${classes.displayTooltip}`
-    }
-
-    return (
-        <span className={tooltipClasses}>
-            {props.children}
-        </span>
-    )
 }
 
-export default Tooltip
+export default tooltipClasses

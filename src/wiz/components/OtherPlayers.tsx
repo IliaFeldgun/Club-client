@@ -33,7 +33,7 @@ const WizOtherPlayers: React.FC<IWizOtherPlayersProps> = (props) => {
     }, [props.players])
     
     return (
-        <div className="other-players">
+        <div>
             {players}
         </div>
     )

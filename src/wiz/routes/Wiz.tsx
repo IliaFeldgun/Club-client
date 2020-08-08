@@ -1,4 +1,4 @@
-import React from "react"
+import React, { CSSProperties } from "react"
 import './Wiz.css'
 import WizGame from "../components/WizGame"
 import { match, RouteComponentProps } from "react-router"
@@ -7,6 +7,11 @@ import ICard, { Suit } from "../../interfaces/Card"
 import { PossibleMoves } from "../interfaces/PossibleMoves"
 import IWizPlayer from "../interfaces/WizPlayer"
 import IWizAnnouncement from "../interfaces/WizAnnouncement"
+
+const wrapperStyles : CSSProperties = {
+    display: "flex",
+    flexGrow: 1
+}
 
 interface IRouteParams {
     id: string
@@ -77,9 +82,9 @@ const Wiz: React.FC<IWizProps> = (props) => {
                             instructions={instructions}
                             announcement={announcement}/>
     return (
-        <React.Fragment>
+        <div style={wrapperStyles}>
             {toRender}
-        </React.Fragment>
+        </div>
     )
 }
 

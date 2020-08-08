@@ -2,7 +2,7 @@
 
 exports[`Testing LogoutForm component renders 1`] = `
 <button
-  className="form-button"
+  className="formButton-0-2-1"
   onClick={[Function]}
 >
   <span>

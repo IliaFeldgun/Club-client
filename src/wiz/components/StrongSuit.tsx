@@ -1,17 +1,35 @@
 import React from 'react'
 import { Suit } from '../../interfaces/Card'
+import {createUseStyles} from 'react-jss'
+import tooltipClasses from '../../style/tooltipClasses'
+const useStyles = createUseStyles({...tooltipClasses,
+    red: {
+        color: 'red'
+    },
+    strongSuit: {
+        fontSize: '10vh',
+        position: 'absolute',
+        bottom: '0',
+        marginLeft: '1vw',
+        zIndex: '101',
+        userSelect: 'none', 
+        textShadow: '0.25vh 0.5vh darkgreen',
+    }
+})
 
 interface IStrongSuitProps {
     strongSuit: Suit
 }
 const StrongSuit: React.FC<IStrongSuitProps> = (props) => {
+    const classes = useStyles()
     const suit = translateSuit(props.strongSuit)
-    const redClass = isRed(props.strongSuit) ? "red-card" : ""
-
+    const redClass = isRed(props.strongSuit) ? classes.red : ""
     return (
-        <span className={`strong-suit ${redClass}`}>
+        <span className={
+            `${classes.strongSuit} ${classes.tooltipTarget} ${redClass}`
+        }>
             {suit}
-            <span className="tooltip-text">Strong suit</span>
+            <span className={classes.tooltip}>Strong suit</span>
         </span>
     )
 }

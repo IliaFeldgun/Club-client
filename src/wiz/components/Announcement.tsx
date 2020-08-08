@@ -3,13 +3,35 @@ import IWizAnnouncement from "../interfaces/WizAnnouncement"
 import ANNOUNCEMENT_MAP from "../text_map/AnnouncementMap"
 import { WizAnnouncementType } from "../interfaces/WizAnnouncementType"
 import IWizPlayer from "../interfaces/WizPlayer"
-//import ClubSession from "../../utils/ClubSession"
+import {createUseStyles} from 'react-jss'
+const useStyles = createUseStyles({
+    snackBar: {
+        visibility: 'hidden',
+        minWidth: '50vw',
+        marginLeft: '-25vw',
+        backgroundColor: '#333',
+        color: '#fff',
+        textAlign: 'center',
+        borderRadius: '2px',
+        padding: '1vh',
+        position: 'fixed',
+        zIndex: '300',
+        left: '50%',
+        top: '10vh',
+        fontSize: '17px',
+    },
+    showSnackBar: {
+        visibility: 'visible',
+        animation: 'fadein 0.5s, fadeout 0.5s 2.5s',
+    }
+})
 
 interface IAnnouncementProps {
     announcement: IWizAnnouncement
     players: IWizPlayer[]
 }
 const Announcement: React.FC<IAnnouncementProps> = (props) => {
+    const classes = useStyles()
     const [show, setShow] = React.useState(false)
     const [lastVersion, setLastVersion] = React.useState(0)
     
@@ -33,11 +55,11 @@ const Announcement: React.FC<IAnnouncementProps> = (props) => {
     })
     
     const text = getText(props.announcement, props.players)
-    let classes = "grey-popup" 
-    classes += show ? " show" : ""
+    let snackBarClasses = classes.snackBar 
+    snackBarClasses += show ? ` ${classes.showSnackBar}` : ""
     
     return (
-        <span className={classes}>
+        <span className={snackBarClasses}>
             {text}
         </span>
     )

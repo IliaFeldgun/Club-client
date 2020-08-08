@@ -9,6 +9,32 @@ import ShareButton from '../components/Room/ShareButton'
 import LoginModal from '../components/Login/LoginModal'
 import RoomGame from '../components/Room/RoomGame'
 import ClientError from '../engine/api/ClientError'
+import {createUseStyles} from 'react-jss'
+const useStyles = createUseStyles({
+    room: {
+        position: 'relative',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        marginTop: '1%',
+        width: 'max-content',
+        textAlign: 'left',
+        borderRadius: '10px',
+        borderStyle: 'groove',
+        borderWidth: 'thick',
+        padding: '2vmax',
+        borderColor: 'rgb(0, 102, 153)',
+    },
+    bold: {
+        fontWeight: 'bold'
+    },
+    toTheRight: {
+        textAlign: 'right'
+    },
+    block: {
+        display: 'block'
+    }
+})
+
 
 interface IRouteParams {
     id: string
@@ -23,6 +49,7 @@ interface IRoomState {
     gameId: string
 }
 const Room: React.FC<IRoomProps> = (props) => {
+    const classes = useStyles()
     const roomId = props.match.params.id
     const [room, setRoom] = React.useState<IRoomState>({
         players: [],
@@ -61,13 +88,13 @@ const Room: React.FC<IRoomProps> = (props) => {
         joinButton = <JoinButton roomId={roomId} />
     }
     return (
-        <div className="centered-relative room">
-            <span className="bold">Room ID: </span>
+        <div className={classes.room}>
+            <span className={classes.bold}>Room ID: </span>
             <span>{roomId}</span>
-            <div className="align-right">
+            <div className={classes.toTheRight}>
                 <ShareButton targetUrl={document.URL} />
             </div>
-            <p className="block bold">Players in this room:</p>
+            <p className={`${classes.bold} ${classes.block}`}>Players in this room:</p>
             <PlayerList players={room.players} />
             {joinButton}
             <RoomGame 

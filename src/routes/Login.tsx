@@ -3,14 +3,26 @@ import './Login.css'
 import { Redirect } from "react-router-dom"
 import ClubSession from "../utils/ClubSession"
 import LoginForm from "../components/Login/LoginForm"
+import {createUseStyles} from 'react-jss'
 
+const useStyles = createUseStyles({
+    centeredTop: {
+        position: 'absolute',
+        top: '30%',
+        left: '50%',
+        textAlign: 'center',
+        transform: 'translate(-50%, -50%)',
+        width: 'fit-content'
+    }
+})
 const Login: React.FC = () => {
-    let pageContents = ClubSession.getPlayerName() ? <Redirect to="/"/> : <LoginForm className="centered-top"/>
+    const classes = useStyles()
+    let pageContents = ClubSession.getPlayerName() ? <Redirect to="/"/> : <LoginForm/>
 
     return (
-        <React.Fragment>
+        <div className={classes.centeredTop}>
             {pageContents}
-        </React.Fragment>
+        </div>
     )
 }
 

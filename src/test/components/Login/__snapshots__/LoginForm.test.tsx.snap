@@ -2,14 +2,13 @@
 
 exports[`Testing LoginForm component renders 1`] = `
 <Fragment>
-  <div
-    className="form test login-form"
-  >
+  <div>
     <h3>
       Login with a name of your choice
     </h3>
     <input
-      className="form-field"
+      autoFocus={true}
+      className="formField-0-2-2"
       id="playerName"
       name="playerName"
       onChange={[Function]}
@@ -17,7 +16,7 @@ exports[`Testing LoginForm component renders 1`] = `
       type="text"
     />
     <button
-      className="form-button"
+      className="formButton-0-2-3"
       id="loginsend"
       onClick={[Function]}
     >

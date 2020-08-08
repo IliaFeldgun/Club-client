@@ -1,10 +1,17 @@
 import React from 'react'
-
+import {createUseStyles} from 'react-jss'
+const useStyles = createUseStyles({
+    gameSelect: {
+        fontSize: 'inherit',
+        borderRadius: '3px'
+    }
+})
 interface IGameDropDownProps {
     gameNames: string[]
     handleSelection: (gameName: string) => void
 }
 const GameDropDown: React.FC<IGameDropDownProps> = (props) => {
+    const classes = useStyles()
     const [games, setGames] = React.useState<JSX.Element[]>([])
 
     React.useEffect(() => {
@@ -21,7 +28,7 @@ const GameDropDown: React.FC<IGameDropDownProps> = (props) => {
         <React.Fragment>
             <div>Select the game you wish to start: </div>
             <select 
-                className="room-game-select"
+                className={classes.gameSelect}
                 name="games"
                 onChange={handleChange}
             >

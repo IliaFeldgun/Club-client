@@ -5,6 +5,13 @@ import GameDropDown from './RoomGame/GameDropDown'
 import CreateGame from './RoomGame/CreateGame'
 import ClubSession from '../../utils/ClubSession'
 
+import {createUseStyles} from 'react-jss'
+
+const useStyles = createUseStyles({
+    toTheRight: {
+        textAlign: 'right'
+    }
+})
 interface IRoomGameProps {
     roomId: string
     roomLeaderId: string
@@ -13,6 +20,7 @@ interface IRoomGameProps {
     gameNames: string[]
 }
 const RoomGame: React.FC<IRoomGameProps> = (props) => {
+    const classes = useStyles()
     const [selectedGame, setSelectedGame] = React.useState("")
 
     React.useEffect(() => {
@@ -34,7 +42,7 @@ const RoomGame: React.FC<IRoomGameProps> = (props) => {
                 <GameDisplay 
                     gameName={props.gameName} 
                 />
-                <div className="align-right">
+                <div className={classes.toTheRight}>
                     <PlayButton 
                         handlePlay={handlePlay}
                     />
@@ -51,7 +59,7 @@ const RoomGame: React.FC<IRoomGameProps> = (props) => {
                     handleSelection={handleGameSelect} 
                     gameNames={props.gameNames} 
                 />
-                <div className="align-right">
+                <div className={classes.toTheRight}>
                     <CreateGame 
                     roomId={props.roomId} 
                     gameName={selectedGame} 
@@ -60,7 +68,7 @@ const RoomGame: React.FC<IRoomGameProps> = (props) => {
             </React.Fragment>
     }
     return (
-        <div className="room-game">
+        <div>
             {toRender}
         </div>
     )

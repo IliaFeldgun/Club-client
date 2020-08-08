@@ -17,9 +17,6 @@ body {
 .blue {
     background-color: royalblue;
 }
-.highlight {
-    font-weight: bold;
-}
 .tooltip-text {
     font-size: 2vh;
     line-height: 2vh;
@@ -211,9 +208,6 @@ body {
 .player-card.right {
     animation-name: to-stack, rotate-right
 }
-.player-list {
-    padding: 0.5vh;
-}
 .player-list-item {
     display: block;
     border-style: groove;
@@ -221,56 +215,4 @@ body {
     padding: 0.5vh;
     margin-bottom: 0.5vh;
     font-size: 2.5vw;
-}
-.pli-score {
-    position: relative;
-    float: right;
-    font-size: 5vw;
-}
-.pli-score:hover .tooltip-text {
-    visibility: visible;
-    opacity: 1;
-    text-shadow: none;
-}
-.pli-bet-takes{
-    display: block;
-}
-.pli-bet {
-    position: relative;
-    display: inline-block;
-    width: 3vw;
-    border-radius: 100%;
-    text-align: center;
-    font-size: 2.5vw;
-    line-height: 3vw;
-    border-width: 2px;
-    border-style: inset;
-    border-color: gold;
-    background: rgb(255, 255, 102);
-}
-.pli-bet:hover .tooltip-text {
-    visibility: visible;
-    opacity: 1;
-    text-shadow: none;
-    transform: translate(-18%);
-}
-.pli-takes {
-    position: relative;
-    display: inline-block;
-    width: 2.5vw;
-    border-radius: 5px;
-    text-align: center;
-    line-height: 3vw;
-    border-width: 2px;
-    border-style: outset;
-    border-color: whitesmoke;
-    background: royalblue;
-    color: white;
-    margin-left: 1vw;
-}
-.pli-takes:hover .tooltip-text {
-    visibility: visible;
-    opacity: 1;
-    text-shadow: none;
-    transform: translate(-30%);
 }

@@ -8,12 +8,12 @@ const useStyles = createUseStyles({...tooltipClasses,
     },
     strongSuit: {
         fontSize: '10vh',
-        position: 'absolute',
-        bottom: '0',
         marginLeft: '1vw',
         zIndex: '101',
         userSelect: 'none', 
         textShadow: '0.25vh 0.5vh darkgreen',
+        gridColumn: '1',
+        gridRow: '8'
     }
 })
 

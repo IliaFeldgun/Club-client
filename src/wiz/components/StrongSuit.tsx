@@ -13,7 +13,10 @@ const useStyles = createUseStyles({...tooltipClasses,
         userSelect: 'none', 
         textShadow: '0.25vh 0.5vh darkgreen',
         gridColumn: '1',
-        gridRow: '8'
+        gridRow: '9',
+        lineHeight: '0',
+        position: 'relative',
+        transform: 'translate(0, 50%)'
     }
 })
 

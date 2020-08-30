@@ -14,39 +14,7 @@ body {
 .white {
     background-color: white;
 }
-.blue {
-    background-color: royalblue;
-}
-.tooltip-text {
-    font-size: 2vh;
-    line-height: 2vh;
-    font-weight: normal;
-    background-color: #555;
-    color: white;
-    text-align: center;
-    padding: 5px 5px;
-    border-radius: 5px;
-    position: absolute;
-    z-index: 1000;
-    bottom: 100%;
-    left: 0;
-    opacity: 0;
-    transition: opacity 0.3s;
-    visibility: hidden;
-    user-select: none;
-}
-/* Tooltip arrow */
-.tooltip-text::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, 0);
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
-}
-.player-card {
+/* .player-card {
     width: 12vmax;
     height: 18vmax;
     position: fixed;
@@ -61,11 +29,7 @@ body {
     padding-left: 0.5vmax;
     user-select: none;
     box-shadow: 5px 10px darkgreen;
-}
-.vertical-text {
-    writing-mode: vertical-lr;
-    text-orientation: upright;
-}
+} */
 .player-fan {
     position: absolute;
     left: 33%;
@@ -73,34 +37,13 @@ body {
     bottom: 0;
     z-index: 101;
 }
-.player-fan:hover .tooltip-text {
-    visibility: visible;
-    opacity: 1;
-    width: max-content;
-    z-index: 1001;
-}
-.player-fan .player-card {
+/* .player-fan .player-card {
     bottom: 0;
-}
-.player-fan .player-card:hover {
+} */
+/* .player-fan .player-card:hover {
     z-index: 1000;
-   /* transform: scale(1.2)*/
-}
-.other-card {
-    width: 2vmax;
-    height: 3vmax;
-    position: absolute;
-    margin: 0;
-    transform-origin: left bottom;
-    font-size: 0.416666667vmax;
-    font-family: sans-serif;
-    border-style: ridge;
-    border-radius: 5px;
-    border-width: thin;
-    padding-left: 0.5vmax;
-    user-select: none;
-    box-shadow: 0.25vmax 0.5vmax darkgreen;
-}
+   /* transform: scale(1.2)
+} */
 .other-fan-1 {
     position: absolute;
     top: 2%;
@@ -155,26 +98,20 @@ body {
     text-shadow: 1px 2px darkgreen;
     color: white;
 }
-.stack {
+/* .stack {
     position: absolute;
     bottom: 50%;
     left: 33%;
     display: flex;
-}
+} */
 .stack .player-card {
     position: relative;
     margin-right: -13vmax;
     box-shadow: 1px 2px darkgreen;
 }
-.stack .placeholder-card{
-    box-shadow: none;
-    border-style: ridge;
-    border-width: medium;
-}
 .stack:hover .player-card {
     margin-right: -10vmax;
 }
-.red-card { color: red; }
 
 @keyframes to-stack {
     0% {bottom: 0}

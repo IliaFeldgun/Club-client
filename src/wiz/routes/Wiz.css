@@ -6,44 +6,6 @@ body {
 .right { right: 0; }
 .top {top: 0; }
 .bottom {bottom: 0; }
-
-.cardboard {
-    background-color: rgba(7,150,34);
-    overflow: hidden;
-}
-.white {
-    background-color: white;
-}
-/* .player-card {
-    width: 12vmax;
-    height: 18vmax;
-    position: fixed;
-    margin: 0;
-    transform-origin: left bottom;
-    font-size: 2.5vmax;
-    font-family: sans-serif;
-    line-height: 2.5vmax;
-    border-style: double;
-    border-width: thin;
-    border-radius: 5px;
-    padding-left: 0.5vmax;
-    user-select: none;
-    box-shadow: 5px 10px darkgreen;
-} */
-.player-fan {
-    position: absolute;
-    left: 33%;
-    top: 66%;
-    bottom: 0;
-    z-index: 101;
-}
-/* .player-fan .player-card {
-    bottom: 0;
-} */
-/* .player-fan .player-card:hover {
-    z-index: 1000;
-   /* transform: scale(1.2)
-} */
 .other-fan-1 {
     position: absolute;
     top: 2%;
@@ -94,24 +56,6 @@ body {
     top: 60%;
     right: 10%;
 }
-.other-player-name {
-    text-shadow: 1px 2px darkgreen;
-    color: white;
-}
-/* .stack {
-    position: absolute;
-    bottom: 50%;
-    left: 33%;
-    display: flex;
-} */
-.stack .player-card {
-    position: relative;
-    margin-right: -13vmax;
-    box-shadow: 1px 2px darkgreen;
-}
-.stack:hover .player-card {
-    margin-right: -10vmax;
-}
 
 @keyframes to-stack {
     0% {bottom: 0}
@@ -144,12 +88,4 @@ body {
 }
 .player-card.right {
     animation-name: to-stack, rotate-right
-}
-.player-list-item {
-    display: block;
-    border-style: groove;
-    border-radius: 7px;
-    padding: 0.5vh;
-    margin-bottom: 0.5vh;
-    font-size: 2.5vw;
 }

@@ -2,6 +2,17 @@ import React from "react"
 import Card, { ICardProps } from "./Card"
 import ICard from "../../interfaces/Card"
 
+import {createUseStyles} from 'react-jss'
+import tooltipClasses from '../../style/tooltipClasses'
+const useStyles = createUseStyles({...tooltipClasses,
+    fan: {
+        gridRow: '9',
+        gridColumn: '5',
+        zIndex: '101',
+        transform: 'translate(-50%, -100%)'
+    }
+})
+
 interface ICardFanProps {
     yourTurn: boolean
     cards: Array<{suit: ICardProps["suit"], rank: ICardProps["rank"]}>
@@ -10,6 +21,7 @@ interface ICardFanProps {
                        rank: ICardProps["rank"]) => void
 }
 const CardFan: React.FC<ICardFanProps> = (props) => {
+    const classes = useStyles()
     const [cards, setCards] = React.useState<JSX.Element[]>([])
     
     const handleCardClick = React.useCallback((event: React.MouseEvent, suit: ICardProps["suit"], rank: ICardProps["rank"]) => {
@@ -46,13 +58,13 @@ const CardFan: React.FC<ICardFanProps> = (props) => {
     let wrongTurnTooltip = <React.Fragment />
     if (!props.yourTurn) {
         wrongTurnTooltip =  
-            <span className="tooltip-text">
+            <span className={classes.tooltip}>
                 Wait for your turn
             </span>
     }
 
     return (
-        <div className="player-fan">
+        <div className={`${classes.fan} ${classes.tooltipTarget}`}>
             {wrongTurnTooltip}
             {cards}
         </div>

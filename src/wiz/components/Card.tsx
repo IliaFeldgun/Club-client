@@ -1,5 +1,39 @@
 import React, { CSSProperties } from "react"
 import ICard, { Suit, Rank } from "../../interfaces/Card"
+import {createUseStyles} from 'react-jss'
+
+const useStyles = createUseStyles({
+    redCard: {
+        color: 'red'
+    },
+    joker: {
+        writingMode: 'vertical-lr',
+        textOrientation: 'upright'
+    },
+    white: {
+        backgroundColor: 'white'
+    },
+    card: {
+        width: '12vmax',
+        height: '18vmax',
+        position: 'fixed',
+        margin: '0',
+        transformOrigin: 'left bottom',
+        fontSize: '2.5vmax',
+        fontFamily: 'sans-serif',
+        lineHeight: '2.5vmax',
+        borderStyle: 'double',
+        borderWidth: 'thin',
+        borderRadius: '5px',
+        paddingLeft: '0.5vmax',
+        userSelect: 'none',
+        boxShadow: '5px 10px rgba(0,0,0,0.2)',
+        '&:hover': {
+            zIndex: '1000',
+            // boxShadow: '3px 5px'
+        }
+    }
+})
 
 export interface ICardProps {
     rotateDegree: number
@@ -8,6 +42,7 @@ export interface ICardProps {
     handleClick?: (event: React.MouseEvent, suit: ICard["suit"], rank: ICard["rank"]) => void
 }
 const Card: React.FC<ICardProps> = (props) => {
+    const classes = useStyles()
     const handleClick = (event: React.MouseEvent<HTMLSpanElement>) => {
         if (props.handleClick) {
             props.handleClick(event, props.suit, props.rank)
@@ -15,10 +50,10 @@ const Card: React.FC<ICardProps> = (props) => {
     }
     const suit: string = translateSuit(props.suit)
     const rank: string = translateRank(props.rank)
-    const classRed: string = isRed(props.suit) ? "red-card" : ""
+    const classRed: string = isRed(props.suit) ? classes.redCard : ""
 
     const isJoker = props.rank === Rank.JOKER
-    const classJoker = isJoker ? "vertical-text" : ""
+    const classJoker = isJoker ? classes.joker : ""
 
     let rotate: CSSProperties = {}
     const degrees = props.rotateDegree
@@ -27,7 +62,7 @@ const Card: React.FC<ICardProps> = (props) => {
         rotate = {transform: `rotate(${degrees}deg) translate(${spread}%,0)`}
     }
 
-    const classes = `white player-card ${classRed} ${classJoker}`
+    const cssClasses = `${classes.white} ${classes.card} player-card ${classRed} ${classJoker}`
     const cardContent = <React.Fragment>
         {suit}
         {!isJoker && <br/>}
@@ -35,9 +70,9 @@ const Card: React.FC<ICardProps> = (props) => {
     </React.Fragment>
     
     return (
-        <p className={classes} style={rotate} onClick={handleClick}>
+        <span className={cssClasses} style={rotate} onClick={handleClick}>
             {cardContent}
-        </p>
+        </span>
     )
 }
 

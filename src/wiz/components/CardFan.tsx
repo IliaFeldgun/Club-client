@@ -77,7 +77,7 @@ const CardFan: React.FC<ICardFanProps> = (props) => {
             if (props.handleCardClick)
                 props.handleCardClick(event, suit, rank)
         }
-    }, [props])
+    }, [props, classes])
 
     React.useEffect(() => {
         if (props.cards.length && props.cards && props.cards[0]) {

@@ -26,16 +26,15 @@ const WizOtherPlayers: React.FC<IWizOtherPlayersProps> = (props) => {
             return (
                     <WizOtherPlayer key={player.name} 
                                     name={player.name} 
-                                    cards={player.cards} 
-                                    className={`other-fan-${index + 1}`}/>
+                                    cards={player.cards} />
             )
         }))
     }, [props.players])
     
     return (
-        <div>
+        <React.Fragment>
             {players}
-        </div>
+        </React.Fragment>
     )
 }
 

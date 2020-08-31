@@ -62,7 +62,7 @@ const Card: React.FC<ICardProps> = (props) => {
         rotate = {transform: `rotate(${degrees}deg) translate(${spread}%,0)`}
     }
 
-    const cssClasses = `${classes.white} ${classes.card} player-card ${classRed} ${classJoker}`
+    const cssClasses = `${classes.white} ${classes.card} ${classRed} ${classJoker}`
     const cardContent = <React.Fragment>
         {suit}
         {!isJoker && <br/>}

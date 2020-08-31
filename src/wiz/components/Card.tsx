@@ -58,7 +58,6 @@ const Card: React.FC<ICardProps> = (props) => {
         rotate = {transform: `rotate(${degrees}deg) translate(${spread}%,0)`}
     }
 
-    const cssClasses = `${classes.white} ${classes.card} ${classRed} ${classJoker}`
     const cardContent = <React.Fragment>
         {suit}
         {!isJoker && <br/>}
@@ -66,7 +65,13 @@ const Card: React.FC<ICardProps> = (props) => {
     </React.Fragment>
     
     return (
-        <span className={cssClasses} style={rotate} onClick={handleClick}>
+        <span 
+            className={
+                `${classes.white} ${classes.card} ${classRed} ${classJoker}`
+            } 
+            style={rotate} 
+            onClick={handleClick}
+        >
             {cardContent}
         </span>
     )

@@ -18,7 +18,7 @@ const useStyles = createUseStyles({
         borderWidth: 'thin',
         paddingLeft: '0.5vmax',
         userSelect: 'none',
-        boxShadow: '0.25vmax 0.5vmax darkgreen',
+        boxShadow: '0.25vmax 0.5vmax rgba(0,0,0,0.2)',
     }
 })
 
@@ -29,7 +29,7 @@ const EmptyCard: React.FC<IEmptyCardProps> = (props) => {
     const classes = useStyles()
     const rotate: CSSProperties = {transform: `rotate(${props.rotateDegree}deg)`}
 
-    return (<p className={`${classes.blue} ${classes.otherCard}`} style={rotate} />)
+    return (<span className={`${classes.blue} ${classes.otherCard}`} style={rotate} />)
 }
 
 export default EmptyCard

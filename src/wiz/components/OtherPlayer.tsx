@@ -10,13 +10,13 @@ const useStyles = createUseStyles({
 interface IWizOtherPlayerProps {
     name: string
     cards: number
-    className: string
 }
 const WizOtherPlayer: React.FC<IWizOtherPlayerProps> = (props) => {
     const classes = useStyles()
+    
     return (
         <React.Fragment>
-            <div className={props.className} >
+            <div>
                 <div className={classes.name}>{props.name}</div>
                 <div>
                     <EmptyCardFan amount={props.cards} />

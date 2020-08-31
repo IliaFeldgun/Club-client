@@ -6,56 +6,6 @@ body {
 .right { right: 0; }
 .top {top: 0; }
 .bottom {bottom: 0; }
-.other-fan-1 {
-    position: absolute;
-    top: 2%;
-    left: 30%;
-}
-.other-fan-2 {
-    position: absolute;
-    top: 2%;
-    left: 65%
-}
-.other-fan-3 {
-    position: absolute;
-    top: 2%;
-    left: 10%;
-}
-.other-fan-4 {
-    position: absolute;
-    top: 2%;
-    right:10%;
-}
-.other-fan-5 {
-    position: absolute;
-    top: 20%;
-    left: 10%;
-}
-.other-fan-6 {
-    position: absolute;
-    top: 20%;
-    right: 10%;
-}
-.other-fan-7 {
-    position: absolute;
-    top: 40%;
-    left: 10%;
-}
-.other-fan-8 {
-    position: absolute;
-    top: 40%;
-    right: 10%;
-}
-.other-fan-9 {
-    position: absolute;
-    top: 60%;
-    left: 10%;
-}
-.other-fan-10 {
-    position: absolute;
-    top: 60%;
-    right: 10%;
-}
 
 @keyframes to-stack {
     0% {bottom: 0}

@@ -22,8 +22,28 @@ const useStyles = createUseStyles({
     },
     showSnackBar: {
         visibility: 'visible',
-        animation: 'fadein 0.5s, fadeout 0.5s 2.5s',
-    }
+        animation: '$fadein 0.5s, $fadeout 0.5s 2.5s',
+    },
+        '@keyframes fadein': {
+            from: {
+                top: 0, 
+                opacity: 0
+            },
+            to: {
+                top: '10vh', 
+                opacity: 0.9
+            }
+        },
+        '@keyframes fadeout': {
+            from: {
+                top: '10vh',
+                opacity: 0.9
+            },
+            to: {
+                top: 0,
+                opacity: 0
+            }
+        }
 })
 
 interface IAnnouncementProps {

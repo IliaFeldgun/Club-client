@@ -9,7 +9,48 @@ const useStyles = createUseStyles({...tooltipClasses,
         gridRow: '9',
         gridColumn: '5',
         zIndex: '101',
-        transform: 'translate(-50%, -100%)'
+        transform: 'translate(-50%, -100%)',
+        position: 'relative'
+    },
+    playCard: {
+        animationDuration: '0.5s',
+        animationTimingFunction: 'cubic-bezier(.62,1.18,.75,.79)',
+        animationFillMode: 'forwards',
+    },
+    right: {
+        animationName: '$to-stack, $rotate-right'
+    },
+    left: {
+        animationName: '$to-stack, $rotate-left'
+    },
+    '@keyframes to-stack': {
+        '0%': {
+            bottom: '0vh'
+        },
+        '50%': {
+            bottom: '30vh'
+        },
+        '100%': {
+            bottom: '40vh'
+        }
+    },
+    '@keyframes rotate-right': {
+        '0%': {},
+        '50%': {
+            transform: 'rotate3d(0, 0, 0.1, 0.1turn), scale(2)'
+        },
+        '100%': {
+            transform: 'rotate3d(0, 0, 0.1, 0.1turn)'
+        }
+    },
+    '@keyframes rotate-left': {
+        '0%': {},
+        '50%': {
+            transform: 'rotate3d(0, 0, 0.1, -0.1turn), scale(2)'
+        },
+        '100%': {
+            transform: 'rotate3d(0, 0, 0.1, -0.1turn)'
+        }
     }
 })
 
@@ -26,8 +67,8 @@ const CardFan: React.FC<ICardFanProps> = (props) => {
     
     const handleCardClick = React.useCallback((event: React.MouseEvent, suit: ICardProps["suit"], rank: ICardProps["rank"]) => {
         if (props.yourTurn) {
-            let cssClasses = ["play-card"]
-            Math.round(Math.random()) ? cssClasses.push("right") : cssClasses.push("left")
+            let cssClasses = [classes.playCard]
+            Math.round(Math.random()) ? cssClasses.push(classes.right) : cssClasses.push(classes.left)
             event.currentTarget.classList.add(cssClasses[0], cssClasses[1])
             if (props.handleCardClick)
                 props.handleCardClick(event, suit, rank)

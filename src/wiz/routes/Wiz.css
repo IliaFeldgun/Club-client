@@ -6,36 +6,3 @@ body {
 .right { right: 0; }
 .top {top: 0; }
 .bottom {bottom: 0; }
-
-@keyframes to-stack {
-    0% {bottom: 0}
-    50% {
-        bottom: 40%;
-    }
-    100% {
-        bottom: 50%;
-    }
-}
-@keyframes rotate-right {
-    0% {}
-    50% {transform: rotate3d(0,0,0.1,0.1turn), scale(2)}
-    100% {transform: rotate3d(0,0,0.1,0.1turn)}
-}
-@keyframes rotate-left {
-    0% {}
-    50% {transform: rotate3d(0,0,0.1,-0.1turn), scale(2)}
-    100% {transform: rotate3d(0,0,0.1,-0.1turn)}
-}
-.play-card {
-    left:33%;
-    animation-duration: 0.5s;
-    animation-timing-function: cubic-bezier(.62,1.18,.75,.79);
-    animation-fill-mode: forwards;
-}
-.player-card.left {
-    animation-name: to-stack, rotate-left;
-
-}
-.player-card.right {
-    animation-name: to-stack, rotate-right
-}

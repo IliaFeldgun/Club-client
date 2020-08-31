@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react"
+import React from "react"
 import './Wiz.css'
 import WizGame from "../components/WizGame"
 import { match, RouteComponentProps } from "react-router"
@@ -8,10 +8,13 @@ import { PossibleMoves } from "../interfaces/PossibleMoves"
 import IWizPlayer from "../interfaces/WizPlayer"
 import IWizAnnouncement from "../interfaces/WizAnnouncement"
 
-const wrapperStyles : CSSProperties = {
-    display: "flex",
-    flexGrow: 1
-}
+import {createUseStyles} from 'react-jss'
+const useStyles = createUseStyles({
+    wrapper: {
+        display: 'flex',
+        flexBasis: '100%'
+    }
+})
 
 interface IRouteParams {
     id: string
@@ -20,6 +23,7 @@ interface IWizProps extends RouteComponentProps<IRouteParams>{
     match: match<IRouteParams>
 }
 const Wiz: React.FC<IWizProps> = (props) => {
+    const classes = useStyles()
     const gameId = props.match.params.id
     const [announcement, setAnnouncement] = React.useState<IWizAnnouncement>()
     const [instructions, setInstructions] = React.useState<PossibleMoves>(PossibleMoves.NONE)
@@ -82,7 +86,7 @@ const Wiz: React.FC<IWizProps> = (props) => {
                             instructions={instructions}
                             announcement={announcement}/>
     return (
-        <div style={wrapperStyles}>
+        <div className={classes.wrapper}>
             {toRender}
         </div>
     )

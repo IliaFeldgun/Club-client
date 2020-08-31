@@ -2,7 +2,6 @@ import React from 'react'
 import { RouteComponentProps, match } from 'react-router-dom'
 import LobbyApi from '../engine/api/LobbyApi'
 import PlayerList from '../components/PlayerList'
-import "./Room.css"
 import ClubSession from '../utils/ClubSession'
 import JoinButton from '../components/Room/JoinButton'
 import ShareButton from '../components/Room/ShareButton'

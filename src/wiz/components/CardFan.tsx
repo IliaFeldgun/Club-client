@@ -10,7 +10,11 @@ const useStyles = createUseStyles({...tooltipClasses,
         gridColumn: '5',
         zIndex: '101',
         transform: 'translate(-50%, -100%)',
-        position: 'relative'
+        position: 'relative',
+        '& span:hover': {
+            zIndex: '1000',
+            // boxShadow: '3px 5px'
+        }
     },
     playCard: {
         animationDuration: '0.5s',

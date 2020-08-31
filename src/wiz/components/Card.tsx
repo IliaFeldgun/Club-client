@@ -27,11 +27,7 @@ const useStyles = createUseStyles({
         borderRadius: '5px',
         paddingLeft: '0.5vmax',
         userSelect: 'none',
-        boxShadow: '5px 10px rgba(0,0,0,0.2)',
-        '&:hover': {
-            zIndex: '1000',
-            // boxShadow: '3px 5px'
-        }
+        boxShadow: '5px 10px rgba(0,0,0,0.2)'
     }
 })
 

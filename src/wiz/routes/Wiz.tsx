@@ -1,5 +1,4 @@
 import React from "react"
-import './Wiz.css'
 import WizGame from "../components/WizGame"
 import { match, RouteComponentProps } from "react-router"
 import { WizApi } from "../api/WizApi"

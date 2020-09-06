@@ -67,6 +67,14 @@ const LOBBY_API_MAP = {
             const url = `${API_ENPOINT}/api/room/${roomId}/game`
             return GET_CONFIG(url)
         },
+        GET_AVAILABLE_GAMES: () => {
+            const url = `${API_ENPOINT}/api/room/games`
+            return GET_CONFIG(url)
+        },
+        CREATE_GAME: (roomId: string, gameName: string) => {
+            const url = `${API_ENPOINT}/api/room/${roomId}/game/${gameName}`
+            return POST_CONFIG(url)
+        },
         UPDATES: (): [string, EventSourceInit] => {
             const url = `${API_ENPOINT}/api/room/updates`
             const config = EVENT_SOURCE_INIT()

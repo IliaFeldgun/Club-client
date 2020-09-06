@@ -5,19 +5,6 @@ import IWizPlayer from "../interfaces/WizPlayer"
 import WIZ_API_MAP from "./WizApiMap"
 
 export class WizApi {
-    static async newGame(roomId: string): Promise<string> {
-        const url = WIZ_API_MAP.NEW_GAME.url(roomId)
-        const config = WIZ_API_MAP.NEW_GAME.config()
-        try {
-            const response = await axios(url, config)
-            return response.data.gameId
-        }
-        catch (ex) {
-            const error: AxiosError = ex
-            // TODO: Handle            
-            throw error
-        }
-    }
     static async getGameInstructions(gameId: string): Promise<PossibleMoves> {
         const url = WIZ_API_MAP.GET_GAME_INSTRUCTIONS.url(gameId)
         const config = WIZ_API_MAP.GET_GAME_INSTRUCTIONS.config()

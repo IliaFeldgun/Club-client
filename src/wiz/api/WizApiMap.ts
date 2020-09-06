@@ -30,12 +30,6 @@ function EVENT_SOURCE_INIT(): EventSourceInit {
     }
 }
 const WIZ_API_MAP = {
-    NEW_GAME: {
-        url: (roomId: string) => {
-            return `${API_ENPOINT}/api/game/wizard/${roomId}`
-        },
-        config: POST_CONFIG
-    },
     GET_GAME_INSTRUCTIONS: {
         url: (gameId: string) => {
             return `${API_ENPOINT}/api/game/wizard/${gameId}`

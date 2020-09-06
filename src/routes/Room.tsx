@@ -101,7 +101,6 @@ const Room: React.FC<IRoomProps> = (props) => {
                 gameId={room.gameId} 
                 gameName={room.gameName}
                 roomId={roomId}
-                gameNames={["wizard"]}
             />
             <LoginModal show={!isLoggedIn} />
         </div>

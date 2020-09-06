@@ -8,7 +8,7 @@ import ShareButton from '../components/Room/ShareButton'
 import LoginModal from '../components/Login/LoginModal'
 import RoomGame from '../components/Room/RoomGame'
 import ClientError from '../engine/api/ClientError'
-import {createUseStyles} from 'react-jss'
+import { createUseStyles } from 'react-jss'
 const useStyles = createUseStyles({
     room: {
         position: 'relative',
@@ -38,7 +38,7 @@ const useStyles = createUseStyles({
 interface IRouteParams {
     id: string
 }
-interface IRoomProps extends RouteComponentProps<IRouteParams>{
+interface IRoomProps extends RouteComponentProps<IRouteParams> {
     match: match<IRouteParams>
 }
 interface IRoomState {
@@ -61,7 +61,7 @@ const Room: React.FC<IRoomProps> = (props) => {
     React.useEffect(() => {
         setIsLoggedIn(ClubSession.getPlayerId() !== null)
     }, [])
-    
+
     const fetchDataToState = React.useCallback(() => {
         LobbyApi.getRoom(roomId).then((room) => {
             if (room) {
@@ -80,10 +80,9 @@ const Room: React.FC<IRoomProps> = (props) => {
 
         fetchDataToState()
     }, [fetchDataToState])
-    
-    let joinButton = <React.Fragment/>
-    if (!room.players.some((player) => player === ClubSession.getPlayerName()))
-    {
+
+    let joinButton = <React.Fragment />
+    if (!room.players.some((player) => player === ClubSession.getPlayerName())) {
         joinButton = <JoinButton roomId={roomId} />
     }
     return (
@@ -96,9 +95,9 @@ const Room: React.FC<IRoomProps> = (props) => {
             <p className={`${classes.bold} ${classes.block}`}>Players in this room:</p>
             <PlayerList players={room.players} />
             {joinButton}
-            <RoomGame 
+            <RoomGame
                 roomLeaderId={room.leader}
-                gameId={room.gameId} 
+                gameId={room.gameId}
                 gameName={room.gameName}
                 roomId={roomId}
             />

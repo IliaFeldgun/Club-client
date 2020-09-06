@@ -70,19 +70,18 @@ export class WizApi {
             throw error
         }
     }
-    static async getStrongSuit(gameId: string):
-        Promise<Suit> {        
-            const url = WIZ_API_MAP.GET_STRONG_SUIT.url(gameId)
-            const config = WIZ_API_MAP.GET_STRONG_SUIT.config()
-            try {
-                const response = await axios(url, config)
-                return response.data.strongSuit
-            }
-            catch (ex) {
-                const error: AxiosError = ex
-                // TODO: Handle            
-                throw error
-            }
+    static async getStrongSuit(gameId: string): Promise<Suit> {
+        const url = WIZ_API_MAP.GET_STRONG_SUIT.url(gameId)
+        const config = WIZ_API_MAP.GET_STRONG_SUIT.config()
+        try {
+            const response = await axios(url, config)
+            return response.data.strongSuit
+        }
+        catch (ex) {
+            const error: AxiosError = ex
+            // TODO: Handle            
+            throw error
+        }
     }
     static async sendCard(gameId: string, card: ICard): Promise<boolean> {
         const url = WIZ_API_MAP.SEND_CARD.url(gameId)

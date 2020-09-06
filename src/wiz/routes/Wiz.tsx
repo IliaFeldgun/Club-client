@@ -7,7 +7,7 @@ import { PossibleMoves } from "../interfaces/PossibleMoves"
 import IWizPlayer from "../interfaces/WizPlayer"
 import IWizAnnouncement from "../interfaces/WizAnnouncement"
 
-import {createUseStyles} from 'react-jss'
+import { createUseStyles } from 'react-jss'
 const useStyles = createUseStyles({
     wrapper: {
         display: 'flex',
@@ -18,7 +18,7 @@ const useStyles = createUseStyles({
 interface IRouteParams {
     id: string
 }
-interface IWizProps extends RouteComponentProps<IRouteParams>{
+interface IWizProps extends RouteComponentProps<IRouteParams> {
     match: match<IRouteParams>
 }
 const Wiz: React.FC<IWizProps> = (props) => {
@@ -52,7 +52,7 @@ const Wiz: React.FC<IWizProps> = (props) => {
             setStrongSuit(strongSuit)
         })
     }, [gameId])
-    
+
     React.useEffect(() => {
         const eventSource = WizApi.listenToUpdateEvent(gameId)
         eventSource.onmessage = (event) => {
@@ -60,30 +60,32 @@ const Wiz: React.FC<IWizProps> = (props) => {
             fetchDataToState()
         }
         fetchDataToState()
-    }, [ fetchDataToState, gameId ])
+    }, [fetchDataToState, gameId])
 
     const handleCardSend = (card: ICard) => {
-            WizApi.sendCard(gameId, card).then((isCardSent) => {
-                if (!isCardSent) {
-                    alert("NOPE")
-                    window.location.reload()
-                }
-            })
+        WizApi.sendCard(gameId, card).then((isCardSent) => {
+            if (!isCardSent) {
+                alert("NOPE")
+                window.location.reload()
+            }
+        })
     }
     const handleBet = (bet: number) => {
         WizApi.sendBet(gameId, bet).then((isBetSent) => {
         })
     }
 
-    let toRender = <WizGame players={players} 
-                            nextPlayer={nextPlayer}
-                            playerHand={playerHand}
-                            tableStack={tableStack}
-                            handleFanCardClick={handleCardSend}
-                            handleBet={handleBet}
-                            strongSuit={strongSuit}
-                            instructions={instructions}
-                            announcement={announcement}/>
+    let toRender = <WizGame
+        players={players}
+        nextPlayer={nextPlayer}
+        playerHand={playerHand}
+        tableStack={tableStack}
+        handleFanCardClick={handleCardSend}
+        handleBet={handleBet}
+        strongSuit={strongSuit}
+        instructions={instructions}
+        announcement={announcement}
+    />
     return (
         <div className={classes.wrapper}>
             {toRender}

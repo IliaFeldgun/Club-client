@@ -6,9 +6,14 @@ import wizGameImage from '../img/WizClub2Small.png'
 const Home: React.FC = () => {
     return (
         <React.Fragment>
-            <Description/>
-            <Catalog games={[{name: "Wizard", url: "/room",
-                                img: wizGameImage}]} />
+            <Description />
+            <Catalog games={[
+                {
+                    name: "Wizard",
+                    url: "/room",
+                    img: wizGameImage
+                }
+            ]} />
         </React.Fragment>
     )
 }

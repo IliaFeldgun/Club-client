@@ -8,29 +8,30 @@ interface IWizOtherPlayersProps {
 }
 const WizOtherPlayers: React.FC<IWizOtherPlayersProps> = (props) => {
     const [players, setPlayers] = React.useState<JSX.Element[]>([])
-    
+
     React.useEffect(() => {
         const otherPlayers = props.players.filter((player) => {
             return player.id !== ClubSession.getPlayerId()
         })
-        
-        const otherPlayerHands = otherPlayers.map((player) => 
-        {
+
+        const otherPlayerHands = otherPlayers.map((player) => {
             return {
-                name: player.name, 
+                name: player.name,
                 cards: player.handSize
             }
         })
 
         setPlayers(otherPlayerHands.map((player, index) => {
             return (
-                    <WizOtherPlayer key={player.name} 
-                                    name={player.name} 
-                                    cards={player.cards} />
+                <WizOtherPlayer
+                    key={player.name}
+                    name={player.name}
+                    cards={player.cards}
+                />
             )
         }))
     }, [props.players])
-    
+
     return (
         <React.Fragment>
             {players}

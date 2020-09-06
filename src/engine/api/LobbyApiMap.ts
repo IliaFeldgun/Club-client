@@ -88,7 +88,7 @@ const LOBBY_API_MAP = {
         },
         CREATE_PLAYER: (playerName: string) => {
             const url = `${API_ENPOINT}/api/player`
-            return {...POST_CONFIG(url), data: {playerName}}
+            return { ...POST_CONFIG(url), data: { playerName } }
         },
         GET_PLAYER: () => {
             const url = `${API_ENPOINT}/api/player`

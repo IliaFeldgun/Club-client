@@ -2,7 +2,7 @@ import React from "react"
 import { Redirect } from "react-router-dom"
 import ClubSession from "../utils/ClubSession"
 import LoginForm from "../components/Login/LoginForm"
-import {createUseStyles} from 'react-jss'
+import { createUseStyles } from 'react-jss'
 
 const useStyles = createUseStyles({
     centeredTop: {
@@ -16,7 +16,7 @@ const useStyles = createUseStyles({
 })
 const Login: React.FC = () => {
     const classes = useStyles()
-    let pageContents = ClubSession.getPlayerName() ? <Redirect to="/"/> : <LoginForm/>
+    let pageContents = ClubSession.getPlayerName() ? <Redirect to="/" /> : <LoginForm />
 
     return (
         <div className={classes.centeredTop}>

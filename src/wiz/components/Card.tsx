@@ -1,6 +1,6 @@
 import React, { CSSProperties } from "react"
 import ICard, { Suit, Rank } from "../../interfaces/Card"
-import {createUseStyles} from 'react-jss'
+import { createUseStyles } from 'react-jss'
 
 const useStyles = createUseStyles({
     redCard: {
@@ -55,21 +55,21 @@ const Card: React.FC<ICardProps> = (props) => {
     const degrees = props.rotateDegree
     const spread = degrees
     if (props.rotateDegree) {
-        rotate = {transform: `rotate(${degrees}deg) translate(${spread}%,0)`}
+        rotate = { transform: `rotate(${degrees}deg) translate(${spread}%,0)` }
     }
 
     const cardContent = <React.Fragment>
         {suit}
-        {!isJoker && <br/>}
+        {!isJoker && <br />}
         {rank}
     </React.Fragment>
-    
+
     return (
-        <span 
+        <span
             className={
                 `${classes.white} ${classes.card} ${classRed} ${classJoker}`
-            } 
-            style={rotate} 
+            }
+            style={rotate}
             onClick={handleClick}
         >
             {cardContent}
@@ -79,9 +79,9 @@ const Card: React.FC<ICardProps> = (props) => {
 
 // TODO: move helper function to another class
 
-const translateRank = (rank: Rank) : string  =>{
+const translateRank = (rank: Rank): string => {
     let textRank: string
-    
+
     if (rank <= 10 && rank >= 2) {
         textRank = rank.toString()
     }
@@ -91,12 +91,12 @@ const translateRank = (rank: Rank) : string  =>{
     else {
         textRank = Rank[rank].charAt(0)
     }
-    
+
     return textRank
 }
-const translateSuit = (suit: Suit) : string  => {
+const translateSuit = (suit: Suit): string => {
     let textSuit: string
-    switch(suit) {
+    switch (suit) {
         case Suit.SPADE:
             textSuit = "♠"
             break
@@ -114,7 +114,7 @@ const translateSuit = (suit: Suit) : string  => {
     return textSuit
 }
 
-const isRed = (suit: Suit) : boolean => {
+const isRed = (suit: Suit): boolean => {
     return suit === Suit.HEART || suit === Suit.DIAMOND
 }
 

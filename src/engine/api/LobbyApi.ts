@@ -18,7 +18,7 @@ export default class LobbyApi {
             )
         }
     }
-    static async getPlayer(): Promise<{playerId: string, playerName: string}> {
+    static async getPlayer(): Promise<{ playerId: string, playerName: string }> {
         const config = LOBBY_API_MAP.PLAYER.GET_PLAYER()
         try {
             const response = await axios.request(config)
@@ -27,7 +27,7 @@ export default class LobbyApi {
         catch (ex) {
             const error: AxiosError = ex
             throw new ClientError(
-                error.response?.status, 
+                error.response?.status,
                 error.response?.data
             )
         }
@@ -41,7 +41,7 @@ export default class LobbyApi {
         catch (ex) {
             const error: AxiosError = ex
             throw new ClientError(
-                error.response?.status, 
+                error.response?.status,
                 error.response?.data
             )
         }
@@ -55,7 +55,7 @@ export default class LobbyApi {
         catch (ex) {
             const error: AxiosError = ex
             throw new ClientError(
-                error.response?.status, 
+                error.response?.status,
                 error.response?.data
             )
         }
@@ -70,13 +70,13 @@ export default class LobbyApi {
         catch (ex) {
             const error: AxiosError = ex
             throw new ClientError(
-                error.response?.status, 
+                error.response?.status,
                 error.response?.data
             )
         }
     }
 
-    static async joinRoom(roomId: string): Promise<string>{
+    static async joinRoom(roomId: string): Promise<string> {
         const config = LOBBY_API_MAP.ROOM.JOIN_ROOM(roomId)
         try {
             const response = await axios.request(config)
@@ -85,12 +85,12 @@ export default class LobbyApi {
         catch (ex) {
             const error: AxiosError = ex
             throw new ClientError(
-                error.response?.status, 
+                error.response?.status,
                 error.response?.data
             )
         }
     }
-    
+
     static async getPlayerRooms(): Promise<string[]> {
         const config = LOBBY_API_MAP.PLAYER.GET_ROOMS()
         try {
@@ -100,11 +100,12 @@ export default class LobbyApi {
         catch (ex) {
             const error: AxiosError = ex
             throw new ClientError(
-                error.response?.status, 
+                error.response?.status,
                 error.response?.data
             )
         }
     }
+
     static async getRoomLeader(roomId: string): Promise<string> {
         const config = LOBBY_API_MAP.ROOM.GET_LEADER(roomId)
         try {
@@ -114,13 +115,13 @@ export default class LobbyApi {
         catch (ex) {
             const error: AxiosError = ex
             throw new ClientError(
-                error.response?.status, 
+                error.response?.status,
                 error.response?.data
             )
         }
     }
-    static async getRoomGame(roomId: string): Promise<{id: string, name: string}>
-    {
+
+    static async getRoomGame(roomId: string): Promise<{ id: string, name: string }> {
         const config = LOBBY_API_MAP.ROOM.GET_GAME(roomId)
         try {
             const response = await axios.request(config)
@@ -129,11 +130,12 @@ export default class LobbyApi {
         catch (ex) {
             const error: AxiosError = ex
             throw new ClientError(
-                error.response?.status, 
+                error.response?.status,
                 error.response?.data
             )
         }
     }
+
     static async getRoom(roomId: string): Promise<IRoom> {
         const config = LOBBY_API_MAP.ROOM.GET_ROOM(roomId)
 
@@ -144,11 +146,12 @@ export default class LobbyApi {
         catch (ex) {
             const error: AxiosError = ex
             throw new ClientError(
-                error.response?.status, 
+                error.response?.status,
                 error.response?.data
             )
         }
     }
+
     static async getAvailableGames(): Promise<string[]> {
         const config = LOBBY_API_MAP.ROOM.GET_AVAILABLE_GAMES()
 
@@ -164,6 +167,7 @@ export default class LobbyApi {
             )
         }
     }
+
     static async createGame(roomId: string, gameName: string): Promise<string> {
         const config = LOBBY_API_MAP.ROOM.CREATE_GAME(roomId, gameName)
 
@@ -179,8 +183,9 @@ export default class LobbyApi {
             )
         }
     }
+
     static listenToUpdateEvent() {
-        const [url,init] = LOBBY_API_MAP.ROOM.UPDATES()
+        const [url, init] = LOBBY_API_MAP.ROOM.UPDATES()
         return new EventSource(url, init)
     }
 }

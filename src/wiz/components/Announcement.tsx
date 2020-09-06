@@ -3,7 +3,7 @@ import IWizAnnouncement from "../interfaces/WizAnnouncement"
 import ANNOUNCEMENT_MAP from "../text_map/AnnouncementMap"
 import { WizAnnouncementType } from "../interfaces/WizAnnouncementType"
 import IWizPlayer from "../interfaces/WizPlayer"
-import {createUseStyles} from 'react-jss'
+import { createUseStyles } from 'react-jss'
 const useStyles = createUseStyles({
     snackBar: {
         visibility: 'hidden',
@@ -24,26 +24,26 @@ const useStyles = createUseStyles({
         visibility: 'visible',
         animation: '$fadein 0.5s, $fadeout 0.5s 2.5s',
     },
-        '@keyframes fadein': {
-            from: {
-                top: 0, 
-                opacity: 0
-            },
-            to: {
-                top: '10vh', 
-                opacity: 0.9
-            }
+    '@keyframes fadein': {
+        from: {
+            top: 0,
+            opacity: 0
         },
-        '@keyframes fadeout': {
-            from: {
-                top: '10vh',
-                opacity: 0.9
-            },
-            to: {
-                top: 0,
-                opacity: 0
-            }
+        to: {
+            top: '10vh',
+            opacity: 0.9
         }
+    },
+    '@keyframes fadeout': {
+        from: {
+            top: '10vh',
+            opacity: 0.9
+        },
+        to: {
+            top: 0,
+            opacity: 0
+        }
+    }
 })
 
 interface IAnnouncementProps {
@@ -54,14 +54,14 @@ const Announcement: React.FC<IAnnouncementProps> = (props) => {
     const classes = useStyles()
     const [show, setShow] = React.useState(false)
     const [lastVersion, setLastVersion] = React.useState(0)
-    
+
     const displayAnnouncement = React.useCallback((time: number) => {
         setShow(true)
         setLastVersion(props.announcement.version)
-        setTimeout(() => { 
+        setTimeout(() => {
             setShow(false)
-         }, time)
-    },[props.announcement.version])
+        }, time)
+    }, [props.announcement.version])
 
     React.useEffect(() => {
         if (
@@ -69,15 +69,15 @@ const Announcement: React.FC<IAnnouncementProps> = (props) => {
             props.announcement &&
             props.announcement.type !== WizAnnouncementType.NONE &&
             props.announcement.version > lastVersion
-        ) { 
+        ) {
             displayAnnouncement(3000)
         }
     })
-    
+
     const text = getText(props.announcement, props.players)
-    let snackBarClasses = classes.snackBar 
+    let snackBarClasses = classes.snackBar
     snackBarClasses += show ? ` ${classes.showSnackBar}` : ""
-    
+
     return (
         <span className={snackBarClasses}>
             {text}
@@ -85,9 +85,9 @@ const Announcement: React.FC<IAnnouncementProps> = (props) => {
     )
 }
 const getText = (
-    announcement: IWizAnnouncement, 
+    announcement: IWizAnnouncement,
     players: IWizPlayer[]
-) : string => {
+): string => {
     let text: string = ""
     const type = announcement.type
     const player = players.find((player) => {

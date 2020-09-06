@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react'
-import {createUseStyles} from 'react-jss'
+import { createUseStyles } from 'react-jss'
 
 const useStyles = createUseStyles({
     blue: {
@@ -27,7 +27,7 @@ interface IEmptyCardProps {
 }
 const EmptyCard: React.FC<IEmptyCardProps> = (props) => {
     const classes = useStyles()
-    const rotate: CSSProperties = {transform: `rotate(${props.rotateDegree}deg)`}
+    const rotate: CSSProperties = { transform: `rotate(${props.rotateDegree}deg)` }
 
     return (<span className={`${classes.blue} ${classes.otherCard}`} style={rotate} />)
 }

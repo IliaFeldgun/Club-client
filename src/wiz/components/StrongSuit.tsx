@@ -1,8 +1,9 @@
 import React from 'react'
 import { Suit } from '../../interfaces/Card'
-import {createUseStyles} from 'react-jss'
+import { createUseStyles } from 'react-jss'
 import tooltipClasses from '../../style/tooltipClasses'
-const useStyles = createUseStyles({...tooltipClasses,
+const useStyles = createUseStyles({
+    ...tooltipClasses,
     red: {
         color: 'red'
     },
@@ -10,7 +11,7 @@ const useStyles = createUseStyles({...tooltipClasses,
         fontSize: '10vh',
         marginLeft: '1vw',
         zIndex: '101',
-        userSelect: 'none', 
+        userSelect: 'none',
         textShadow: '0.25vh 0.5vh darkgreen',
         gridColumn: '1',
         gridRow: '9',
@@ -39,9 +40,9 @@ const StrongSuit: React.FC<IStrongSuitProps> = (props) => {
 
 // TODO: move helper function to another class
 
-const translateSuit = (suit: Suit) : string  => {
+const translateSuit = (suit: Suit): string => {
     let textSuit: string
-    switch(suit) {
+    switch (suit) {
         case Suit.SPADE:
             textSuit = "♠"
             break
@@ -59,7 +60,7 @@ const translateSuit = (suit: Suit) : string  => {
     return textSuit
 }
 
-const isRed = (suit: Suit) : boolean => {
+const isRed = (suit: Suit): boolean => {
     return suit === Suit.HEART || suit === Suit.DIAMOND
 }
 

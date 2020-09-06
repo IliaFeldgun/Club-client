@@ -6,13 +6,14 @@ import CreateGame from './RoomGame/CreateGame'
 import ClubSession from '../../utils/ClubSession'
 import LobbyApi from '../../engine/api/LobbyApi'
 
-import {createUseStyles} from 'react-jss'
+import { createUseStyles } from 'react-jss'
 
 const useStyles = createUseStyles({
     toTheRight: {
         textAlign: 'right'
     }
 })
+
 interface IRoomGameProps {
     roomId: string
     roomLeaderId: string
@@ -36,7 +37,7 @@ const RoomGame: React.FC<IRoomGameProps> = (props) => {
     })
     React.useEffect(() => {
         setSelectedGame(games[0])
-    }, [ games ])
+    }, [games])
 
     const handlePlay = () => {
         window.location.assign(`/${props.gameName}/${props.gameId}`)
@@ -48,29 +49,29 @@ const RoomGame: React.FC<IRoomGameProps> = (props) => {
 
     let toRender = <React.Fragment />
     if (props.gameName && props.gameId) {
-        toRender = 
+        toRender =
             <React.Fragment>
-                <GameDisplay 
-                    gameName={props.gameName} 
+                <GameDisplay
+                    gameName={props.gameName}
                 />
                 <div className={classes.toTheRight}>
-                    <PlayButton 
+                    <PlayButton
                         handlePlay={handlePlay}
                     />
                 </div>
             </React.Fragment>
     }
     else if (props.roomLeaderId === ClubSession.getPlayerId()) {
-        toRender = 
+        toRender =
             <React.Fragment>
-                <GameDropDown 
-                    handleSelection={handleGameSelect} 
+                <GameDropDown
+                    handleSelection={handleGameSelect}
                     gameNames={games}
                 />
                 <div className={classes.toTheRight}>
-                    <CreateGame 
-                    roomId={props.roomId} 
-                    gameName={selectedGame} 
+                    <CreateGame
+                        roomId={props.roomId}
+                        gameName={selectedGame}
                     />
                 </div>
             </React.Fragment>

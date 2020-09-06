@@ -71,7 +71,7 @@ const WIZ_API_MAP = {
             return `${API_ENPOINT}/api/game/wizard/${gameId}/play`
         },
         config: (card: ICard) => {
-            return {...POST_CONFIG(), data: JSON.stringify(card)}
+            return { ...POST_CONFIG(), data: JSON.stringify(card) }
         }
     },
     SEND_BET: {

@@ -1,5 +1,5 @@
 import React from 'react'
-import {createUseStyles} from 'react-jss'
+import { createUseStyles } from 'react-jss'
 import formClasses from '../../../style/formClasses'
 import LobbyApi from '../../../engine/api/LobbyApi'
 const useStyles = createUseStyles({
@@ -15,7 +15,7 @@ const CreateGame: React.FC<ICreateGameProps> = (props) => {
     const handleGameCreation = (event: React.MouseEvent<HTMLButtonElement>) => {
         const gameName = props.gameName
         LobbyApi.createGame(props.roomId, gameName).then((gameId: string) => {
-                window.location.assign(`/${gameName}/` + gameId) 
+            window.location.assign(`/${gameName}/` + gameId)
         }).catch((error) => {
             console.log(error)
             // TODO: Handle

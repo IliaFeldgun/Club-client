@@ -1,5 +1,6 @@
 import React from 'react'
-import {createUseStyles} from 'react-jss'
+
+import { createUseStyles } from 'react-jss'
 const useStyles = createUseStyles({
     gameSelect: {
         fontSize: 'inherit',
@@ -27,7 +28,7 @@ const GameDropDown: React.FC<IGameDropDownProps> = (props) => {
     return (
         <React.Fragment>
             <div>Select the game you wish to start: </div>
-            <select 
+            <select
                 className={classes.gameSelect}
                 name="games"
                 onChange={handleChange}

@@ -1,5 +1,5 @@
 import React from "react"
-import {createUseStyles} from 'react-jss'
+import { createUseStyles } from 'react-jss'
 
 const useStyles = createUseStyles({
     cardBoard: {
@@ -14,7 +14,7 @@ const useStyles = createUseStyles({
 
 const CardBoard: React.FC = (props) => {
     const classes = useStyles()
-    
+
     return (
         <span className={classes.cardBoard}>
             {props.children}

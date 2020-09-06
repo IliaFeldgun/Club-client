@@ -149,6 +149,36 @@ export default class LobbyApi {
             )
         }
     }
+    static async getAvailableGames(): Promise<string[]> {
+        const config = LOBBY_API_MAP.ROOM.GET_AVAILABLE_GAMES()
+
+        try {
+            const response = await axios.request(config)
+            return response.data.games
+        }
+        catch (ex) {
+            const error: AxiosError = ex
+            throw new ClientError(
+                error.response?.status,
+                error.response?.data
+            )
+        }
+    }
+    static async createGame(roomId: string, gameName: string): Promise<string> {
+        const config = LOBBY_API_MAP.ROOM.CREATE_GAME(roomId, gameName)
+
+        try {
+            const response = await axios.request(config)
+            return response.data.gameId
+        }
+        catch (ex) {
+            const error: AxiosError = ex
+            throw new ClientError(
+                error.response?.status,
+                error.response?.data
+            )
+        }
+    }
     static listenToUpdateEvent() {
         const [url,init] = LOBBY_API_MAP.ROOM.UPDATES()
         return new EventSource(url, init)

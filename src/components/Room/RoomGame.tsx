@@ -4,6 +4,7 @@ import PlayButton from './RoomGame/PlayButton'
 import GameDropDown from './RoomGame/GameDropDown'
 import CreateGame from './RoomGame/CreateGame'
 import ClubSession from '../../utils/ClubSession'
+import LobbyApi from '../../engine/api/LobbyApi'
 
 import {createUseStyles} from 'react-jss'
 
@@ -17,15 +18,25 @@ interface IRoomGameProps {
     roomLeaderId: string
     gameName: string
     gameId: string
-    gameNames: string[]
 }
 const RoomGame: React.FC<IRoomGameProps> = (props) => {
     const classes = useStyles()
+    const [games, setGames] = React.useState([""])
     const [selectedGame, setSelectedGame] = React.useState("")
 
     React.useEffect(() => {
-        setSelectedGame(props.gameNames[0])
-    }, [ props.gameNames ])
+        LobbyApi.getAvailableGames().then((games) => {
+            if (games && games.length > 0) {
+                setGames(games)
+            }
+        }).catch((error) => {
+            // TODO: handle
+            console.log(error)
+        })
+    })
+    React.useEffect(() => {
+        setSelectedGame(games[0])
+    }, [ games ])
 
     const handlePlay = () => {
         window.location.assign(`/${props.gameName}/${props.gameId}`)
@@ -49,15 +60,12 @@ const RoomGame: React.FC<IRoomGameProps> = (props) => {
                 </div>
             </React.Fragment>
     }
-    else if (props.gameNames && 
-        props.gameNames.length &&
-        props.roomLeaderId === ClubSession.getPlayerId()
-    ) {
+    else if (props.roomLeaderId === ClubSession.getPlayerId()) {
         toRender = 
             <React.Fragment>
                 <GameDropDown 
                     handleSelection={handleGameSelect} 
-                    gameNames={props.gameNames} 
+                    gameNames={games}
                 />
                 <div className={classes.toTheRight}>
                     <CreateGame 

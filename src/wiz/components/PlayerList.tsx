@@ -1,7 +1,8 @@
 import React from 'react'
 import PlayerListItem from './PlayerListItem'
 import IWizPlayer from '../interfaces/WizPlayer'
-import {createUseStyles} from 'react-jss'
+
+import { createUseStyles } from 'react-jss'
 const useStyles = createUseStyles({
     list: {
         padding: '0.5vh'
@@ -19,10 +20,10 @@ const WizPlayerList: React.FC<IWizPlayerListProps> = (props) => {
     React.useEffect(() => {
         if (props.players) {
             setPlayers(props.players.map((player) => {
-                return <PlayerListItem 
+                return <PlayerListItem
                     highlight={player.id === props.nextPlayer}
-                    key={player.id} 
-                    name={player.name} 
+                    key={player.id}
+                    name={player.name}
                     score={player.score}
                     bet={player.bet}
                     takes={player.takes} />

@@ -1,14 +1,16 @@
 import React from "react"
 import ReactModal from 'react-modal'
-import {createUseStyles} from 'react-jss'
+
+import { createUseStyles } from 'react-jss'
 import modalClasses from '../../style/modalClasses'
 import formClasses from '../../style/formClasses'
 const useStyles = createUseStyles({
-    modal: {...modalClasses.boxModal},
+    modal: { ...modalClasses.boxModal },
     input: {
         display: 'block'
     },
-    button: {...formClasses.formButton,
+    button: {
+        ...formClasses.formButton,
         float: 'right'
     }
 
@@ -34,7 +36,7 @@ const SetBet: React.FC<ISetBetProps> = (props) => {
     const handleOpenModal = () => {
         setShowModal(true)
     }
-    
+
     const handleCloseModal = () => {
         setShowModal(false)
     }
@@ -44,22 +46,22 @@ const SetBet: React.FC<ISetBetProps> = (props) => {
 
     return (
         <ReactModal className={classes.modal}
-                    isOpen={showModal}>
-            <input 
+            isOpen={showModal}>
+            <input
                 className={classes.input}
-                type="range" 
-                defaultValue="0" 
-                name="setBet" 
-                min="0" 
+                type="range"
+                defaultValue="0"
+                name="setBet"
+                min="0"
                 max={props.maxBet}
                 onChange={handleBetChange}
             />
             <label>{bet}</label>
-                <button className={classes.button} type="button" onClick={handleClick}>
-                    <span>
-                        Bet!
+            <button className={classes.button} type="button" onClick={handleClick}>
+                <span>
+                    Bet!
                     </span>
-                </button>
+            </button>
         </ReactModal>
     )
 }

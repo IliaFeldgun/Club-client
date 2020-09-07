@@ -1,7 +1,9 @@
 import React from 'react'
-import {createUseStyles} from 'react-jss'
+
+import { createUseStyles } from 'react-jss'
 import tooltipClasses from '../../style/tooltipClasses'
-const useStyles = createUseStyles({...tooltipClasses,
+const useStyles = createUseStyles({
+    ...tooltipClasses,
     listItem: {
         display: 'block',
         borderStyle: 'groove',
@@ -61,7 +63,7 @@ interface IPlayerListItemProps {
 }
 const PlayerListItem: React.FC<IPlayerListItemProps> = (props) => {
     const classes = useStyles()
-    
+
     return (
         <span className={
             `${props.highlight ? classes.highlight : ""} ${classes.listItem}`
@@ -76,7 +78,7 @@ const PlayerListItem: React.FC<IPlayerListItemProps> = (props) => {
                     {props.bet}
                     <span className={classes.tooltip}>Bet</span>
                 </span>
-                
+
                 <span className={`${classes.takes} ${classes.tooltipTarget}`}>
                     {props.takes}
                     <span className={classes.tooltip}>Takes</span>

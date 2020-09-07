@@ -2,10 +2,11 @@ import React from "react"
 import WizGame from "../components/WizGame"
 import { match, RouteComponentProps } from "react-router"
 import { WizApi } from "../api/WizApi"
-import ICard, { Suit } from "../../interfaces/Card"
-import { PossibleMoves } from "../interfaces/PossibleMoves"
 import IWizPlayer from "../interfaces/WizPlayer"
 import IWizAnnouncement from "../interfaces/WizAnnouncement"
+
+import ICard, { Suit } from "../../interfaces/Card"
+import { PossibleMoves } from "../interfaces/PossibleMoves"
 
 import { createUseStyles } from 'react-jss'
 const useStyles = createUseStyles({

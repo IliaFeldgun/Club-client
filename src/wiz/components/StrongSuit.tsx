@@ -1,5 +1,7 @@
 import React from 'react'
+
 import { Suit } from '../../interfaces/Card'
+
 import { createUseStyles } from 'react-jss'
 import tooltipClasses from '../../style/tooltipClasses'
 const useStyles = createUseStyles({

@@ -4,16 +4,17 @@ import CardFan from "./CardFan"
 import ScoreBoard from "./ScoreBoard"
 import CardStack from "./CardStack"
 import { ICardProps } from "./Card"
-import ICard, { Suit } from "../../interfaces/Card"
 import WizPlayerList from "./PlayerList"
 import WizOtherPlayers from "./OtherPlayers"
-import ClubSession from "../../utils/ClubSession"
 import { PossibleMoves } from "../interfaces/PossibleMoves"
 import SetBet from "./SetBet"
 import StrongSuit from "./StrongSuit"
 import IWizPlayer from "../interfaces/WizPlayer"
 import IWizAnnouncement from "../interfaces/WizAnnouncement"
 import Announcement from "./Announcement"
+
+import ClubSession from "../../utils/ClubSession"
+import ICard, { Suit } from "../../interfaces/Card"
 
 interface IWizGameProps {
     instructions: PossibleMoves
@@ -28,33 +29,33 @@ interface IWizGameProps {
 }
 const WizGame: React.FC<IWizGameProps> = (props) => {
     const [shouldBet, setShouldBet] = React.useState(false)
-    
+
     React.useEffect(() => {
-        const isYourTurn = isCurrentPlayersTurn(props.nextPlayer) 
+        const isYourTurn = isCurrentPlayersTurn(props.nextPlayer)
         const playerHasHand = props.playerHand !== undefined
         const isInstructionBet = props.instructions === PossibleMoves.PLACE_BET
         const player = getCurrentPlayer(props.players)
         const didPlayerNotBet = player !== undefined && player.bet === undefined
         setShouldBet(isYourTurn && playerHasHand && isInstructionBet && didPlayerNotBet)
     }, [props.nextPlayer, props.playerHand, props.instructions, props.players])
-    
+
     const handleFanCardClick = (
-        event: React.MouseEvent, 
-        suit: ICardProps["suit"], 
+        event: React.MouseEvent,
+        suit: ICardProps["suit"],
         rank: ICardProps["rank"]
     ) => {
-        if(props.handleFanCardClick)
-            props.handleFanCardClick({suit,rank})
+        if (props.handleFanCardClick)
+            props.handleFanCardClick({ suit, rank })
     }
     const handleBet = (event: React.MouseEvent, bet: number) => {
         if (props.handleBet) {
             props.handleBet(bet)
         }
     }
-    
+
     let setBet = <React.Fragment />
     if (shouldBet) {
-        setBet = <SetBet maxBet={props.playerHand.length} handleBet={handleBet}/>
+        setBet = <SetBet maxBet={props.playerHand.length} handleBet={handleBet} />
     }
     let strongSuit = <React.Fragment />
     if (props.strongSuit) {
@@ -62,11 +63,11 @@ const WizGame: React.FC<IWizGameProps> = (props) => {
     }
     let announcement = <React.Fragment />
     if (props.announcement) {
-        announcement = 
-        <Announcement 
-            announcement={props.announcement} 
-            players={props.players}
-        />
+        announcement =
+            <Announcement
+                announcement={props.announcement}
+                players={props.players}
+            />
     }
 
     return (
@@ -76,16 +77,16 @@ const WizGame: React.FC<IWizGameProps> = (props) => {
             <CardBoard>
                 {strongSuit}
                 <CardStack cards={props.tableStack} />
-                <CardFan yourTurn={shouldPlayCard(props.nextPlayer, props.instructions)} 
-                    cards={props.playerHand} 
+                <CardFan yourTurn={shouldPlayCard(props.nextPlayer, props.instructions)}
+                    cards={props.playerHand}
                     handleCardClick={handleFanCardClick}
                 />
                 <WizOtherPlayers players={props.players} />
             </CardBoard>
             <ScoreBoard>
-                <WizPlayerList 
-                    players={props.players} 
-                    nextPlayer={props.nextPlayer} 
+                <WizPlayerList
+                    players={props.players}
+                    nextPlayer={props.nextPlayer}
                 />
             </ScoreBoard>
         </React.Fragment>
@@ -105,7 +106,7 @@ const isCurrentPlayersTurn = (nextPlayer: string): boolean => {
 
 const shouldPlayCard = (nextPlayer: string, instructions: PossibleMoves) => {
     return (
-        instructions === PossibleMoves.PLAY_CARD && 
+        instructions === PossibleMoves.PLAY_CARD &&
         isCurrentPlayersTurn(nextPlayer)
     )
 }

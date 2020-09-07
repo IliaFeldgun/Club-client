@@ -1,5 +1,7 @@
 import React, { CSSProperties } from "react"
+
 import ICard, { Suit, Rank } from "../../interfaces/Card"
+
 import { createUseStyles } from 'react-jss'
 
 const useStyles = createUseStyles({

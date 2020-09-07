@@ -1,7 +1,8 @@
 import React from 'react'
 import WizOtherPlayer from './OtherPlayer'
-import ClubSession from '../../utils/ClubSession'
 import IWizPlayer from '../interfaces/WizPlayer'
+
+import ClubSession from '../../utils/ClubSession'
 
 interface IWizOtherPlayersProps {
     players: IWizPlayer[]

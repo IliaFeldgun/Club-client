@@ -1,8 +1,9 @@
 import axios, { AxiosError } from "axios"
-import ICard, { Suit } from "../../interfaces/Card"
 import { PossibleMoves } from "../interfaces/PossibleMoves"
 import IWizPlayer from "../interfaces/WizPlayer"
 import WIZ_API_MAP from "./WizApiMap"
+
+import ICard, { Suit } from "../../interfaces/Card"
 
 export class WizApi {
     static async getGameInstructions(gameId: string): Promise<PossibleMoves> {

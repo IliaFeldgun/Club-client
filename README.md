@@ -4,6 +4,8 @@
 
 Front end web client for Club
 
+![Club GUI](https://github.com/IliaFeldgun/Club-client/raw/master/src/img/WizClub2Small.png)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
